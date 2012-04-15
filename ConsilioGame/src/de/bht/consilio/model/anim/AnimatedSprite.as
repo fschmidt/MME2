@@ -79,9 +79,8 @@ package de.bht.consilio.model.anim
 			if(animationIndex >= animationDelay) {
 				animationIndex = 0;
 				
-				Logger.log(Logger.INFO, "Frame Index before check: "+ currentFrameIndex);
 				
-				if(currentFrameIndex >= textures.length-1)
+				if(currentFrameIndex >= textures[0].length-1)
 				{
 					currentFrameIndex = 0;
 				} 
