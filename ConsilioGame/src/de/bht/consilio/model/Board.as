@@ -16,7 +16,7 @@ package de.bht.consilio.model
 	
 	import org.osflash.thunderbolt.Logger;
 	
-	public class Board extends Sprite
+	public class Board extends MovieClip
 	{
 		
 		private var fields:Dictionary;
@@ -89,7 +89,7 @@ package de.bht.consilio.model
 			dispatchEvent(new ConsilioEvent(ConsilioEvent.ON_INITIALIZATION_COMPLETE));
 		}
 		
-		public function addSprite(sprite:Bitmap):void
+		public function addSprite(sprite:AnimatedSprite):void
 		{
 //			sprite.x = ((Bitmap)(fields["a1"])).x + sprite.width/2 + sprite.x;
 //			sprite.y = ((Bitmap)(fields["a1"])).y + sprite.height/2 + sprite.y;

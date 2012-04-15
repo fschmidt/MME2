@@ -1,6 +1,7 @@
 package de.bht.consilio.game 
 {
 	import de.bht.consilio.model.Board;
+	import de.bht.consilio.model.Dwarf;
 	import de.bht.consilio.model.anim.AnimatedSprite;
 	import de.bht.consilio.model.anim.ConsilioEvent;
 	
@@ -28,36 +29,38 @@ package de.bht.consilio.game
 			myBoard = new Board();
 			
 			myBoard.initialize();
-			myBoard.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, addSprite);
+			myBoard.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, addSprites);
 		}
 		
-		private function addSprite(e:Event):void
+		private function addSprites(e:Event):void
 		{
 			myBoard.removeEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, addSprite);
-			mySprite = new AnimatedSprite();
+			
+			addChild(myBoard);
+			
+			mySprite = new Dwarf();
 			mySprite.initialize();
 			mySprite.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
-			mySprite2 = new AnimatedSprite();
+			
+			mySprite2 = new Dwarf();
 			mySprite2.initialize();
-			mySprite2.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation2);
+			mySprite2.x = 50;
+			mySprite2.y = 50;
+			mySprite2.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
+		}
+		
+		private function addSprite():void
+		{
+			
+			
 		}
 		
 		private function startAnimation(e:Event):void
 		{
-			mySprite.removeEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
-			mySprite.name = "sprite1";
-			addChild(myBoard);
-			mySprite.startAnimation(myBoard);
+			var sprite:AnimatedSprite = e.target as AnimatedSprite;
+			sprite.removeEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
+			
+			sprite.startAnimation(myBoard);
 		}
-		
-		private function startAnimation2(e:Event):void
-		{
-			mySprite2.removeEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation2);
-			mySprite2.name = "sprite2";
-			mySprite2.x = 50;
-			mySprite2.y = 50;
-			mySprite2.startAnimation(myBoard);
-		}
-
 	}
 }
