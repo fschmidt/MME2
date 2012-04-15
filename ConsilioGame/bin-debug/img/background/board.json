@@ -1,0 +1,21 @@
+{
+
+	"images": {
+
+		"black": "rect_black.png"
+		,
+		"white": "rect_white.png"
+	},
+	"image_width": 80,
+	"image_width": 50,
+	"h_offset": {
+		"x": 40,
+		"y": 20
+	},
+
+	"v_offset": {
+		"x": -40,
+		"y": 30
+	}
+}
+
