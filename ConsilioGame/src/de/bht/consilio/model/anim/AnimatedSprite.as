@@ -12,6 +12,7 @@ package de.bht.consilio.model.anim
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.net.URLRequest;
+	import flash.utils.Dictionary;
 	
 	import org.osflash.thunderbolt.Logger;
 	
@@ -20,9 +21,11 @@ package de.bht.consilio.model.anim
 		protected var animationDelay:uint = 5;
 		protected var animationIndex:uint = 0;
 		
-		protected var locations:Array = new Array();
+		protected var locations:Array;
 		protected var textures:Array = new Array();
+		protected var textureKeys:Array;
 		
+		protected var currentAnimation:String;
 		protected var currentFrame:Bitmap;
 		protected var currentFrameIndex:uint = 0;
 		
@@ -34,25 +37,30 @@ package de.bht.consilio.model.anim
 		
 		public function initialize():void 
 		{
-			var loader:ResourceLoader = new ResourceLoader();
-			loader.loadImages(locations);
-			loader.addEventListener(ConsilioEvent.ON_RESOURCE_LOAD_COMPLETE, resourcesLoaded);
+			for (var i:int = locations.length; i > 0; i--) 
+			{
+					var loader:ResourceLoader = new ResourceLoader();
+					loader.loadImages(textureKeys[i], locations.pop());
+					loader.addEventListener(ConsilioEvent.ON_RESOURCE_LOAD_COMPLETE, resourcesLoaded);
+			}
 		}
 		
 		private function resourcesLoaded(e:Event):void 
 		{
 			
 			var loader:ResourceLoader = e.target as ResourceLoader;
-			textures = loader.getLastResult();
+			textures[loader.getLastResult()[0]] = loader.getLastResult()[1];
 			
-			var tmp:Bitmap = (Bitmap)(textures[0]);
-			
-			currentFrame = new Bitmap();
-			currentFrame.bitmapData = new BitmapData(tmp.width, tmp.height);
-			
-			currentFrame.bitmapData.copyPixels(tmp.bitmapData, new Rectangle(0, tmp.width, tmp.height), new Point(0, 0));
-			
-			dispatchEvent(new ConsilioEvent(ConsilioEvent.ON_INITIALIZATION_COMPLETE));
+			if(locations.length < 1){
+				currentAnimation = textureKeys[0];
+				var tmp:Bitmap = (Bitmap)(textures[0][0]);
+				
+				currentFrame = new Bitmap();
+				currentFrame.bitmapData = new BitmapData(tmp.width, tmp.height);
+				
+				currentFrame.bitmapData.copyPixels(tmp.bitmapData, new Rectangle(0, tmp.width, tmp.height), new Point(0, 0));
+				dispatchEvent(new ConsilioEvent(ConsilioEvent.ON_INITIALIZATION_COMPLETE));
+			}
 		}
 		
 		public function startAnimation(board:Board):void 
@@ -69,7 +77,7 @@ package de.bht.consilio.model.anim
 			if(animationIndex >= animationDelay) {
 				animationIndex = 0;
 				
-				//				Logger.log(Logger.INFO, "Frame Index before check: "+ currentFrameIndex);
+				Logger.log(Logger.INFO, "Frame Index before check: "+ currentFrameIndex);
 				
 				if(currentFrameIndex >= textures.length-1)
 				{
@@ -80,7 +88,7 @@ package de.bht.consilio.model.anim
 					currentFrameIndex++;
 				}
 				
-				currentFrame.bitmapData.copyPixels(((Bitmap)(textures[currentFrameIndex])).bitmapData, currentFrame.bitmapData.rect, new Point(0, 0));
+				currentFrame.bitmapData.copyPixels(((Bitmap)(textures[textureKeys[currentAnimation]][currentFrameIndex])).bitmapData, currentFrame.bitmapData.rect, new Point(0, 0));
 			}
 		}
 		

@@ -49,7 +49,7 @@ package de.bht.consilio.model
 			
 			var urlList:Array = ["img/boards/board.png"];
 			
-			loader.loadImages(urlList);
+			loader.loadImages("board", urlList);
 			
 			loader.addEventListener(ConsilioEvent.ON_RESOURCE_LOAD_COMPLETE, resourcesLoaded);
 		}
@@ -60,7 +60,7 @@ package de.bht.consilio.model
 			
 			var loader:ResourceLoader = e.target as ResourceLoader;
 			
-			board = loader.getLastResult()[0];
+			board = loader.getLastResult()[1][0];
 			
 			addChild(board);
 			
