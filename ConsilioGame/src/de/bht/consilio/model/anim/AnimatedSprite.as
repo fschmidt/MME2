@@ -52,6 +52,7 @@ package de.bht.consilio.model.anim
 			textures[loader.getLastResult()[0]] = loader.getLastResult()[1];
 			
 			if(locations.length < 1){
+				Logger.log(Logger.INFO, "loc len < 1");
 				currentAnimation = textureKeys[0];
 				var tmp:Bitmap = (Bitmap)(textures[0][0]);
 				
