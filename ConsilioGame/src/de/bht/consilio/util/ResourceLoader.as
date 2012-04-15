@@ -24,8 +24,6 @@ package de.bht.consilio.util
 		
 		private var results:Array = new Array();
 		
-		private var key:String;
-		
 		public function ResourceLoader() {}
 		
 		
@@ -35,11 +33,9 @@ package de.bht.consilio.util
 		 * @return An Array of Bitmaps
 		 * 
 		 */
-		public function loadImages(resKey:String, urlList:Array):void {
+		public function loadImages(urlList:Array):void {
 			
 			this.urls = urlList;
-			
-			this.key = resKey;
 			
 			Logger.log(Logger.INFO, "urlList:" + urlList.length);
 			Logger.log(Logger.INFO, "urlList:" + urls.length);
@@ -76,7 +72,7 @@ package de.bht.consilio.util
 		
 		public function getLastResult():Array
 		{
-			return [key, results];
+			return results;
 		}
 	}
 }

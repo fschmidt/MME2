@@ -25,7 +25,7 @@ package de.bht.consilio.model.anim
 		protected var textures:Array = new Array();
 		protected var textureKeys:Array;
 		
-		protected var currentAnimation:String;
+		protected var currentAnimation:uint;
 		protected var currentFrame:Bitmap;
 		protected var currentFrameIndex:uint = 0;
 		
@@ -37,11 +37,13 @@ package de.bht.consilio.model.anim
 		
 		public function initialize():void 
 		{
-			for (var i:int = locations.length; i > 0; i--) 
+			Logger.log(Logger.INFO, locations.length+"");
+			while(locations.length > 0)
 			{
-					var loader:ResourceLoader = new ResourceLoader();
-					loader.loadImages(textureKeys[i], locations.pop());
-					loader.addEventListener(ConsilioEvent.ON_RESOURCE_LOAD_COMPLETE, resourcesLoaded);
+				var loader:ResourceLoader = new ResourceLoader();
+				var tmp:Array = locations.pop();
+				loader.loadImages(tmp);
+				loader.addEventListener(ConsilioEvent.ON_RESOURCE_LOAD_COMPLETE, resourcesLoaded);
 			}
 		}
 		
@@ -49,12 +51,11 @@ package de.bht.consilio.model.anim
 		{
 			
 			var loader:ResourceLoader = e.target as ResourceLoader;
-			textures[loader.getLastResult()[0]] = loader.getLastResult()[1];
+			textures.push(loader.getLastResult());
 			
 			if(locations.length < 1){
-				Logger.log(Logger.INFO, "loc len < 1");
-				currentAnimation = textureKeys[0];
-				var tmp:Bitmap = (Bitmap)(textures[0][0]);
+				currentAnimation = 0;
+				var tmp:Bitmap = (Bitmap)(textures[currentAnimation][0]);
 				
 				currentFrame = new Bitmap();
 				currentFrame.bitmapData = new BitmapData(tmp.width, tmp.height);
@@ -89,14 +90,14 @@ package de.bht.consilio.model.anim
 					currentFrameIndex++;
 				}
 				
-				currentFrame.bitmapData.copyPixels(((Bitmap)(textures[textureKeys[currentAnimation]][currentFrameIndex])).bitmapData, currentFrame.bitmapData.rect, new Point(0, 0));
+				currentFrame.bitmapData.copyPixels(((Bitmap)(textures[currentAnimation][currentFrameIndex])).bitmapData, currentFrame.bitmapData.rect, new Point(0, 0));
 			}
 		}
 		
-//		public function getCurrentFrame():Bitmap
-//		{
-//			return currentFrame;
-//		}
+		//		public function getCurrentFrame():Bitmap
+		//		{
+		//			return currentFrame;
+		//		}
 		
 		public function getCurrentPosition():String
 		{
