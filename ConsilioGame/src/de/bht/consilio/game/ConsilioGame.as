@@ -16,11 +16,11 @@ package de.bht.consilio.game
 	public class ConsilioGame extends Sprite{
 		
 		private var mySprite:AnimatedSprite;
+		private var mySprite2:AnimatedSprite;
 		
 		private var myBoard:Board;
 		
 		public function ConsilioGame(){
-			trace("here");
 			init();
 		}
 		
@@ -37,15 +37,27 @@ package de.bht.consilio.game
 			mySprite = new AnimatedSprite();
 			mySprite.initialize();
 			mySprite.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
+			mySprite2 = new AnimatedSprite();
+			mySprite2.initialize();
+			mySprite2.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation2);
 		}
 		
 		private function startAnimation(e:Event):void
 		{
 			mySprite.removeEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
+			mySprite.name = "sprite1";
 			addChild(myBoard);
 			mySprite.startAnimation(myBoard);
 		}
 		
+		private function startAnimation2(e:Event):void
+		{
+			mySprite2.removeEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation2);
+			mySprite2.name = "sprite2";
+			mySprite2.x = 50;
+			mySprite2.y = 50;
+			mySprite2.startAnimation(myBoard);
+		}
 
 	}
 }

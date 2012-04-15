@@ -65,7 +65,7 @@ package de.bht.consilio.model.anim
 		{
 			animationIndex++;
 			
-//			Logger.log(Logger.INFO, "Anmation Index: " + animationIndex);
+			Logger.log(Logger.INFO, "Animating: " + currentFrame.name);
 			
 			if(animationIndex >= animationDelay) {
 				animationIndex = 0;

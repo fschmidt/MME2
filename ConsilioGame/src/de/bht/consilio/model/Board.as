@@ -64,14 +64,13 @@ package de.bht.consilio.model
 			
 			var lastX:int = boardData.h_offset.x * 6;
 			var lastY:int = 0 - boardData.h_offset.y;
-			
+			var tmp:Bitmap;
 			for (var i:int = 8; i > 0; i--) 
 			{
-				var tmp:Bitmap = i % 2 == 0 ? new Bitmap(tileWhite.bitmapData) : new Bitmap(tileBlack.bitmapData);
-				tmp.x = lastX + boardData.h_offset.x;
-				tmp.y = lastY + boardData.h_offset.y;
-				fields["a" + i] = tmp;
-				addChild(tmp);
+				fields["a" + i] = i % 2 == 0 ? new Bitmap(tileWhite.bitmapData) : new Bitmap(tileBlack.bitmapData);
+				((Bitmap)(fields["a" + i])).x = lastX + boardData.h_offset.x;
+				((Bitmap)(fields["a" + i])).y = lastY + boardData.h_offset.y;
+				addChild(((Bitmap)(fields["a" + i])));
 			}
 			
 			lastX = boardData.h_offset.x * 6;
@@ -90,27 +89,10 @@ package de.bht.consilio.model
 			dispatchEvent(new ConsilioEvent(ConsilioEvent.ON_INITIALIZATION_COMPLETE));
 		}
 		
-		//		private function image2Loaded(e:Event):void {
-		//			
-		//			tileWhite = new Bitmap(e.target.content.bitmapData);
-		//			
-		//			tileBlack.x = boardData.A8.x;
-		//			tileBlack.y = boardData.A8.y;
-		//			
-		//			tileWhite.x = boardData.A7.x;
-		//			tileWhite.y = boardData.A7.y;
-		//			
-		//			addChild(tileBlack);
-		//			addChild(tileWhite);
-		//			
-		//			var ice:ConsilioEvent = new ConsilioEvent(ConsilioEvent.ON_INITIALIZATION_COMPLETE);
-		//			dispatchEvent(ice);
-		//		}
-		
 		public function addSprite(sprite:Bitmap):void
 		{
-			sprite.x = (fields["a1"] as Bitmap).x+sprite.width/2;
-			sprite.y = (fields["a1"] as Bitmap).y+sprite.height/2;
+//			sprite.x = ((Bitmap)(fields["a1"])).x + sprite.width/2 + sprite.x;
+//			sprite.y = ((Bitmap)(fields["a1"])).y + sprite.height/2 + sprite.y;
 			addChild(sprite);
 		}
 	}
