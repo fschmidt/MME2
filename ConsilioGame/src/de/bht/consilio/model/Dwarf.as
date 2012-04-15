@@ -12,11 +12,16 @@ package de.bht.consilio.model
 			
 			locations = new Array();
 			
-			locations[0] = new Array();
-			
-			for (var i:int = 0; i < 8; i++) {
-				locations[0].push("img/dwarf96/" + "walking ne000" + i + ".png");
+			for (var j:int = 9; j >= 0; j--) {
+				locations.push("img/dwarf96/" + "attack ne000" + j + ".png");
 			}
+			
+			for (var i:int = 7; i >= 0; i--) {
+				locations.push("img/dwarf96/" + "walking ne000" + i + ".png");
+			}
+			
+	
+			
 		}
 	}
 }

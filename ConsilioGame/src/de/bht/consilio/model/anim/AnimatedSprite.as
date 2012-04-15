@@ -9,6 +9,7 @@ package de.bht.consilio.model.anim
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.net.URLRequest;
@@ -25,7 +26,9 @@ package de.bht.consilio.model.anim
 		protected var textures:Array = new Array();
 		protected var textureKeys:Array;
 		
-		protected var currentAnimation:uint;
+		protected var animationStart:uint;
+		protected var animationEnd:uint;
+		
 		protected var currentFrame:Bitmap;
 		protected var currentFrameIndex:uint = 0;
 		
@@ -37,38 +40,51 @@ package de.bht.consilio.model.anim
 		
 		public function initialize():void 
 		{
-			Logger.log(Logger.INFO, locations.length+"");
-			while(locations.length > 0)
-			{
+				Logger.log(Logger.INFO, "initializing");
 				var loader:ResourceLoader = new ResourceLoader();
-				var tmp:Array = locations.pop();
-				loader.loadImages(tmp);
+				loader.loadImages(locations);
 				loader.addEventListener(ConsilioEvent.ON_RESOURCE_LOAD_COMPLETE, resourcesLoaded);
-			}
 		}
 		
 		private function resourcesLoaded(e:Event):void 
 		{
 			
 			var loader:ResourceLoader = e.target as ResourceLoader;
-			textures.push(loader.getLastResult());
-			
-			if(locations.length < 1){
-				currentAnimation = 0;
-				var tmp:Bitmap = (Bitmap)(textures[currentAnimation][0]);
+			textures = loader.getLastResult();
+			Logger.log(Logger.INFO, "Textures len:" + textures.length);
+				
+				animationIndex = 0;
+				animationStart = 0;
+				animationEnd = 7;
+				
+				var tmp:Bitmap = (Bitmap)(textures[0]);
 				
 				currentFrame = new Bitmap();
 				currentFrame.bitmapData = new BitmapData(tmp.width, tmp.height);
 				
-				currentFrame.bitmapData.copyPixels(tmp.bitmapData, new Rectangle(0, tmp.width, tmp.height), new Point(0, 0));
+				currentFrame.bitmapData.copyPixels(tmp.bitmapData, new Rectangle(0,0,0), new Point(0, 0));
+				
+				attachMouseListener();
+				
 				dispatchEvent(new ConsilioEvent(ConsilioEvent.ON_INITIALIZATION_COMPLETE));
-			}
+		}
+		
+		private function attachMouseListener():void
+		{
+			this.addEventListener(MouseEvent.CLICK, attack);
+		}
+		
+		private function attack(e:MouseEvent):void
+		{
+			animationIndex = 0;
+			animationStart = 8;
+			animationEnd = 18;
+			currentFrameIndex = animationIndex;
 		}
 		
 		public function startAnimation(board:Board):void 
 		{
 			this.addChild(currentFrame);
-			board.addSprite(this);
 			addEventListener(Event.ENTER_FRAME, animate);
 		}
 		
@@ -79,24 +95,18 @@ package de.bht.consilio.model.anim
 			if(animationIndex >= animationDelay) {
 				animationIndex = 0;
 				
-				
-				if(currentFrameIndex >= textures[0].length-1)
+				if(currentFrameIndex >= animationEnd)
 				{
-					currentFrameIndex = 0;
+					currentFrameIndex = animationStart;
 				} 
 				else 
 				{
 					currentFrameIndex++;
 				}
 				
-				currentFrame.bitmapData.copyPixels(((Bitmap)(textures[currentAnimation][currentFrameIndex])).bitmapData, currentFrame.bitmapData.rect, new Point(0, 0));
+				currentFrame.bitmapData.copyPixels(((Bitmap)(textures[currentFrameIndex])).bitmapData, currentFrame.bitmapData.rect, new Point(0, 0));
 			}
 		}
-		
-		//		public function getCurrentFrame():Bitmap
-		//		{
-		//			return currentFrame;
-		//		}
 		
 		public function getCurrentPosition():String
 		{

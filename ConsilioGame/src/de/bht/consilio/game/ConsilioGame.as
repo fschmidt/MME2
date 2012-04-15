@@ -43,12 +43,13 @@ package de.bht.consilio.game
 			mySprite.x = 329;
 			mySprite.y = 498;
 			mySprite.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
+			myBoard.addSprite(mySprite);
 			
-			mySprite2 = new Dwarf();
-			mySprite2.initialize();
-			mySprite2.x = 220;
-			mySprite2.y = 430;
-			mySprite2.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
+//			mySprite2 = new Dwarf();
+//			mySprite2.initialize();
+//			mySprite2.x = 220;
+//			mySprite2.y = 430;
+//			mySprite2.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
 		}
 		
 		private function addSprite():void

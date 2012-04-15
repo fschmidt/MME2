@@ -56,48 +56,17 @@ package de.bht.consilio.model
 		
 		private function resourcesLoaded(e:Event):void {
 			
-//			fields = new Dictionary();
-			
 			var loader:ResourceLoader = e.target as ResourceLoader;
 			
 			board = loader.getLastResult()[0];
 			
 			addChild(board);
 			
-//			tileBlack = loader.getLastResult()[0];
-//			tileWhite = loader.getLastResult()[1];
-//			
-//			var lastX:int = boardData.h_offset.x * 6;
-//			var lastY:int = 0 - boardData.h_offset.y;
-//			var tmp:Bitmap;
-//			for (var i:int = 8; i > 0; i--) 
-//			{
-//				fields["a" + i] = i % 2 == 0 ? new Bitmap(tileWhite.bitmapData) : new Bitmap(tileBlack.bitmapData);
-//				((Bitmap)(fields["a" + i])).x = lastX + boardData.h_offset.x;
-//				((Bitmap)(fields["a" + i])).y = lastY + boardData.h_offset.y;
-//				addChild(((Bitmap)(fields["a" + i])));
-//			}
-//			
-//			lastX = boardData.h_offset.x * 6;
-//			lastY = boardData.v_offset.y - boardData.h_offset.y;
-//			
-//			for (var j:int = 8; i > 0; i--) 
-//			{
-//				tmp = i % 2 == 1 ? new Bitmap(tileWhite.bitmapData) : new Bitmap(tileBlack.bitmapData);
-//				tmp.x = lastX + boardData.h_offset.x;
-//				tmp.y = lastY + boardData.h_offset.y;
-//				fields["b" + j] = tmp;
-//				addChild(tmp);
-//			}
-			
-			
 			dispatchEvent(new ConsilioEvent(ConsilioEvent.ON_INITIALIZATION_COMPLETE));
 		}
 		
 		public function addSprite(sprite:AnimatedSprite):void
 		{
-//			sprite.x = ((Bitmap)(fields["a1"])).x + sprite.width/2 + sprite.x;
-//			sprite.y = ((Bitmap)(fields["a1"])).y + sprite.height/2 + sprite.y;
 			addChild(sprite);
 		}
 	}
