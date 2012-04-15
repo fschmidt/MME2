@@ -13,7 +13,7 @@ package de.bht.consilio.game
 	import flash.net.URLRequest;
 	import flash.text.TextField;
 	
-	[SWF(width="640",height="500",frameRate="30")]
+	[SWF(width="1024",height="768",frameRate="30", backgroundColor="0x000000")]
 	public class ConsilioGame extends Sprite{
 		
 		private var mySprite:AnimatedSprite;
@@ -40,12 +40,14 @@ package de.bht.consilio.game
 			
 			mySprite = new Dwarf();
 			mySprite.initialize();
+			mySprite.x = 329;
+			mySprite.y = 498;
 			mySprite.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
 			
 			mySprite2 = new Dwarf();
 			mySprite2.initialize();
-			mySprite2.x = 50;
-			mySprite2.y = 50;
+			mySprite2.x = 220;
+			mySprite2.y = 430;
 			mySprite2.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
 		}
 		

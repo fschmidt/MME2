@@ -22,6 +22,7 @@ package de.bht.consilio.model
 		private var fields:Dictionary;
 		private var tileBlack:Bitmap;
 		private var tileWhite:Bitmap;
+		private var board:Bitmap;
 		
 		private var boardData:Object;
 		
@@ -46,7 +47,7 @@ package de.bht.consilio.model
 			
 			var loader:ResourceLoader = new ResourceLoader();
 			
-			var urlList:Array = ["img/background/" + boardData.images.black, "img/background/" + boardData.images.white];
+			var urlList:Array = ["img/boards/board.png"];
 			
 			loader.loadImages(urlList);
 			
@@ -55,35 +56,39 @@ package de.bht.consilio.model
 		
 		private function resourcesLoaded(e:Event):void {
 			
-			fields = new Dictionary();
+//			fields = new Dictionary();
 			
 			var loader:ResourceLoader = e.target as ResourceLoader;
 			
-			tileBlack = loader.getLastResult()[0];
-			tileWhite = loader.getLastResult()[1];
+			board = loader.getLastResult()[0];
 			
-			var lastX:int = boardData.h_offset.x * 6;
-			var lastY:int = 0 - boardData.h_offset.y;
-			var tmp:Bitmap;
-			for (var i:int = 8; i > 0; i--) 
-			{
-				fields["a" + i] = i % 2 == 0 ? new Bitmap(tileWhite.bitmapData) : new Bitmap(tileBlack.bitmapData);
-				((Bitmap)(fields["a" + i])).x = lastX + boardData.h_offset.x;
-				((Bitmap)(fields["a" + i])).y = lastY + boardData.h_offset.y;
-				addChild(((Bitmap)(fields["a" + i])));
-			}
+			addChild(board);
 			
-			lastX = boardData.h_offset.x * 6;
-			lastY = boardData.v_offset.y - boardData.h_offset.y;
-			
-			for (var j:int = 8; i > 0; i--) 
-			{
-				tmp = i % 2 == 1 ? new Bitmap(tileWhite.bitmapData) : new Bitmap(tileBlack.bitmapData);
-				tmp.x = lastX + boardData.h_offset.x;
-				tmp.y = lastY + boardData.h_offset.y;
-				fields["b" + j] = tmp;
-				addChild(tmp);
-			}
+//			tileBlack = loader.getLastResult()[0];
+//			tileWhite = loader.getLastResult()[1];
+//			
+//			var lastX:int = boardData.h_offset.x * 6;
+//			var lastY:int = 0 - boardData.h_offset.y;
+//			var tmp:Bitmap;
+//			for (var i:int = 8; i > 0; i--) 
+//			{
+//				fields["a" + i] = i % 2 == 0 ? new Bitmap(tileWhite.bitmapData) : new Bitmap(tileBlack.bitmapData);
+//				((Bitmap)(fields["a" + i])).x = lastX + boardData.h_offset.x;
+//				((Bitmap)(fields["a" + i])).y = lastY + boardData.h_offset.y;
+//				addChild(((Bitmap)(fields["a" + i])));
+//			}
+//			
+//			lastX = boardData.h_offset.x * 6;
+//			lastY = boardData.v_offset.y - boardData.h_offset.y;
+//			
+//			for (var j:int = 8; i > 0; i--) 
+//			{
+//				tmp = i % 2 == 1 ? new Bitmap(tileWhite.bitmapData) : new Bitmap(tileBlack.bitmapData);
+//				tmp.x = lastX + boardData.h_offset.x;
+//				tmp.y = lastY + boardData.h_offset.y;
+//				fields["b" + j] = tmp;
+//				addChild(tmp);
+//			}
 			
 			
 			dispatchEvent(new ConsilioEvent(ConsilioEvent.ON_INITIALIZATION_COMPLETE));
