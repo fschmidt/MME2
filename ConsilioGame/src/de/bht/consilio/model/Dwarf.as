@@ -19,9 +19,6 @@ package de.bht.consilio.model
 			for (var i:int = 7; i >= 0; i--) {
 				locations.push("img/dwarf96/" + "walking ne000" + i + ".png");
 			}
-			
-	
-			
 		}
 	}
 }

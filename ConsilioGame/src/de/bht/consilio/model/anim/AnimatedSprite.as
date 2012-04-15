@@ -78,8 +78,8 @@ package de.bht.consilio.model.anim
 		{
 			animationIndex = 0;
 			animationStart = 8;
-			animationEnd = 18;
-			currentFrameIndex = animationIndex;
+			animationEnd = 17;
+			currentFrameIndex = animationStart;
 		}
 		
 		public function startAnimation(board:Board):void 
