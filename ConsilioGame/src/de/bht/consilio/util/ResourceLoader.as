@@ -21,10 +21,18 @@ package de.bht.consilio.util
 	public class ResourceLoader extends EventDispatcher {
 		
 		private var urls:Array;
+
+		private var key:String;
+		
+		private var data:Object;
 		
 		private var results:Array = new Array();
 		
-		public function ResourceLoader() {}
+		public function ResourceLoader(key:String=null, data:Object=null) 
+		{
+			this.key = key;
+			this.data = data;
+		}
 		
 		
 		/**
@@ -37,9 +45,6 @@ package de.bht.consilio.util
 			
 			this.urls = urlList;
 			
-			Logger.log(Logger.INFO, "urlList:" + urlList.length);
-			Logger.log(Logger.INFO, "urlList:" + urls.length);
-			
 			loadImage(urls);
 			
 		}
@@ -50,7 +55,7 @@ package de.bht.consilio.util
 			
 			var url:String = urls.pop() as String;
 			
-			Logger.log(Logger.INFO, "URL:" + url.toString());
+			Logger.log(Logger.INFO, "Loading URL:" + url.toString());
 			
 			
 			var urlRequest:URLRequest = new URLRequest(url);
@@ -73,6 +78,16 @@ package de.bht.consilio.util
 		public function getLastResult():Array
 		{
 			return results;
+		}
+		
+		public function getKey():String
+		{
+			return key;
+		}
+		
+		public function getData():Object
+		{
+			return data;
 		}
 	}
 }

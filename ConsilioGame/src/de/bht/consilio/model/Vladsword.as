@@ -1,8 +1,8 @@
 package de.bht.consilio.model
 {
-	import de.bht.consilio.model.anim.AnimatedSprite;
+	import de.bht.consilio.model.anim.AnimatedSpriteOld;
 
-	public class Vladsword extends AnimatedSprite
+	public class Vladsword extends AnimatedSpriteOld
 	{
 		public function Vladsword()
 		{

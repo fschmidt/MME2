@@ -1,0 +1,15 @@
+{
+	"animations": [
+		{
+			"name": "walking_ne",
+			"frames": 8,
+			"animationdelay": 5,
+			"url": "img/dwarf96/walking ne"
+		}, {
+			"name": "attack_ne",
+			"frames": 13,
+			"animationdelay": 5,
+			"url": "img/dwarf96/attack ne"
+		}
+	]
+}

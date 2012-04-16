@@ -5,16 +5,11 @@ package de.bht.consilio.model
 	import de.bht.consilio.util.ResourceLoader;
 	
 	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.display.Loader;
 	import flash.display.MovieClip;
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
-	
-	import org.osflash.thunderbolt.Logger;
 	
 	public class Board extends MovieClip
 	{
