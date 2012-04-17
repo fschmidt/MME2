@@ -33,7 +33,6 @@ package de.bht.consilio.model
 			myLoader.addEventListener(Event.COMPLETE, onload);
 			myLoader.load(myRequest);
 			
-			
 		}
 		
 		private function onload(e:Event):void

@@ -9,10 +9,15 @@ package de.bht.consilio.game
 	import de.bht.consilio.model.anim.AnimatedSprite;
 	import de.bht.consilio.model.anim.ConsilioEvent;
 	import de.bht.consilio.model.board.ChessBoard;
+	import de.bht.consilio.model.iso.IsoUtils;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
+	import flash.geom.Vector3D;
+	
+	import mx.core.ButtonAsset;
 	
 	import org.osflash.thunderbolt.Logger;
 	
@@ -24,14 +29,21 @@ package de.bht.consilio.game
 		
 		private var myBoard:Board;
 		
+		private var chessboard:ChessBoard;
+		
 		public function ConsilioGame(){
 			init();
 		}
 		
 		private function init():void
 		{
-//			var chessboard:ChessBoard = new ChessBoard( 0x333333, 0x999999 );
-//			addChild(chessboard);	
+			chessboard = new ChessBoard( 0x333333, 0x999999 );
+			addChild(chessboard);
+			
+			chessboard.x = 512;
+			chessboard.y = 128;
+			
+			
 			myBoard = new Board();
 			
 			myBoard.initialize();
@@ -42,11 +54,11 @@ package de.bht.consilio.game
 		{
 			myBoard.removeEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, addSprites);
 			
-			addChild(myBoard);
+//			addChild(myBoard);
 			
 			mySprite = new Dwarf("ne");
-			mySprite.x += 524;
-			mySprite.y += 539;
+//			mySprite.x += 524;
+//			mySprite.y += 539;
 			mySprite.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void{
 				Logger.log(Logger.INFO, "In Start Animation");
 				var sprite:AnimatedSprite = e.target as AnimatedSprite;
@@ -57,11 +69,16 @@ package de.bht.consilio.game
 					TweenLite.to(sprite, 8, {x:sprite.x + 65, y:sprite.y - 52, onComplete:sprite.pause});
 				});
 			});
-			myBoard.addSprite(mySprite);
+			
+//			myBoard.addSprite(mySprite);
+//			addChild(mySprite);
+			var p:Point = IsoUtils.isoToScreen(chessboard.getSquare("h8").position);
+			Logger.log(Logger.INFO, "Point: [" + p.x + "; " + p.y + "]");
+			mySprite.x = p.x;
+			mySprite.y = p.y;
+			chessboard.addChild(mySprite);
 			
 			mySprite2 = new Vladsword("sw");
-			mySprite2.x += 766;
-			mySprite2.y += 246;
 			mySprite2.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void{
 				Logger.log(Logger.INFO, "In Start Animation");
 				var sprite:AnimatedSprite = e.target as AnimatedSprite;
@@ -72,7 +89,9 @@ package de.bht.consilio.game
 					TweenLite.to(sprite, 8, {x:sprite.x - 65, y:sprite.y + 52, onComplete:sprite.pause});
 				});
 			});
-			myBoard.addSprite(mySprite2);
+			
+//			myBoard.addSprite(mySprite2);
+//			addChild(mySprite2);
 		}
 	}
 }

@@ -8,8 +8,8 @@ package de.bht.consilio.model
 	{
 		public function Dwarf(facing:String)
 		{
-			this.x = -48;
-			this.y = -60;
+//			this.x = -48;
+//			this.y = -60;
 			super("img/dwarf96/", "dwarf.json", facing);
 		}
 	}
