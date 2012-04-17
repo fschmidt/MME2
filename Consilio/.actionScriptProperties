@@ -14,9 +14,8 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="application/IsoSandbox.mxml"/>
-    <application path="application/IsoSandboxApp.as"/>
-    <application path="MyTest.mxml"/>
+    <application path="Consilio.mxml"/>
+    <application path="application/ConsilioApp.as"/>
   </applications>
   <modules/>
   <buildCSSFiles/>

@@ -8,6 +8,7 @@ package de.bht.consilio.game
 	import de.bht.consilio.model.Vladsword;
 	import de.bht.consilio.model.anim.AnimatedSprite;
 	import de.bht.consilio.model.anim.ConsilioEvent;
+	import de.bht.consilio.model.board.ChessBoard;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -27,7 +28,10 @@ package de.bht.consilio.game
 			init();
 		}
 		
-		private function init():void{
+		private function init():void
+		{
+//			var chessboard:ChessBoard = new ChessBoard( 0x333333, 0x999999 );
+//			addChild(chessboard);	
 			myBoard = new Board();
 			
 			myBoard.initialize();
@@ -70,19 +74,5 @@ package de.bht.consilio.game
 			});
 			myBoard.addSprite(mySprite2);
 		}
-		
-		//		private function startAnimation(e:Event):void
-		//		{
-		//			Logger.log(Logger.INFO, "In Start Animation");
-		//			var sprite:AnimatedSprite = e.target as AnimatedSprite;
-		//			sprite.removeEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
-		//			sprite.show();
-		//			sprite.addEventListener(MouseEvent.CLICK, function(e:Event):void 
-		//			{
-		//				var target:AnimatedSprite = e.target as AnimatedSprite;
-		//				sprite.moveTo("ne");
-		//				TweenLite.to(target, 8, {x:target.x + 65, y:target.y - 52, onComplete:target.pause});
-		//			});
-		//		}
 	}
 }

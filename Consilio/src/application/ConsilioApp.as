@@ -1,26 +1,23 @@
 package application {
 	import flash.events.MouseEvent;
 	
+	import game.ConsilioGame;
+	
+	import mx.containers.Panel;
 	import mx.core.Application;
 	import mx.core.UIComponent;
 	import mx.events.FlexEvent;
 	
 	import spark.components.Button;
 
-	public class IsoSandboxApp extends Application {
-		public var myButton:Button; //has to be public
+	public class ConsilioApp extends Application {
+		public var mainPanel:Panel; //has to be public
 		
-		public var isoHostContainer:UIComponent;
-		
-		public function IsoSandboxApp() {
+		public function ConsilioApp() {
 			addEventListener(FlexEvent.CREATION_COMPLETE, creationCompleteHandler);
 		}
 		private function creationCompleteHandler (event:FlexEvent):void {
-			myButton.addEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
-		}
-		public function handleMouseUp(e:MouseEvent):void {
-
-			
+			mainPanel.addChild(new ConsilioGame());
 		}
 	}
 }

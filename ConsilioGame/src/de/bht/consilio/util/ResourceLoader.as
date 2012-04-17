@@ -34,7 +34,6 @@ package de.bht.consilio.util
 			this.data = data;
 		}
 		
-		
 		/**
 		 * 
 		 * @param urlList An Array ot String containing the urls of the sources
