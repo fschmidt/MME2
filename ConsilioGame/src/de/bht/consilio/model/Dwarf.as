@@ -6,9 +6,11 @@ package de.bht.consilio.model
 	
 	public class Dwarf extends AnimatedSprite
 	{
-		public function Dwarf()
+		public function Dwarf(facing:String)
 		{
-			super("img/dwarf96/dwarf.json");
+			this.x = -48;
+			this.y = -60;
+			super("img/dwarf96/", "dwarf.json", facing);
 		}
 	}
 }

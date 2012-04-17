@@ -5,6 +5,7 @@ package de.bht.consilio.game
 	
 	import de.bht.consilio.model.Board;
 	import de.bht.consilio.model.Dwarf;
+	import de.bht.consilio.model.Vladsword;
 	import de.bht.consilio.model.anim.AnimatedSprite;
 	import de.bht.consilio.model.anim.ConsilioEvent;
 	
@@ -39,31 +40,49 @@ package de.bht.consilio.game
 			
 			addChild(myBoard);
 			
-			mySprite = new Dwarf();
-			mySprite.x = 329;
-			mySprite.y = 498;
-			mySprite.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
+			mySprite = new Dwarf("ne");
+			mySprite.x += 524;
+			mySprite.y += 539;
+			mySprite.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void{
+				Logger.log(Logger.INFO, "In Start Animation");
+				var sprite:AnimatedSprite = e.target as AnimatedSprite;
+				sprite.show();
+				sprite.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+				{
+					sprite.moveTo("ne");
+					TweenLite.to(sprite, 8, {x:sprite.x + 65, y:sprite.y - 52, onComplete:sprite.pause});
+				});
+			});
 			myBoard.addSprite(mySprite);
 			
-			//			mySprite2 = new Dwarf();
-			//			mySprite2.initialize();
-			//			mySprite2.x = 220;
-			//			mySprite2.y = 430;
-			//			mySprite2.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
+			mySprite2 = new Vladsword("sw");
+			mySprite2.x += 766;
+			mySprite2.y += 246;
+			mySprite2.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void{
+				Logger.log(Logger.INFO, "In Start Animation");
+				var sprite:AnimatedSprite = e.target as AnimatedSprite;
+				sprite.show();
+				sprite.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+				{
+					sprite.moveTo("sw");
+					TweenLite.to(sprite, 8, {x:sprite.x - 65, y:sprite.y + 52, onComplete:sprite.pause});
+				});
+			});
+			myBoard.addSprite(mySprite2);
 		}
 		
-		private function startAnimation(e:Event):void
-		{
-			Logger.log(Logger.INFO, "In Start Animation");
-			var sprite:AnimatedSprite = e.target as AnimatedSprite;
-			sprite.removeEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
-			sprite.show();
-			sprite.moveTo("null");
-			sprite.addEventListener(MouseEvent.CLICK, function(e:Event):void 
-			{
-				var target:Sprite = e.target as Sprite;
-				TweenLite.to(target, 10, {x:target.x + 65, y:target.y - 52});
-			});
-		}
+		//		private function startAnimation(e:Event):void
+		//		{
+		//			Logger.log(Logger.INFO, "In Start Animation");
+		//			var sprite:AnimatedSprite = e.target as AnimatedSprite;
+		//			sprite.removeEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, startAnimation);
+		//			sprite.show();
+		//			sprite.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+		//			{
+		//				var target:AnimatedSprite = e.target as AnimatedSprite;
+		//				sprite.moveTo("ne");
+		//				TweenLite.to(target, 8, {x:target.x + 65, y:target.y - 52, onComplete:target.pause});
+		//			});
+		//		}
 	}
 }

@@ -34,7 +34,7 @@ package de.bht.consilio.model.anim
 		private function init():void
 		{
 			animationIndex = 0;
-			currentFrameIndex = 0;
+			currentFrameIndex = 2;
 			
 			var tmp:Bitmap = (Bitmap)(textures[0]);
 			
@@ -42,6 +42,8 @@ package de.bht.consilio.model.anim
 			currentFrame.bitmapData = new BitmapData(tmp.width, tmp.height);
 			
 			currentFrame.bitmapData.copyPixels(tmp.bitmapData, new Rectangle(0,0,0), new Point(0, 0));
+			
+			currentFrame.bitmapData.copyPixels(((Bitmap)(textures[currentFrameIndex])).bitmapData, currentFrame.bitmapData.rect, new Point(0, 0));
 			
 			this.addChild(currentFrame);
 		}
@@ -56,6 +58,11 @@ package de.bht.consilio.model.anim
 			removeEventListener(Event.ENTER_FRAME, animate);
 			animationIndex = 0;
 			currentFrameIndex = 0;
+		}
+		
+		public function pause():void
+		{
+			removeEventListener(Event.ENTER_FRAME, animate);
 		}
 		
 		private function animate(e:Event):void 

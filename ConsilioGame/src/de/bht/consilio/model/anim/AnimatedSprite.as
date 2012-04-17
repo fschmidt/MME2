@@ -19,20 +19,26 @@ package de.bht.consilio.model.anim
 	public class AnimatedSprite extends Sprite
 	{
 		
+		private var baseUrl:String;
+		
 		private var animations:Dictionary = new Dictionary();
 		
 		private var currentAnimation:Animation;
 		
 		private var spriteData:Object;
 		
-		public function AnimatedSprite(spriteDataUrl:String) 
+		private var facing:String;
+		
+		public function AnimatedSprite(baseUrl:String, spriteDataUrl:String, facing:String) 
 		{
-			init(spriteDataUrl);			
+			this.facing = facing;
+			this.baseUrl = baseUrl;
+			init(baseUrl, spriteDataUrl);			
 		}
 		
-		private function init(spriteDataUrl:String):void
+		private function init(baseUrl:String, spriteDataUrl:String):void
 		{
-			var myRequest:URLRequest = new URLRequest(spriteDataUrl);
+			var myRequest:URLRequest = new URLRequest(baseUrl + spriteDataUrl);
 			var myLoader:URLLoader = new URLLoader();
 			myLoader.addEventListener(Event.COMPLETE, onload);
 			myLoader.load(myRequest);
@@ -54,9 +60,9 @@ package de.bht.consilio.model.anim
 				for(var j:int = animationsToLoad[i].frames-1; j >= 0; j--)
 				{
 					if(j<10){
-						locations.push(animationsToLoad[i].url + "000" + j + ".png");
+						locations.push(baseUrl + animationsToLoad[i].name + "000" + j + ".png");
 					} else {
-						locations.push(animationsToLoad[i].url + "00" + j + ".png");
+						locations.push(baseUrl + animationsToLoad[i].name + "00" + j + ".png");
 					}
 				}
 				
@@ -83,7 +89,8 @@ package de.bht.consilio.model.anim
 					{
 						Logger.log(Logger.INFO, "no Animations left to load");
 						// change this to stopped animation
-						currentAnimation = animations["walking_ne"];
+						currentAnimation = animations["walking " + facing];
+						addChild(currentAnimation);
 						dispatchEvent(new ConsilioEvent(ConsilioEvent.ON_INITIALIZATION_COMPLETE));
 					}
 				});
@@ -94,8 +101,33 @@ package de.bht.consilio.model.anim
 		
 		public function moveTo(target:String):void
 		{
-			currentAnimation = animations["walking_ne"];
+			removeChild(currentAnimation);
+			currentAnimation = animations["walking " + target];
+			addChild(currentAnimation);
 			currentAnimation.start();
+		}
+		
+		public function attack(direction:String):void
+		{
+			removeChild(currentAnimation);
+			currentAnimation = animations["attack " + direction];
+			addChild(currentAnimation);
+			currentAnimation.start();
+		}
+		
+		public function stop():void
+		{
+			currentAnimation.stop();
+		}
+		
+		public function start():void
+		{
+			currentAnimation.start();
+		}
+		
+		public function pause():void
+		{
+			currentAnimation.pause();
 		}
 		
 		public function show():void
