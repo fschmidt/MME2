@@ -67,14 +67,6 @@ package de.bht.consilio.model.iso
 			return _position;
 		}
 		
-		public function get centerWC():Point
-		{
-			var p:Point = IsoUtils.isoToScreen(_position);
-			p.x+=size/2;
-			p.y+=size/2;
-			return p;
-		}
-		
 		public function get size():Number
 		{
 			return _size;

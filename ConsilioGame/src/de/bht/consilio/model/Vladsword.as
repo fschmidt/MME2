@@ -8,7 +8,7 @@ package de.bht.consilio.model
 		{
 			this.x = -48;
 			this.y = -60;
-			super("img/vladsword96/", "vladsword.json", facing);
+			super(96,96,48,"img/vladsword96/", "vladsword.json", facing);
 		}
 	}
 }

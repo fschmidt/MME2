@@ -72,10 +72,10 @@ package de.bht.consilio.game
 			
 //			myBoard.addSprite(mySprite);
 //			addChild(mySprite);
-			var p:Point = IsoUtils.isoToScreen(chessboard.getSquare("h8").position);
-			Logger.log(Logger.INFO, "Point: [" + p.x + "; " + p.y + "]");
-			mySprite.x = p.x;
-			mySprite.y = p.y;
+			mySprite.position = chessboard.getSquare("a1").position;
+			Logger.log(Logger.INFO, "Point: [" + mySprite.x + "; " + mySprite.y + "]");
+//			mySprite.x = p.x;
+//			mySprite.y = p.y;
 			chessboard.addChild(mySprite);
 			
 			mySprite2 = new Vladsword("sw");

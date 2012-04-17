@@ -1,10 +1,12 @@
 package de.bht.consilio.model.anim
 {
 	import de.bht.consilio.model.Board;
+	import de.bht.consilio.model.iso.IsoObject;
 	import de.bht.consilio.util.ResourceLoader;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -16,12 +18,14 @@ package de.bht.consilio.model.anim
 	
 	import org.osflash.thunderbolt.Logger;
 	
-	public class AnimatedSprite extends Sprite
+	public class AnimatedSprite extends IsoObject
 	{
 		
 		private var baseUrl:String;
 		
 		private var animations:Dictionary = new Dictionary();
+		
+		private var animationOffsetContainer:Sprite = new Sprite();
 		
 		private var currentAnimation:Animation;
 		
@@ -29,8 +33,11 @@ package de.bht.consilio.model.anim
 		
 		private var facing:String;
 		
-		public function AnimatedSprite(baseUrl:String, spriteDataUrl:String, facing:String) 
+		public function AnimatedSprite(size:Number, xoffset:Number, yoffset:Number, baseUrl:String, spriteDataUrl:String, facing:String) 
 		{
+			super(size);
+			this.animationOffsetContainer.x = -xoffset;
+			this.animationOffsetContainer.y = -yoffset;
 			this.facing = facing;
 			this.baseUrl = baseUrl;
 			init(baseUrl, spriteDataUrl);			
@@ -67,30 +74,27 @@ package de.bht.consilio.model.anim
 				}
 				
 				// write the loaded locations to the console
-				for (var k:int = 0; k < locations.length; k++) 
-				{
-					Logger.log(Logger.INFO, "location:" + locations[k]);	
-				}
+				//				for (var k:int = 0; k < locations.length; k++) 
+				//				{
+				//					Logger.log(Logger.INFO, "location:" + locations[k]);	
+				//				}
 				
 				var key:String = animationsToLoad[i].name;
-				
-				Logger.log(Logger.INFO, "key:" + key);
 				
 				var data:Array = [animationsToLoad[i].animationdelay, animationsToLoad[i].frames];
 				
 				var loader:ResourceLoader = new ResourceLoader(key, data);
 				loader.addEventListener(ConsilioEvent.ON_RESOURCE_LOAD_COMPLETE, function(e:Event):void {
 					animationsLeftToLoad--
-					Logger.log(Logger.INFO, "Animations left:" + animationsLeftToLoad);
 					
 					var loader:ResourceLoader = e.target as ResourceLoader;
 					animations[loader.getKey()] = new Animation(loader.getLastResult(), loader.getData() as Array);
 					if(animationsLeftToLoad < 1)
 					{
-						Logger.log(Logger.INFO, "no Animations left to load");
 						// change this to stopped animation
 						currentAnimation = animations["walking " + facing];
-						addChild(currentAnimation);
+						animationOffsetContainer.addChild(currentAnimation);
+						addChild(animationOffsetContainer);
 						dispatchEvent(new ConsilioEvent(ConsilioEvent.ON_INITIALIZATION_COMPLETE));
 					}
 				});
@@ -101,17 +105,17 @@ package de.bht.consilio.model.anim
 		
 		public function moveTo(target:String):void
 		{
-			removeChild(currentAnimation);
+			animationOffsetContainer.removeChild(currentAnimation);
 			currentAnimation = animations["walking " + target];
-			addChild(currentAnimation);
+			animationOffsetContainer.addChild(currentAnimation);
 			currentAnimation.start();
 		}
 		
 		public function attack(direction:String):void
 		{
-			removeChild(currentAnimation);
+			animationOffsetContainer.removeChild(currentAnimation);
 			currentAnimation = animations["attack " + direction];
-			addChild(currentAnimation);
+			animationOffsetContainer.addChild(currentAnimation);
 			currentAnimation.start();
 		}
 		
@@ -132,12 +136,12 @@ package de.bht.consilio.model.anim
 		
 		public function show():void
 		{
-			this.addChild(currentAnimation);
+			animationOffsetContainer..addChild(currentAnimation);
 		}
 		
 		public function hide():void
 		{
-			this.removeChild(currentAnimation);
+			animationOffsetContainer..removeChild(currentAnimation);
 		}
 	}
 }

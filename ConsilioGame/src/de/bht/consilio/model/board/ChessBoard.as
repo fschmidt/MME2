@@ -64,9 +64,7 @@ package de.bht.consilio.model.board
 		private function onClick(e:MouseEvent):void
 		{
 			var s:Square = e.target as Square;
-//			var p:Point = s.local3DToGlobal(new Vector3D(s.x, s.y));
-			var p:Point = new Point(s.x, s.y);
-			Logger.log(Logger.INFO, "Point: [" + p.x + "; " + p.y + "]");
+			Logger.log(Logger.INFO, "Square " + s.id + ": [" + s.position.x + "; " + s.position.y + "]");
 		}
 		public function getSquare(id:String):Square
 		{
