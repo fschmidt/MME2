@@ -1,33 +1,29 @@
 package de.bht.consilio.game 
 {
 	import com.greensock.TweenLite;
-	import com.greensock.TweenMax;
 	
-	import de.bht.consilio.model.Board;
+	import de.bht.consilio.model.AxeStanShield;
+	import de.bht.consilio.model.BlackMage;
+	import de.bht.consilio.model.DarkPrincess;
 	import de.bht.consilio.model.Dwarf;
+	import de.bht.consilio.model.TFreyaAxe;
 	import de.bht.consilio.model.Vladsword;
+	import de.bht.consilio.model.WhiteMage;
 	import de.bht.consilio.model.anim.AnimatedSprite;
 	import de.bht.consilio.model.anim.ConsilioEvent;
 	import de.bht.consilio.model.board.ChessBoard;
-	import de.bht.consilio.model.iso.IsoUtils;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.geom.Point;
-	import flash.geom.Vector3D;
 	
-	import mx.core.ButtonAsset;
-	
-	import org.osflash.thunderbolt.Logger;
+	import flashx.textLayout.formats.WhiteSpaceCollapse;
 	
 	[SWF(width="1024",height="768",frameRate="30", backgroundColor="0x000000")]
 	public class ConsilioGame extends Sprite{
 		
 		private var mySprite:AnimatedSprite;
 		private var mySprite2:AnimatedSprite;
-		
-		private var myBoard:Board;
 		
 		private var chessboard:ChessBoard;
 		
@@ -43,55 +39,173 @@ package de.bht.consilio.game
 			chessboard.x = 512;
 			chessboard.y = 128;
 			
-			
-			myBoard = new Board();
-			
-			myBoard.initialize();
-			myBoard.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, addSprites);
+			addSprites();
 		}
 		
-		private function addSprites(e:Event):void
+		private function addSprites():void
 		{
-			myBoard.removeEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, addSprites);
-			
-//			addChild(myBoard);
-			
-			mySprite = new Dwarf("ne");
-//			mySprite.x += 524;
-//			mySprite.y += 539;
-			mySprite.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void{
-				Logger.log(Logger.INFO, "In Start Animation");
-				var sprite:AnimatedSprite = e.target as AnimatedSprite;
-				sprite.show();
-				sprite.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+			for(var i:int = 1; i < 9; i++)
+			{
+				var dwarf:Dwarf = new Dwarf("ne");
+				dwarf.position = chessboard.getSquare(String.fromCharCode(64+i).toLowerCase()+"2").position;
+				chessboard.addChild(dwarf);
+				dwarf.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void
 				{
-					sprite.moveTo("ne");
-					TweenLite.to(sprite, 8, {x:sprite.x + 65, y:sprite.y - 52, onComplete:sprite.pause});
+					var s:AnimatedSprite = e.target as AnimatedSprite;
+					s.show();
+					s.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+					{
+						s.moveTo("ne");
+//						TweenLite.to(s, 8, {x:s.x + 65, y:s.y - 52, onComplete:s.pause});
+					});
+				});
+			}
+			
+			for(var j:int = 1; j < 9; j++)
+			{
+				var vlad:Vladsword = new Vladsword("sw");
+				vlad.position = chessboard.getSquare(String.fromCharCode(64+j).toLowerCase()+"7").position;
+				chessboard.addChild(vlad);
+				vlad.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void
+				{
+					var s:AnimatedSprite = e.target as AnimatedSprite;
+					s.show();
+					s.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+					{
+						s.moveTo("sw");
+					});
+				});
+			}
+			
+			var dprin:DarkPrincess = new DarkPrincess("sw");
+			dprin.position = chessboard.getSquare("e8").position;
+			chessboard.addChild(dprin);
+			dprin.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void
+			{
+				var s:AnimatedSprite = e.target as AnimatedSprite;
+				s.show();
+				s.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+				{
+					s.moveTo("sw");
 				});
 			});
 			
-//			myBoard.addSprite(mySprite);
-//			addChild(mySprite);
-			mySprite.position = chessboard.getSquare("a1").position;
-			Logger.log(Logger.INFO, "Point: [" + mySprite.x + "; " + mySprite.y + "]");
-//			mySprite.x = p.x;
-//			mySprite.y = p.y;
-			chessboard.addChild(mySprite);
-			
-			mySprite2 = new Vladsword("sw");
-			mySprite2.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void{
-				Logger.log(Logger.INFO, "In Start Animation");
-				var sprite:AnimatedSprite = e.target as AnimatedSprite;
-				sprite.show();
-				sprite.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+			var dprin2:DarkPrincess = new DarkPrincess("ne");
+			dprin2.position = chessboard.getSquare("e1").position;
+			chessboard.addChild(dprin2);
+			dprin2.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void
+			{
+				var s:AnimatedSprite = e.target as AnimatedSprite;
+				s.show();
+				s.addEventListener(MouseEvent.CLICK, function(e:Event):void 
 				{
-					sprite.moveTo("sw");
-					TweenLite.to(sprite, 8, {x:sprite.x - 65, y:sprite.y + 52, onComplete:sprite.pause});
+					s.moveTo("ne");
 				});
 			});
 			
-//			myBoard.addSprite(mySprite2);
-//			addChild(mySprite2);
+			var wmage:WhiteMage = new WhiteMage("ne");
+			wmage.position = chessboard.getSquare("c1").position;
+			chessboard.addChild(wmage);
+			wmage.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void
+			{
+				var s:AnimatedSprite = e.target as AnimatedSprite;
+				s.show();
+				s.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+				{
+					s.moveTo("ne");
+				});
+			});
+			
+			var wmage2:WhiteMage = new WhiteMage("ne");
+			wmage2.position = chessboard.getSquare("f1").position;
+			chessboard.addChild(wmage2);
+			wmage2.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void
+			{
+				var s:AnimatedSprite = e.target as AnimatedSprite;
+				s.show();
+				s.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+				{
+					s.moveTo("ne");
+				});
+			});
+			
+			var bmage:BlackMage = new BlackMage("sw");
+			bmage.position = chessboard.getSquare("c8").position;
+			chessboard.addChild(bmage);
+			bmage.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void
+			{
+				var s:AnimatedSprite = e.target as AnimatedSprite;
+				s.show();
+				s.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+				{
+					s.moveTo("sw");
+				});
+			});
+			
+			var bmage2:BlackMage = new BlackMage("sw");
+			bmage2.position = chessboard.getSquare("f8").position;
+			chessboard.addChild(bmage2);
+			bmage2.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void
+			{
+				var s:AnimatedSprite = e.target as AnimatedSprite;
+				s.show();
+				s.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+				{
+					s.moveTo("sw");
+				});
+			});
+			
+			var freya:TFreyaAxe = new TFreyaAxe("ne");
+			freya.position = chessboard.getSquare("a1").position;
+			chessboard.addChild(freya);
+			freya.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void
+			{
+				var s:AnimatedSprite = e.target as AnimatedSprite;
+				s.show();
+				s.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+				{
+					s.moveTo("ne");
+				});
+			});
+			
+			var freya2:TFreyaAxe = new TFreyaAxe("ne");
+			freya2.position = chessboard.getSquare("h1").position;
+			chessboard.addChild(freya2);
+			freya2.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void
+			{
+				var s:AnimatedSprite = e.target as AnimatedSprite;
+				s.show();
+				s.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+				{
+					s.moveTo("ne");
+				});
+			});
+			
+			var axestan:AxeStanShield = new AxeStanShield("sw");
+			axestan.position = chessboard.getSquare("a8").position;
+			chessboard.addChild(axestan);
+			axestan.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void
+			{
+				var s:AnimatedSprite = e.target as AnimatedSprite;
+				s.show();
+				s.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+				{
+					s.moveTo("sw");
+				});
+			});
+			
+			var axestan2:AxeStanShield = new AxeStanShield("sw");
+			axestan2.position = chessboard.getSquare("h8").position;
+			chessboard.addChild(axestan2);
+			axestan2.addEventListener(ConsilioEvent.ON_INITIALIZATION_COMPLETE, function(e:Event):void
+			{
+				var s:AnimatedSprite = e.target as AnimatedSprite;
+				s.show();
+				s.addEventListener(MouseEvent.CLICK, function(e:Event):void 
+				{
+					s.moveTo("sw");
+				});
+			});
 		}
 	}
 }
