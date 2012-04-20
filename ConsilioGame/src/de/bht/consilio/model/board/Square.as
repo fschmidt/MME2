@@ -1,29 +1,44 @@
 package de.bht.consilio.model.board
 {
-		import flash.display.*;
-		import flash.events.*;
-		import flash.utils.*;
+	import de.bht.consilio.model.iso.IsoObject;
+	
+	import flash.display.*;
+	import flash.events.*;
+	import flash.utils.*;
+	
+	public class Square extends IsoObject
+	{
+		protected var _height:Number;
+		protected var _id:String;
+		protected var _color:uint
 		
-		public class Square extends Sprite
+		public function Square(size:Number, color:uint)
+		{ 
+			super(size);
+			_height = height;
+			_color = color;
+			draw();
+		}
+		
+		protected function draw():void
 		{
-			private var _id:String;
-			
-			public function Square(color:uint)
-			{ 
-				var g:Graphics = this.graphics;
-				g.beginFill(color);
-				g.drawRect(0,0,60,60);
-				g.endFill();
-			}
-			
-			public function get id():String
-			{
-				return _id;
-			}
-			
-			public function set id(value:String):void
-			{
-				_id  = value;
-			}
+			graphics.clear();
+			graphics.beginFill(_color);
+			graphics.moveTo(-size, 0);
+			graphics.lineTo(0, -size * .5);
+			graphics.lineTo(size, 0);
+			graphics.lineTo(0, size * .5);
+			graphics.lineTo(-size, 0);
+		}
+		
+		public function get id():String
+		{
+			return _id;
+		}
+		
+		public function set id(value:String):void
+		{
+			_id  = value;
 		}
 	}
+}

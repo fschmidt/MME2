@@ -54,7 +54,7 @@ package de.bht.consilio.util
 			
 			var url:String = urls.pop() as String;
 			
-			Logger.log(Logger.INFO, "Loading URL:" + url.toString());
+//			Logger.log(Logger.INFO, "Loading URL:" + url.toString());
 			
 			
 			var urlRequest:URLRequest = new URLRequest(url);
