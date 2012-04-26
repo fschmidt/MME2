@@ -1,0 +1,97 @@
+{
+	"animations": [
+		{
+			"name": "attack e",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "attack n",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "attack ne",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "attack nw",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "attack s",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "attack se",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "attack sw",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "attack w",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "been hit e",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "been hit ne",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "been hit nw",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "been hit s",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "been hit se",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "been hit sw",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "been hit w",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "walking e",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "walking n",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "walking ne",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "walking nw",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "walking s",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "walking se",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "walking sw",
+			"frames": 12,
+			"animationdelay": 5
+		}, {
+			"name": "walking w",
+			"frames": 12,
+			"animationdelay": 5
+		}
+	]
+}

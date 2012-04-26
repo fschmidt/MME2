@@ -4,7 +4,8 @@ package de.bht.consilio.game
 	import de.bht.consilio.model.BlackMage;
 	import de.bht.consilio.model.DarkPrincess;
 	import de.bht.consilio.model.Dwarf;
-	import de.bht.consilio.model.TFreyaAxe;
+	import de.bht.consilio.model.FullPlatedKnight;
+	import de.bht.consilio.model.FreyaAxe;
 	import de.bht.consilio.model.Vladsword;
 	import de.bht.consilio.model.WhiteMage;
 	import de.bht.consilio.model.anim.AnimatedSprite;
@@ -85,12 +86,12 @@ package de.bht.consilio.game
 			chessboard.getSquare("f8").registerSprite(bmage2);
 			chessboard.addChild(bmage2);
 			
-			var freya:TFreyaAxe = new TFreyaAxe("ne");
+			var freya:FreyaAxe = new FreyaAxe("ne");
 			freya.position = chessboard.getSquare("a1").position;
 			chessboard.getSquare("a1").registerSprite(freya);
 			chessboard.addChild(freya);
 			
-			var freya2:TFreyaAxe = new TFreyaAxe("ne");
+			var freya2:FreyaAxe = new FreyaAxe("ne");
 			freya2.position = chessboard.getSquare("h1").position;
 			chessboard.getSquare("h1").registerSprite(freya2);
 			chessboard.addChild(freya2);
@@ -105,6 +106,16 @@ package de.bht.consilio.game
 			axestan2.position = chessboard.getSquare("h8").position;
 			chessboard.getSquare("h8").registerSprite(axestan2);
 			chessboard.addChild(axestan2);
+			
+			var fpk:FullPlatedKnight = new FullPlatedKnight("sw");
+			fpk.position = chessboard.getSquare("b8").position;
+			chessboard.getSquare("b8").registerSprite(fpk);
+			chessboard.addChild(fpk);
+			
+			var fpk2:FullPlatedKnight = new FullPlatedKnight("sw");
+			fpk2.position = chessboard.getSquare("g8").position;
+			chessboard.getSquare("g8").registerSprite(fpk2);
+			chessboard.addChild(fpk2);
 		}
 	}
 }
