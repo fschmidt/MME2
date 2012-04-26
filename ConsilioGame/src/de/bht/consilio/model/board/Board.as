@@ -11,10 +11,10 @@ package de.bht.consilio.model.board
 	
 	import org.osflash.thunderbolt.Logger;
 	
-	public class ChessBoard extends Sprite
+	public class Board extends Sprite
 	{
 		private var squares:Dictionary = new Dictionary();
-		public function ChessBoard( dark:uint, light:uint )
+		public function Board( dark:uint, light:uint )
 		{
 			var letters:Array = [ "a", "b", "c", "d", "e", "f", "g", "h" ];
 			var number:int = letters.length;
@@ -64,8 +64,13 @@ package de.bht.consilio.model.board
 		private function onClick(e:MouseEvent):void
 		{
 			var s:Square = e.target as Square;
-			Logger.log(Logger.INFO, "Square " + s.id + ": [" + s.position.x + "; " + s.position.y + "]");
+			if(s.registeredSprite)
+			{
+				s.activateMenu();
+				s.registeredSprite.start();
+			}
 		}
+		
 		public function getSquare(id:String):Square
 		{
 			return squares[id] as Square;

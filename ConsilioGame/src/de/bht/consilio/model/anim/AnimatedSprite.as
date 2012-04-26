@@ -1,22 +1,20 @@
 package de.bht.consilio.model.anim
 {
-	import de.bht.consilio.model.Board;
+	import com.greensock.TweenLite;
+	
+	import de.bht.consilio.model.board.Square;
 	import de.bht.consilio.model.iso.IsoObject;
+	import de.bht.consilio.model.iso.IsoUtils;
+	import de.bht.consilio.model.iso.Point3D;
 	import de.bht.consilio.util.ResourceLoader;
 	
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.MouseEvent;
+	import flash.filters.BlurFilter;
 	import flash.geom.Point;
-	import flash.geom.Rectangle;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
-	
-	import org.osflash.thunderbolt.Logger;
 	
 	public class AnimatedSprite extends IsoObject
 	{
@@ -40,7 +38,9 @@ package de.bht.consilio.model.anim
 			this.animationOffsetContainer.y = -yoffset;
 			this.facing = facing;
 			this.baseUrl = baseUrl;
-			init(baseUrl, spriteDataUrl);			
+			init(baseUrl, spriteDataUrl);
+			this.mouseEnabled = false;
+			this.mouseChildren = false;
 		}
 		
 		private function init(baseUrl:String, spriteDataUrl:String):void
@@ -73,12 +73,6 @@ package de.bht.consilio.model.anim
 					}
 				}
 				
-				// write the loaded locations to the console
-				//				for (var k:int = 0; k < locations.length; k++) 
-				//				{
-				//					Logger.log(Logger.INFO, "location:" + locations[k]);	
-				//				}
-				
 				var key:String = animationsToLoad[i].name;
 				
 				var data:Array = [animationsToLoad[i].animationdelay, animationsToLoad[i].frames];
@@ -103,12 +97,19 @@ package de.bht.consilio.model.anim
 			}
 		}
 		
-		public function moveTo(target:String):void
+		public function moveTo(target:Square):void
 		{
-			animationOffsetContainer.removeChild(currentAnimation);
-			currentAnimation = animations["walking " + target];
-			animationOffsetContainer.addChild(currentAnimation);
+			var p3d:Point3D = target.position;
+			var p:Point = IsoUtils.isoToScreen(p3d);
+			TweenLite.to(this, 7, {x:p.x, y:p.y, onComplete : finishedWalking});
+//			animationOffsetContainer.removeChild(currentAnimation);
+//			currentAnimation = animations["walking " + target];
+//			animationOffsetContainer.addChild(currentAnimation);
 			currentAnimation.start();
+		}
+		private function finishedWalking(e:Event):void
+		{
+			pause();	
 		}
 		
 		public function attack(direction:String):void
@@ -136,12 +137,12 @@ package de.bht.consilio.model.anim
 		
 		public function show():void
 		{
-			animationOffsetContainer..addChild(currentAnimation);
+			animationOffsetContainer.addChild(currentAnimation);
 		}
 		
 		public function hide():void
 		{
-			animationOffsetContainer..removeChild(currentAnimation);
+			animationOffsetContainer.removeChild(currentAnimation);
 		}
 	}
 }
