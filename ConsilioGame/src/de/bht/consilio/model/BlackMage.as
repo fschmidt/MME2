@@ -6,7 +6,7 @@ package de.bht.consilio.model
 	{
 		public function BlackMage(facing:String)
 		{
-			super(96, 55, 65,"img/black_mage/", "blackmage.json", facing);
+			super(96, 55, 65,"img/pieces/black_mage/", "blackmage.json", facing);
 		}
 	}
 }

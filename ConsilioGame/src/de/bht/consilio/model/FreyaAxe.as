@@ -6,7 +6,7 @@ package de.bht.consilio.model
 	{
 		public function FreyaAxe(facing:String)
 		{
-			super(96, 70, 80,"img/freya_axe/", "freyaaxe.json", facing);
+			super(96, 70, 80,"img/pieces/freya_axe/", "freyaaxe.json", facing);
 		}
 	}
 }

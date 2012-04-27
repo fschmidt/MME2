@@ -6,7 +6,7 @@ package de.bht.consilio.model
 	{
 		public function FullPlatedKnight(facing:String)
 		{
-			super(96, 55, 65,"img/fullplated_knight/", "fullplatedknight.json", facing);
+			super(96, 55, 65,"img/pieces/fullplated_knight/", "fullplatedknight.json", facing);
 		}
 	}
 }

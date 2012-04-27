@@ -6,7 +6,7 @@ package de.bht.consilio.model
 	{
 		public function DarkPrincess(facing:String)
 		{
-			super(96, 55, 65,"img/dark_princess/", "darkprincess.json", facing);
+			super(96, 55, 65,"img/pieces/dark_princess/", "darkprincess.json", facing);
 		}
 	}
 }

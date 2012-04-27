@@ -8,7 +8,7 @@ package de.bht.consilio.model
 	{
 		public function Dwarf(facing:String)
 		{
-			super(96, 55, 60, "img/dwarf96/", "dwarf.json", facing);
+			super(96, 55, 60, "img/pieces/dwarf96/", "dwarf.json", facing);
 		}
 	}
 }

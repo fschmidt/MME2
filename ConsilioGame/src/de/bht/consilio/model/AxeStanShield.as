@@ -6,7 +6,7 @@ package de.bht.consilio.model
 	{
 		public function AxeStanShield(facing:String)
 		{
-			super(96, 55, 65,"img/axestan_shield/", "axestanshield.json", facing);
+			super(96, 55, 65,"img/pieces/axestan_shield/", "axestanshield.json", facing);
 		}
 	}
 }

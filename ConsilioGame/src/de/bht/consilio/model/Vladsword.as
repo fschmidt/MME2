@@ -6,7 +6,7 @@ package de.bht.consilio.model
 	{
 		public function Vladsword(facing:String)
 		{
-			super(96, 55, 65,"img/vladsword96/", "vladsword.json", facing);
+			super(96, 55, 65,"img/pieces/vladsword96/", "vladsword.json", facing);
 		}
 	}
 }
