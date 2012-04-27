@@ -19,82 +19,32 @@ package de.bht.consilio.model.anim
 	public class AnimatedSprite extends IsoObject
 	{
 		
-		private var baseUrl:String;
-		
-		private var animations:Dictionary = new Dictionary();
+		private var animations:Dictionary;
 		
 		private var animationOffsetContainer:Sprite = new Sprite();
 		
-		private var currentAnimation:Animation;
+		public var currentAnimation:Animation;
 		
 		private var spriteData:Object;
 		
 		private var facing:String;
 		
-		public function AnimatedSprite(size:Number, xoffset:Number, yoffset:Number, baseUrl:String, spriteDataUrl:String, facing:String) 
+		public function AnimatedSprite(animations:Dictionary, xoffset:Number, yoffset:Number, size:Number, facing:String, currentAnimationName:String) 
 		{
 			super(size);
 			this.animationOffsetContainer.x = -xoffset;
 			this.animationOffsetContainer.y = -yoffset;
 			this.facing = facing;
-			this.baseUrl = baseUrl;
-			init(baseUrl, spriteDataUrl);
+			this.name = name;
+			this.animations = animations;
 			this.mouseEnabled = false;
 			this.mouseChildren = false;
 		}
 		
-		private function init(baseUrl:String, spriteDataUrl:String):void
-		{
-			var myRequest:URLRequest = new URLRequest(baseUrl + spriteDataUrl);
-			var myLoader:URLLoader = new URLLoader();
-			myLoader.addEventListener(Event.COMPLETE, onload);
-			myLoader.load(myRequest);
-		}
-		
-		private function onload(e:Event):void
-		{
-			spriteData = JSON.parse(e.target.data);
-			var animationsToLoad:Array = spriteData.animations as Array;
-			var animationsLeftToLoad:uint = 0;
-			
-			for (var i:int = 0; i < animationsToLoad.length; i++) 
-			{
-				
-				animationsLeftToLoad++;
-				
-				var locations:Array = new Array();
-				
-				for(var j:int = animationsToLoad[i].frames-1; j >= 0; j--)
-				{
-					if(j<10){
-						locations.push(baseUrl + animationsToLoad[i].name + "000" + j + ".png");
-					} else {
-						locations.push(baseUrl + animationsToLoad[i].name + "00" + j + ".png");
-					}
-				}
-				
-				var key:String = animationsToLoad[i].name;
-				
-				var data:Array = [animationsToLoad[i].animationdelay, animationsToLoad[i].frames];
-				
-				var loader:ResourceLoader = new ResourceLoader(key, data);
-				loader.addEventListener(ConsilioEvent.ON_RESOURCE_LOAD_COMPLETE, function(e:Event):void {
-					animationsLeftToLoad--
-					
-					var loader:ResourceLoader = e.target as ResourceLoader;
-					animations[loader.getKey()] = new Animation(loader.getLastResult(), loader.getData() as Array);
-					if(animationsLeftToLoad < 1)
-					{
-						// change this to stopped animation
-						currentAnimation = animations["walking " + facing];
-						animationOffsetContainer.addChild(currentAnimation);
-						addChild(animationOffsetContainer);
-						dispatchEvent(new ConsilioEvent(ConsilioEvent.ON_INITIALIZATION_COMPLETE));
-					}
-				});
-				
-				loader.loadImages(locations);
-			}
+		public function init(currentAnimationName:String):void {
+			currentAnimation = animations[currentAnimationName];
+			animationOffsetContainer.addChild(currentAnimation);
+			addChild(animationOffsetContainer);
 		}
 		
 		public function moveTo(target:Square):void
