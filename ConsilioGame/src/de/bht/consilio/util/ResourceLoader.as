@@ -9,8 +9,6 @@ package de.bht.consilio.util
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
-	import org.osflash.thunderbolt.Logger;
-	
 	
 	/**
 	 * This class is responsible for loading external resources.
@@ -21,7 +19,7 @@ package de.bht.consilio.util
 	public class ResourceLoader extends EventDispatcher {
 		
 		private var urls:Array;
-
+		
 		private var key:String;
 		
 		private var data:Object;
@@ -54,9 +52,6 @@ package de.bht.consilio.util
 			
 			var url:String = urls.pop() as String;
 			
-//			Logger.log(Logger.INFO, "Loading URL:" + url.toString());
-			
-			
 			var urlRequest:URLRequest = new URLRequest(url);
 			
 			loader.load(urlRequest);
@@ -66,12 +61,21 @@ package de.bht.consilio.util
 		
 		private function imageLoaded(e:Event):void
 		{
-				results.push(new Bitmap(e.target.content.bitmapData));
-				if(urls.length > 0){
-					loadImage(urls);
-				} else {
-					dispatchEvent(new ConsilioEvent(ConsilioEvent.ON_RESOURCE_LOAD_COMPLETE));
-				}
+			results.push(new Bitmap(e.target.content.bitmapData));
+			if(urls.length > 0){
+				loadImage(urls);
+			} else {
+				dispatchEvent(new ConsilioEvent(ConsilioEvent.ON_RESOURCE_LOAD_COMPLETE));
+			}
+		}
+		
+		public function loadURL(request:URLRequest):void {
+			var loader:URLLoader = new URLLoader();
+			loader.addEventListener(Event.COMPLETE, function (e:Event):void{
+				
+				dispatchEvent(new ConsilioEvent(ConsilioEvent.ON_RESOURCE_LOAD_COMPLETE, JSON.parse(e.target.data)));
+			});
+			loader.load(request);
 		}
 		
 		public function getLastResult():Array

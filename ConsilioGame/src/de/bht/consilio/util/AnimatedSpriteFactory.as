@@ -1,6 +1,9 @@
-package de.bht.consilio.model.anim
+package de.bht.consilio.util
 {
-	import de.bht.consilio.util.ResourceLoader;
+	
+	import de.bht.consilio.model.anim.AnimatedSprite;
+	import de.bht.consilio.model.anim.Animation;
+	import de.bht.consilio.model.anim.ConsilioEvent;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -10,30 +13,22 @@ package de.bht.consilio.model.anim
 
 	public class AnimatedSpriteFactory extends EventDispatcher
 	{
-		public function createAnimatedSpriteFromJsonDescription(baseUrl:String, spriteData:Object, facing:String) : AnimatedSprite{
+		public function createAnimatedSpriteFromJsonDescription(baseUrl:String, spriteData:Object, facing:String, boardPosition:String) : void {
+
 			var name:String = spriteData.name;
 			
 			var animationsToLoad:Array = spriteData.animations as Array;
 			var animationsLeftToLoad:uint = 0;
-			
 			var animations:Dictionary = new Dictionary();
+			
+			var result:AnimatedSprite = new AnimatedSprite(animations, 55, 65, 96, facing, boardPosition, "stopped");
 			
 			for (var i:int = 0; i < animationsToLoad.length; i++) {
 				
 				animationsLeftToLoad++;
 				
-				
 				var locations:Array = new Array();
-//				
-//				for (var j:int = 0; j < animationsToLoad.length; j++) 
-//				{
-//					locations[j] = baseUrl + spriteData.name + "/" + (locations[j] as String);
-//					Logger.log(Logger.INFO, locations[j] as String);
-//				}
-				
-				
-				
-				
+
 				for(var j:int = animationsToLoad[i].numberOfFrames-1; j >= 0; j--)
 				{
 					if(j<10){
@@ -56,15 +51,14 @@ package de.bht.consilio.model.anim
 					animations[loader.getKey()] = new Animation(loader.getLastResult(), loader.getData() as Array);
 					if(animationsLeftToLoad < 1)
 					{
-						Logger.log(Logger.INFO, "Resource load finished");
-						dispatchEvent(new ConsilioEvent(ConsilioEvent.ON_INITIALIZATION_COMPLETE));
+						result.init("walking " + facing);
+						
+						dispatchEvent(new AnimatedSpriteFactoryEvent(AnimatedSpriteFactoryEvent.ON_SPRITE_CLOAD_COMPLETE, result));
 					}
 				});
 				
 				loader.loadImages(locations);
 			}
-			var result:AnimatedSprite = new AnimatedSprite(animations, 55, 65, 96, facing, "stopped");
-			return result;
 		}
 	}
 }

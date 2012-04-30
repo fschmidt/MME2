@@ -1,0 +1,161 @@
+{
+	"pieces": [{
+		"name": "fullplated_knight",
+		"position": "a8",
+		"facing": "sw"
+	},
+	{
+		"name": "fullplated_knight",
+		"position": "h8",
+		"facing": "sw"
+	},
+	{
+		"name": "red_archer",
+		"position": "b8",
+		"facing": "sw"
+	},
+	{
+		"name": "red_archer",
+		"position": "g8",
+		"facing": "sw"
+	},
+	{
+		"name": "white_mage",
+		"position": "c8",
+		"facing": "sw"
+	},
+	{
+		"name": "white_mage",
+		"position": "f8",
+		"facing": "sw"
+	},{
+		"name": "queen",
+		"position": "e8",
+		"facing": "sw"
+	},
+	{
+		"name": "black_knight",
+		"position": "d8",
+		"facing": "sw"
+	},
+	{
+		"name": "red_knight",
+		"position": "a7",
+		"facing": "sw"
+	},
+	{
+		"name": "red_knight",
+		"position": "b7",
+		"facing": "sw"
+	},
+	{
+		"name": "red_knight",
+		"position": "c7",
+		"facing": "sw"
+	},
+	{
+		"name": "red_knight",
+		"position": "d7",
+		"facing": "sw"
+	},
+	{
+		"name": "red_knight",
+		"position": "e7",
+		"facing": "sw"
+	},
+	{
+		"name": "red_knight",
+		"position": "f7",
+		"facing": "sw"
+	},
+	{
+		"name": "red_knight",
+		"position": "g7",
+		"facing": "sw"
+	},
+	{
+		"name": "red_knight",
+		"position": "h7",
+		"facing": "sw"
+	},
+	{
+		"name": "axestan_shield",
+		"position": "a1",
+		"facing": "ne"
+	},
+	{
+		"name": "axestan_shield",
+		"position": "h1",
+		"facing": "ne"
+	},
+	{
+		"name": "hunter",
+		"position": "b1",
+		"facing": "ne"
+	},
+	{
+		"name": "hunter",
+		"position": "g1",
+		"facing": "ne"
+	},
+	{
+		"name": "black_mage",
+		"position": "c1",
+		"facing": "ne"
+	},
+	{
+		"name": "black_mage",
+		"position": "f1",
+		"facing": "ne"
+	},
+	{
+		"name": "dark_princess",
+		"position": "d1",
+		"facing": "ne"
+	},
+	{
+		"name": "bjorn",
+		"position": "e1",
+		"facing": "ne"
+	},
+	{
+		"name": "greendwarf",
+		"position": "a2",
+		"facing": "ne"
+	},
+	{
+		"name": "greendwarf",
+		"position": "b2",
+		"facing": "ne"
+	},
+	{
+		"name": "greendwarf",
+		"position": "c2",
+		"facing": "ne"
+	},
+	{
+		"name": "greendwarf",
+		"position": "d2",
+		"facing": "ne"
+	},
+	{
+		"name": "greendwarf",
+		"position": "e2",
+		"facing": "ne"
+	},
+	{
+		"name": "greendwarf",
+		"position": "f2",
+		"facing": "ne"
+	},
+	{
+		"name": "greendwarf",
+		"position": "g2",
+		"facing": "ne"
+	},
+	{
+		"name": "greendwarf",
+		"position": "h2",
+		"facing": "ne"
+	}]
+}

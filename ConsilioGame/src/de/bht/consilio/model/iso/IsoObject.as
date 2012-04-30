@@ -8,7 +8,6 @@ package de.bht.consilio.model.iso
 		protected var _position:Point3D;
 		protected var _size:Number;
 		protected var _walkable:Boolean = false;
-		
 		public function IsoObject(size:Number)
 		{
 			_size = size;
