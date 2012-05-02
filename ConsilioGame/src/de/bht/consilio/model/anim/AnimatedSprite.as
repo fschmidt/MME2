@@ -125,7 +125,6 @@ package de.bht.consilio.model.anim
 			
 			_currentFrame.bitmapData = new BitmapData(f.w, f.h);
 			
-			
 			_currentFrame.bitmapData.copyPixels(spriteSheets[name] as BitmapData, new Rectangle(f.x, f.y, f.w, f.h), new Point(0, 0));
 			
 			_currentFrame = new Bitmap(spriteSheets[name]);
