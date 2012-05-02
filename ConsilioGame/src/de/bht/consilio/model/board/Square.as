@@ -2,7 +2,6 @@ package de.bht.consilio.model.board
 {
 	import de.bht.consilio.model.anim.AnimatedSprite;
 	import de.bht.consilio.model.iso.IsoObject;
-	import de.bht.consilio.model.menu.CircleMenu;
 	
 	import flash.display.*;
 	import flash.events.*;
@@ -13,7 +12,6 @@ package de.bht.consilio.model.board
 		protected var _height:Number;
 		protected var _id:String;
 		protected var _color:uint
-		private var menu:CircleMenu;
 		
 		protected var _registeredSprite:AnimatedSprite;
 		
@@ -22,8 +20,6 @@ package de.bht.consilio.model.board
 			super(size);
 			_height = height;
 			_color = color;
-			
-			menu = new CircleMenu(150);
 			
 			draw();
 		}
@@ -57,16 +53,6 @@ package de.bht.consilio.model.board
 		public function get registeredSprite():AnimatedSprite
 		{
 			return _registeredSprite;
-		}
-		
-		public function activateMenu():void
-		{
-			this.addChild(menu);
-		}
-		
-		public function deactivateMenu():void
-		{
-			this.removeChild(menu);
 		}
 	}
 }

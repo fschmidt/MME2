@@ -1,103 +1,214 @@
 package de.bht.consilio.model.anim
 {
-	import com.greensock.TweenLite;
-	
-	import de.bht.consilio.model.board.Square;
 	import de.bht.consilio.model.iso.IsoObject;
-	import de.bht.consilio.model.iso.IsoUtils;
-	import de.bht.consilio.model.iso.Point3D;
-	import de.bht.consilio.util.ResourceLoader;
 	
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
+	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.filters.BlurFilter;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.system.System;
 	import flash.utils.Dictionary;
 	
-	import org.osmf.net.StreamingURLResource;
+	import org.osflash.thunderbolt.Logger;
 	
 	public class AnimatedSprite extends IsoObject
 	{
+		private static var PIECE_DESCRIPTIONS_LOCATION:String = "descriptions/piece_descriptions/";
+		private static var SPRITE_SHEETS_LOCATION:String = "descriptions/sprite_sheets/";
+		private static var SPRITE_SHEET_DESCRIPTIONS_LOCATION:String = "descriptions/sprite_sheet_descriptions/";
 		
-		private var _animations:Dictionary;
+		private static var spriteSheets:Dictionary = new Dictionary();
+		
+		private var _pieceDescription:Object;
+		
+		private var _animationData:Dictionary;
 		
 		private var _animationOffsetContainer:Sprite = new Sprite();
 		
-		public var _currentAnimation:Animation;
+		private var _currentAnimation:AnimationData;
 		
-		private var _spriteData:Object;
+		private var _currentFrame:Bitmap;
+		
+		private var _animationIndex:uint = 0;
+		
+		private var _currentFrameIndex:uint = 0;
 		
 		private var _facing:String;
 		
 		private var _boardPosition:String;
 		
-		public function AnimatedSprite(animations:Dictionary, xoffset:Number, yoffset:Number, size:Number, facing:String, boardPosition:String, currentAnimationName:String) 
+		public function AnimatedSprite(name:String, boardPosition:String, facing:String)
 		{
-			super(size);
+			super(0);
 			
-			_animationOffsetContainer.x = -xoffset;
-			_animationOffsetContainer.y = -yoffset;
 			_facing = facing;
 			_boardPosition = boardPosition;
-			_animations = animations;
 			
 			this.name = name;
+			
 			this.mouseEnabled = false;
 			this.mouseChildren = false;
+			
+			init();
 		}
 		
-		public function init(currentAnimationName:String):void {
-			_currentAnimation = _animations[currentAnimationName];
-			_animationOffsetContainer.addChild(_currentAnimation);
+		public function init():void {
+			
+			var myRequest:URLRequest = new URLRequest(PIECE_DESCRIPTIONS_LOCATION + name + ".json");
+			var myLoader:URLLoader = new URLLoader();
+			
+			myLoader.addEventListener(Event.COMPLETE, function(e:Event):void {
+				_pieceDescription = JSON.parse(e.target.data);
+				
+				_animationOffsetContainer.x = - _pieceDescription.xoffset;
+				_animationOffsetContainer.y = - _pieceDescription.yoffset;
+				
+				// load AnimationData
+				var loader:URLLoader = new URLLoader();
+				var request:URLRequest = new URLRequest(SPRITE_SHEET_DESCRIPTIONS_LOCATION + _pieceDescription.animationData);
+				
+				loader.addEventListener(Event.COMPLETE, function(e:Event):void 
+				{
+					
+					e.currentTarget.removeEventListener( e.type, arguments.callee );
+					
+					var json:String = e.target.data;
+					var result:Object = JSON.parse(json);
+					
+					
+					var frames:Array = result.frames as Array;
+					
+					_animationData = createAnimationData(frames);
+					
+					if(!spriteSheets.hasOwnProperty(name))
+					{
+						// Load Sprite Sheet			
+						var imageLoader:Loader = new Loader();
+						
+						var urlRequest:URLRequest = new URLRequest(SPRITE_SHEETS_LOCATION + _pieceDescription.spriteSheet);
+						
+						imageLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e:Event):void
+						{
+							e.currentTarget.removeEventListener( e.type, arguments.callee );
+							spriteSheets[name] = e.target.content.bitmapData;
+							onInitializationComplete();
+						});
+						
+						imageLoader.load(urlRequest);
+						
+					} else {
+						onInitializationComplete();
+					}
+					
+				});
+				
+				loader.load(request);
+				
+			});
+			myLoader.load(myRequest);
+			
+		}
+		
+		private function onInitializationComplete():void
+		{
+			
+			_currentAnimation = _animationData["walking " + _facing];
+			
+			var f:Frame = _currentAnimation.frames[0];
+			
+			_currentFrame = new Bitmap();
+			
+			_currentFrame.bitmapData = new BitmapData(f.w, f.h);
+			
+			
+			_currentFrame.bitmapData.copyPixels(spriteSheets[name] as BitmapData, new Rectangle(f.x, f.y, f.w, f.h), new Point(0, 0));
+			
+			_currentFrame = new Bitmap(spriteSheets[name]);
+
+			Logger.log(Logger.INFO, "Rect: " + new Rectangle(f.x, f.y, f.w, f.h));
+			
+			Logger.log(Logger.INFO, "Memory used: " + Number( System.totalMemory / 1024 / 1024 ).toFixed( 2 ) + "Mb");
+			
+			_animationOffsetContainer.addChild(_currentFrame);
+			
 			addChild(_animationOffsetContainer);
 		}
 		
-		public function moveTo(target:Square):void
-		{
-			var p3d:Point3D = target.position;
-			var p:Point = IsoUtils.isoToScreen(p3d);
-			TweenLite.to(this, 7, {x:p.x, y:p.y, onComplete : finishedWalking});
-			_currentAnimation.start();
+		/**
+		 * Creates a dictionary containing AnimationData Objects for each Animation in the given Array. 
+		 * 
+		 * @param input Array loaded from the JSON description of the AnimatedSprite
+		 * @return Dictionary containing AnimationData Objects
+		 * 
+		 */
+		private function createAnimationData(input:Array):Dictionary {
+			var result:Dictionary = new Dictionary();
+			
+			for (var i:int = 0; i < input.length; i++) 
+			{
+				var current:Object = input[i];
+				
+				var currentFrameName:String = current.filename as String;
+				
+				var currentPattern:String = currentFrameName.split("/")[0];
+				
+				if(!result.hasOwnProperty(currentPattern)){
+					result[currentPattern] = new AnimationData();
+				}
+				
+				var f:Frame = new Frame(current.frame.x, current.frame.y, current.frame.w, current.frame.h);
+				
+				(result[currentPattern] as AnimationData).frames.push(f);
+			}
+			return result;
 		}
 		
-		private function finishedWalking(e:Event):void
+		public function startCurrentAnimation():void
 		{
-			pause();	
+			addEventListener(Event.ENTER_FRAME, animate);
 		}
 		
-		public function attack(direction:String):void
+		public function stopCurrentAnimation():void
 		{
-			_animationOffsetContainer.removeChild(_currentAnimation);
-			_currentAnimation = _animations["attack " + direction];
-			_animationOffsetContainer.addChild(_currentAnimation);
-			_currentAnimation.start();
+			removeEventListener(Event.ENTER_FRAME, animate);
 		}
 		
-		public function stop():void
-		{
-			_currentAnimation.stop();
-		}
-		
-		public function start():void
-		{
-			_currentAnimation.start();
-		}
-		
-		public function pause():void
-		{
-			_currentAnimation.pause();
+		private function animate(e:Event):void {
+			_animationIndex++;
+			
+			if(_animationIndex >= 5) {
+				_animationIndex = 0;
+				
+				if(_currentFrameIndex >= _currentAnimation.frames.length-1)
+				{
+					_currentFrameIndex = 0;
+				} 
+				else 
+				{
+					_currentFrameIndex++;
+				}
+				
+				var f:Frame = _currentAnimation.frames[_currentFrameIndex];
+				
+				_currentFrame.bitmapData.copyPixels(spriteSheets[name], new Rectangle(f.x, f.y, f.w, f.h), new Point(0, 0));
+				
+				Logger.log(Logger.INFO, "Memory used: " + Number( System.totalMemory / 1024 / 1024 ).toFixed( 2 ) + "Mb");
+			}			
 		}
 		
 		public function show():void
 		{
-			_animationOffsetContainer.addChild(_currentAnimation);
+			_animationOffsetContainer.addChild(_currentFrame);
 		}
 		
 		public function hide():void
 		{
-			_animationOffsetContainer.removeChild(_currentAnimation);
+			_animationOffsetContainer.removeChild(_currentFrame);
 		}
 		
 		public function set boardPosition(newPosition:String):void {
