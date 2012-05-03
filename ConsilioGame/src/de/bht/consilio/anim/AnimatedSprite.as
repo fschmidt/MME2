@@ -17,7 +17,6 @@ package de.bht.consilio.anim
 	public class AnimatedSprite extends IsoObject
 	{
 		private static var PIECE_DESCRIPTIONS_LOCATION:String = "descriptions/piece_descriptions/";
-		private static var SPRITE_SHEETS_LOCATION:String = "descriptions/sprite_sheets/";
 		private static var SPRITE_SHEET_DESCRIPTIONS_LOCATION:String = "descriptions/sprite_sheet_descriptions/";
 		
 		private static var spriteSheets:Dictionary = new Dictionary();
@@ -83,40 +82,8 @@ package de.bht.consilio.anim
 					var frames:Array = result.frames as Array;
 					
 					_animationData = createAnimationData(frames);
-					
-					trace(name);
-					
-					if(!(name in spriteSheets))
-					{
-//						spriteSheets[name] = "temp";
-						
-						trace("_animationName after if :" + name);
-						
-						// Load Sprite Sheet			
-						var imageLoader:Loader = new Loader();
-						
-						var urlRequest:URLRequest = new URLRequest(SPRITE_SHEETS_LOCATION + _pieceDescription.spriteSheet);
-						
-						imageLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e:Event):void
-						{
-							e.currentTarget.removeEventListener( e.type, arguments.callee );
-							numberOfSpriteSheets++;
-							trace("Number of SpriteSheets: " + numberOfSpriteSheets);
-							
-							trace("Memory used before adding sheet: " + Number( System.totalMemory / 1024 / 1024 ).toFixed( 2 ) + "Mb");
-							
-							spriteSheets[name] = e.target.content.bitmapData;
-							
-							trace("Memory used after adding sheet: " + Number( System.totalMemory / 1024 / 1024 ).toFixed( 2 ) + "Mb");
-							
-							onInitializationComplete();
-						});
-						
-						imageLoader.load(urlRequest);
-						
-					} else {
-						onInitializationComplete();
-					}
+				
+					onInitializationComplete();
 					
 				});
 				
@@ -142,7 +109,7 @@ package de.bht.consilio.anim
 			
 			trace(name);
 
-			_currentFrame.bitmapData.copyPixels(spriteSheets[name], new Rectangle(f.x, f.y, f.w, f.h), new Point(0, 0));
+			_currentFrame.bitmapData.copyPixels(spriteSheets[name + ".png"], new Rectangle(f.x, f.y, f.w, f.h), new Point(0, 0));
 
 			trace("Memory used before accessing sheet: " + Number( System.totalMemory / 1024 / 1024 ).toFixed( 2 ) + "Mb");
 
@@ -211,7 +178,7 @@ package de.bht.consilio.anim
 				
 				var f:Frame = _currentAnimation.frames[_currentFrameIndex];
 				
-				_currentFrame.bitmapData.copyPixels(spriteSheets[name], new Rectangle(f.x, f.y, f.w, f.h), new Point(0, 0));
+				_currentFrame.bitmapData.copyPixels(spriteSheets[name + ".png"], new Rectangle(f.x, f.y, f.w, f.h), new Point(0, 0));
 				
 				trace("Memory used: " + Number( System.totalMemory / 1024 / 1024 ).toFixed( 2 ) + "Mb");
 			}			
@@ -232,6 +199,11 @@ package de.bht.consilio.anim
 		}
 		public function get boardPosition():String {
 			return _boardPosition;
+		}
+		
+		public static function addSpriteSheet(name:String, sheet:BitmapData):void
+		{
+			spriteSheets[name] = sheet;
 		}
 	}
 }
