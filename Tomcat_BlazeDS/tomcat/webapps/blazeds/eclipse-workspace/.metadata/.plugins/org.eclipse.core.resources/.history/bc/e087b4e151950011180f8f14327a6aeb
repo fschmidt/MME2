@@ -1,0 +1,5 @@
+package nursead.service;
+
+public class PatientService {
+
+}

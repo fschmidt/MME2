@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+2012-05-04 16:27:43.081 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.6.1.0 - (938214): instance a816c00e-0137-18ad-a75b-0000006e92b0 
+on database directory C:\Users\Frank\Documents\Studium Medieninformatik\FSV\MME2\repro\Tomcat_BlazeDS\tomcat\bin\db   with class loader WebappClassLoader
+  context: /blazeds
+  delegate: false
+  repositories:
+    /WEB-INF/classes/
+----------> Parent Classloader:
+org.apache.catalina.loader.StandardClassLoader@1fee6fc
+
+
+Database Class Loader started - derby.database.classpath=''

@@ -1,0 +1,164 @@
+03.05.2012 18:31:23 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextInitialized()
+03.05.2012 18:31:23 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextInitialized()
+03.05.2012 18:31:23 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: attributeAdded('org.apache.jasper.compiler.TldLocationsCache', 'org.apache.jasper.compiler.TldLocationsCache@d24e3f')
+03.05.2012 19:12:07 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextDestroyed()
+03.05.2012 19:12:07 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextDestroyed()
+03.05.2012 19:12:08 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextInitialized()
+03.05.2012 19:12:08 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextInitialized()
+03.05.2012 19:12:08 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: attributeAdded('org.apache.jasper.compiler.TldLocationsCache', 'org.apache.jasper.compiler.TldLocationsCache@127f79d')
+03.05.2012 19:16:47 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextDestroyed()
+03.05.2012 19:16:48 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextDestroyed()
+03.05.2012 21:01:06 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextInitialized()
+03.05.2012 21:01:06 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextInitialized()
+03.05.2012 21:01:06 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: attributeAdded('org.apache.jasper.compiler.TldLocationsCache', 'org.apache.jasper.compiler.TldLocationsCache@48f675')
+03.05.2012 21:03:15 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextDestroyed()
+03.05.2012 21:03:15 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextDestroyed()
+03.05.2012 21:03:22 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextInitialized()
+03.05.2012 21:03:22 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextInitialized()
+03.05.2012 21:03:22 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: attributeAdded('org.apache.jasper.compiler.TldLocationsCache', 'org.apache.jasper.compiler.TldLocationsCache@8997d1')
+03.05.2012 21:07:41 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextDestroyed()
+03.05.2012 21:07:41 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextDestroyed()
+03.05.2012 21:07:47 org.apache.catalina.core.StandardContext loadOnStartup
+SCHWERWIEGEND: Servlet /blazeds threw load() exception
+flex.messaging.config.ConfigurationException: Invalid destination id '' for service 'remoting-service'.
+	at flex.messaging.config.ServerConfigurationParser.destination(ServerConfigurationParser.java:951)
+	at flex.messaging.config.ServerConfigurationParser.service(ServerConfigurationParser.java:721)
+	at flex.messaging.config.ServerConfigurationParser.serviceInclude(ServerConfigurationParser.java:584)
+	at flex.messaging.config.ServerConfigurationParser.services(ServerConfigurationParser.java:557)
+	at flex.messaging.config.ServerConfigurationParser.parseTopLevelConfig(ServerConfigurationParser.java:72)
+	at flex.messaging.config.AbstractConfigurationParser.parse(AbstractConfigurationParser.java:69)
+	at flex.messaging.config.FlexConfigurationManager.getMessagingConfiguration(FlexConfigurationManager.java:79)
+	at flex.messaging.MessageBrokerServlet.init(MessageBrokerServlet.java:109)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1228)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1147)
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:1043)
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:4957)
+	at org.apache.catalina.core.StandardContext$3.call(StandardContext.java:5284)
+	at org.apache.catalina.core.StandardContext$3.call(StandardContext.java:5279)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:138)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
+	at java.lang.Thread.run(Thread.java:662)
+03.05.2012 21:07:47 org.apache.catalina.core.StandardContext loadOnStartup
+SCHWERWIEGEND: Servlet /blazeds threw load() exception
+javax.servlet.ServletException: Unable to find MessageBroker, ensure that if messageBrokerId is set for the MessageBrokerServlet the RDS FrontEndServlet has a matching init-param value
+	at flex.rds.server.RdsServlet.init(RdsServlet.java:64)
+	at flex.rds.server.servlet.FrontEndServlet.loadServlet(FrontEndServlet.java:262)
+	at flex.rds.server.servlet.FrontEndServlet.init(FrontEndServlet.java:127)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:160)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1228)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1147)
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:1043)
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:4957)
+	at org.apache.catalina.core.StandardContext$3.call(StandardContext.java:5284)
+	at org.apache.catalina.core.StandardContext$3.call(StandardContext.java:5279)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:138)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
+	at java.lang.Thread.run(Thread.java:662)
+03.05.2012 21:07:47 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextInitialized()
+03.05.2012 21:07:47 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextInitialized()
+03.05.2012 21:07:47 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: attributeAdded('org.apache.jasper.compiler.TldLocationsCache', 'org.apache.jasper.compiler.TldLocationsCache@b1a4e2')
+03.05.2012 21:08:00 org.apache.catalina.core.StandardWrapperValve invoke
+SCHWERWIEGEND: Allocate exception for servlet RDSDispatchServlet
+javax.servlet.ServletException: Unable to find MessageBroker, ensure that if messageBrokerId is set for the MessageBrokerServlet the RDS FrontEndServlet has a matching init-param value
+	at flex.rds.server.RdsServlet.init(RdsServlet.java:64)
+	at flex.rds.server.servlet.FrontEndServlet.loadServlet(FrontEndServlet.java:262)
+	at flex.rds.server.servlet.FrontEndServlet.init(FrontEndServlet.java:127)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:160)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1228)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1147)
+	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:836)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:135)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:185)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:151)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:929)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:405)
+	at org.apache.coyote.http11.Http11AprProcessor.process(Http11AprProcessor.java:269)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:515)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.run(AprEndpoint.java:1773)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
+	at java.lang.Thread.run(Thread.java:662)
+03.05.2012 21:08:13 org.apache.catalina.core.StandardWrapperValve invoke
+SCHWERWIEGEND: Allocate exception for servlet RDSDispatchServlet
+javax.servlet.ServletException: Unable to find MessageBroker, ensure that if messageBrokerId is set for the MessageBrokerServlet the RDS FrontEndServlet has a matching init-param value
+	at flex.rds.server.RdsServlet.init(RdsServlet.java:64)
+	at flex.rds.server.servlet.FrontEndServlet.loadServlet(FrontEndServlet.java:262)
+	at flex.rds.server.servlet.FrontEndServlet.init(FrontEndServlet.java:127)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:160)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1228)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1147)
+	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:836)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:135)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:185)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:151)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:929)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:405)
+	at org.apache.coyote.http11.Http11AprProcessor.process(Http11AprProcessor.java:269)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:515)
+	at org.apache.tomcat.util.net.AprEndpoint$SocketProcessor.run(AprEndpoint.java:1773)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
+	at java.lang.Thread.run(Thread.java:662)
+03.05.2012 21:09:52 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextDestroyed()
+03.05.2012 21:09:52 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextDestroyed()
+03.05.2012 21:09:58 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextInitialized()
+03.05.2012 21:09:58 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextInitialized()
+03.05.2012 21:09:58 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: attributeAdded('org.apache.jasper.compiler.TldLocationsCache', 'org.apache.jasper.compiler.TldLocationsCache@e99ce5')
+03.05.2012 21:11:16 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextDestroyed()
+03.05.2012 21:11:16 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextDestroyed()
+03.05.2012 21:11:19 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextInitialized()
+03.05.2012 21:11:19 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextInitialized()
+03.05.2012 21:11:19 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: attributeAdded('org.apache.jasper.compiler.TldLocationsCache', 'org.apache.jasper.compiler.TldLocationsCache@e99ce5')
+03.05.2012 21:22:10 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextDestroyed()
+03.05.2012 21:22:10 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextDestroyed()
+03.05.2012 21:22:15 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextInitialized()
+03.05.2012 21:22:15 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextInitialized()
+03.05.2012 21:22:15 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: attributeAdded('org.apache.jasper.compiler.TldLocationsCache', 'org.apache.jasper.compiler.TldLocationsCache@1f9338f')

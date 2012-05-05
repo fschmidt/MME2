@@ -1,0 +1,5 @@
+package mme2.nursead.model;
+
+public class PatientVO {
+
+}

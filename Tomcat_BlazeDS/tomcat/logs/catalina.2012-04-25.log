@@ -1,0 +1,92 @@
+25.04.2012 12:54:25 org.apache.catalina.core.AprLifecycleListener init
+INFO: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: C:\Program Files\Java\jdk1.6.0_25\bin;.;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\MiKTeX 2.9\miktex\bin;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Windows Live\Shared;C:\Program Files\MySQL\MySQL Server 5.5\bin
+25.04.2012 12:54:27 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-bio-8080"]
+25.04.2012 12:54:27 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-bio-8009"]
+25.04.2012 12:54:27 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 2751 ms
+25.04.2012 12:54:27 org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+25.04.2012 12:54:27 org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.21
+25.04.2012 12:54:27 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory docs
+25.04.2012 12:54:28 org.apache.catalina.util.SessionIdGenerator createSecureRandom
+INFO: Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [322] milliseconds.
+25.04.2012 12:54:29 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory examples
+25.04.2012 12:54:29 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory host-manager
+25.04.2012 12:54:30 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory manager
+25.04.2012 12:54:30 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory ROOT
+25.04.2012 12:54:30 org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-bio-8080"]
+25.04.2012 12:54:30 org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["ajp-bio-8009"]
+25.04.2012 12:54:30 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 2910 ms
+25.04.2012 12:56:24 org.apache.catalina.core.StandardServer await
+INFO: A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+25.04.2012 12:56:24 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-bio-8080"]
+25.04.2012 12:56:25 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-bio-8009"]
+25.04.2012 12:56:26 org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service Catalina
+25.04.2012 12:56:26 org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["http-bio-8080"]
+25.04.2012 12:56:26 org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["ajp-bio-8009"]
+25.04.2012 12:56:26 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-bio-8080"]
+25.04.2012 12:56:26 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-bio-8009"]
+25.04.2012 13:21:30 org.apache.catalina.core.AprLifecycleListener init
+INFO: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: C:\Program Files\Java\jdk1.6.0_25\bin;.;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\MiKTeX 2.9\miktex\bin;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Windows Live\Shared;C:\Program Files\MySQL\MySQL Server 5.5\bin
+25.04.2012 13:21:30 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-bio-8080"]
+25.04.2012 13:21:30 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-bio-8009"]
+25.04.2012 13:21:30 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 970 ms
+25.04.2012 13:21:30 org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+25.04.2012 13:21:30 org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.21
+25.04.2012 13:21:30 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory docs
+25.04.2012 13:21:31 org.apache.catalina.util.SessionIdGenerator createSecureRandom
+INFO: Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [117] milliseconds.
+25.04.2012 13:21:31 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory examples
+25.04.2012 13:21:31 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory host-manager
+25.04.2012 13:21:31 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory manager
+25.04.2012 13:21:32 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory ROOT
+25.04.2012 13:21:32 org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-bio-8080"]
+25.04.2012 13:21:32 org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["ajp-bio-8009"]
+25.04.2012 13:21:32 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 1315 ms
+25.04.2012 13:31:38 org.apache.catalina.core.StandardServer await
+INFO: A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+25.04.2012 13:31:38 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-bio-8080"]
+25.04.2012 13:31:39 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-bio-8009"]
+25.04.2012 13:31:40 org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service Catalina
+25.04.2012 13:31:40 org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["http-bio-8080"]
+25.04.2012 13:31:40 org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["ajp-bio-8009"]
+25.04.2012 13:31:40 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-bio-8080"]
+25.04.2012 13:31:40 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-bio-8009"]

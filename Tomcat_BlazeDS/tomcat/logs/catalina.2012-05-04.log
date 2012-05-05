@@ -1,0 +1,1625 @@
+04.05.2012 16:58:02 org.apache.catalina.core.AprLifecycleListener init
+INFO: Loaded APR based Apache Tomcat Native library 1.1.22.
+04.05.2012 16:58:02 org.apache.catalina.core.AprLifecycleListener init
+INFO: APR capabilities: IPv6 [false], sendfile [true], accept filters [false], random [true].
+04.05.2012 16:58:02 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+04.05.2012 16:58:02 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 16:58:02 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 1087 ms
+04.05.2012 16:58:02 org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+04.05.2012 16:58:02 org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.21
+04.05.2012 16:58:02 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory blazeds
+04.05.2012 16:58:03 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory docs
+04.05.2012 16:58:04 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory examples
+04.05.2012 16:58:04 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory host-manager
+04.05.2012 16:58:04 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory manager
+04.05.2012 16:58:04 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory ROOT
+04.05.2012 16:58:04 org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-apr-8080"]
+04.05.2012 16:58:04 org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 16:58:04 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 1449 ms
+04.05.2012 17:54:22 org.apache.catalina.core.StandardServer await
+WARNUNG: StandardServer.await: Invalid command 'SHUTDOW' received
+04.05.2012 17:55:52 org.apache.catalina.core.AprLifecycleListener init
+INFO: Loaded APR based Apache Tomcat Native library 1.1.22.
+04.05.2012 17:55:52 org.apache.catalina.core.AprLifecycleListener init
+INFO: APR capabilities: IPv6 [false], sendfile [true], accept filters [false], random [true].
+04.05.2012 17:55:53 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+04.05.2012 17:55:53 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["http-apr-8080"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 17:55:53 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[HTTP/1.1-8080]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 17:55:53 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 17:55:53 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["ajp-apr-8009"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 17:55:53 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[AJP/1.3-8009]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[AJP/1.3-8009]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 17:55:53 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 1062 ms
+04.05.2012 17:55:53 org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+04.05.2012 17:55:53 org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.21
+04.05.2012 17:55:53 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory blazeds
+04.05.2012 17:55:54 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory docs
+04.05.2012 17:55:54 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory examples
+04.05.2012 17:55:54 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory host-manager
+04.05.2012 17:55:54 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory manager
+04.05.2012 17:55:54 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory ROOT
+04.05.2012 17:55:54 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 1182 ms
+04.05.2012 17:55:54 org.apache.catalina.core.StandardServer await
+SCHWERWIEGEND: StandardServer.await: create[localhost:8005]: 
+java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:383)
+	at java.net.ServerSocket.bind(ServerSocket.java:328)
+	at java.net.ServerSocket.<init>(ServerSocket.java:194)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:422)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:709)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:654)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:322)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:450)
+04.05.2012 17:55:54 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-apr-8080"]
+04.05.2012 17:55:54 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 17:55:54 org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service Catalina
+04.05.2012 17:55:54 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-apr-8080"]
+04.05.2012 17:55:54 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 18:02:00 org.apache.catalina.core.StandardServer await
+WARNUNG: StandardServer.await: Invalid command 'SHUTDOW' received
+04.05.2012 18:24:24 org.apache.catalina.core.AprLifecycleListener init
+INFO: Loaded APR based Apache Tomcat Native library 1.1.22.
+04.05.2012 18:24:24 org.apache.catalina.core.AprLifecycleListener init
+INFO: APR capabilities: IPv6 [false], sendfile [true], accept filters [false], random [true].
+04.05.2012 18:24:25 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+04.05.2012 18:24:25 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 18:24:25 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 1453 ms
+04.05.2012 18:24:25 org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+04.05.2012 18:24:25 org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.21
+04.05.2012 18:24:25 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory blazeds
+04.05.2012 18:24:26 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory docs
+04.05.2012 18:24:26 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory examples
+04.05.2012 18:24:27 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory host-manager
+04.05.2012 18:24:27 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory manager
+04.05.2012 18:24:27 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory ROOT
+04.05.2012 18:24:27 org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-apr-8080"]
+04.05.2012 18:24:27 org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 18:24:27 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 1974 ms
+04.05.2012 18:29:48 org.apache.catalina.core.StandardServer await
+WARNUNG: StandardServer.await: read: 
+java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at java.net.SocketInputStream.read(SocketInputStream.java:182)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:473)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:709)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:654)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:322)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:450)
+04.05.2012 18:29:48 org.apache.catalina.core.StandardServer await
+WARNUNG: StandardServer.await: Invalid command '' received
+04.05.2012 18:30:13 org.apache.catalina.core.AprLifecycleListener init
+INFO: Loaded APR based Apache Tomcat Native library 1.1.22.
+04.05.2012 18:30:13 org.apache.catalina.core.AprLifecycleListener init
+INFO: APR capabilities: IPv6 [false], sendfile [true], accept filters [false], random [true].
+04.05.2012 18:30:13 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+04.05.2012 18:30:13 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["http-apr-8080"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 18:30:13 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[HTTP/1.1-8080]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 18:30:13 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 18:30:13 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["ajp-apr-8009"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 18:30:13 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[AJP/1.3-8009]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[AJP/1.3-8009]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 18:30:13 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 953 ms
+04.05.2012 18:30:13 org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+04.05.2012 18:30:13 org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.21
+04.05.2012 18:30:13 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory blazeds
+04.05.2012 18:30:14 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory docs
+04.05.2012 18:30:14 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory examples
+04.05.2012 18:30:15 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory host-manager
+04.05.2012 18:30:15 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory manager
+04.05.2012 18:30:15 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory ROOT
+04.05.2012 18:30:15 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 1448 ms
+04.05.2012 18:30:15 org.apache.catalina.core.StandardServer await
+SCHWERWIEGEND: StandardServer.await: create[localhost:8005]: 
+java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:383)
+	at java.net.ServerSocket.bind(ServerSocket.java:328)
+	at java.net.ServerSocket.<init>(ServerSocket.java:194)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:422)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:709)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:654)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:322)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:450)
+04.05.2012 18:30:15 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-apr-8080"]
+04.05.2012 18:30:15 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 18:30:15 org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service Catalina
+04.05.2012 18:30:15 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-apr-8080"]
+04.05.2012 18:30:15 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 18:32:04 org.apache.catalina.core.StandardServer await
+WARNUNG: StandardServer.await: Invalid command 'SHUTDOW' received
+04.05.2012 18:32:06 org.apache.catalina.core.AprLifecycleListener init
+INFO: Loaded APR based Apache Tomcat Native library 1.1.22.
+04.05.2012 18:32:06 org.apache.catalina.core.AprLifecycleListener init
+INFO: APR capabilities: IPv6 [false], sendfile [true], accept filters [false], random [true].
+04.05.2012 18:32:07 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+04.05.2012 18:32:07 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["http-apr-8080"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 18:32:07 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[HTTP/1.1-8080]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 18:32:07 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 18:32:07 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["ajp-apr-8009"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 18:32:07 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[AJP/1.3-8009]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[AJP/1.3-8009]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 18:32:07 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 1085 ms
+04.05.2012 18:32:07 org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+04.05.2012 18:32:07 org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.21
+04.05.2012 18:32:07 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory blazeds
+04.05.2012 18:32:08 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory docs
+04.05.2012 18:32:08 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory examples
+04.05.2012 18:32:09 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory host-manager
+04.05.2012 18:32:09 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory manager
+04.05.2012 18:32:09 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory ROOT
+04.05.2012 18:32:10 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 2512 ms
+04.05.2012 18:32:10 org.apache.catalina.core.StandardServer await
+SCHWERWIEGEND: StandardServer.await: create[localhost:8005]: 
+java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:383)
+	at java.net.ServerSocket.bind(ServerSocket.java:328)
+	at java.net.ServerSocket.<init>(ServerSocket.java:194)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:422)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:709)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:654)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:322)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:450)
+04.05.2012 18:32:10 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-apr-8080"]
+04.05.2012 18:32:10 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 18:32:10 org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service Catalina
+04.05.2012 18:32:10 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-apr-8080"]
+04.05.2012 18:32:10 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 18:39:01 org.apache.catalina.core.StandardServer await
+WARNUNG: StandardServer.await: read: 
+java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at java.net.SocketInputStream.read(SocketInputStream.java:182)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:473)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:709)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:654)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:322)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:450)
+04.05.2012 18:39:01 org.apache.catalina.core.StandardServer await
+WARNUNG: StandardServer.await: Invalid command 'S' received
+04.05.2012 18:39:04 org.apache.catalina.core.AprLifecycleListener init
+INFO: Loaded APR based Apache Tomcat Native library 1.1.22.
+04.05.2012 18:39:04 org.apache.catalina.core.AprLifecycleListener init
+INFO: APR capabilities: IPv6 [false], sendfile [true], accept filters [false], random [true].
+04.05.2012 18:39:05 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+04.05.2012 18:39:05 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["http-apr-8080"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 18:39:05 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[HTTP/1.1-8080]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 18:39:05 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 18:39:05 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["ajp-apr-8009"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 18:39:05 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[AJP/1.3-8009]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[AJP/1.3-8009]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 18:39:05 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 1034 ms
+04.05.2012 18:39:05 org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+04.05.2012 18:39:05 org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.21
+04.05.2012 18:39:05 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory blazeds
+04.05.2012 18:39:06 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory docs
+04.05.2012 18:39:06 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory examples
+04.05.2012 18:39:06 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory host-manager
+04.05.2012 18:39:06 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory manager
+04.05.2012 18:39:06 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory ROOT
+04.05.2012 18:39:06 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 1273 ms
+04.05.2012 18:39:06 org.apache.catalina.core.StandardServer await
+SCHWERWIEGEND: StandardServer.await: create[localhost:8005]: 
+java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:383)
+	at java.net.ServerSocket.bind(ServerSocket.java:328)
+	at java.net.ServerSocket.<init>(ServerSocket.java:194)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:422)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:709)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:654)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:322)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:450)
+04.05.2012 18:39:06 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-apr-8080"]
+04.05.2012 18:39:06 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 18:39:06 org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service Catalina
+04.05.2012 18:39:06 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-apr-8080"]
+04.05.2012 18:39:06 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 18:57:07 org.apache.catalina.core.StandardServer await
+WARNUNG: StandardServer.await: Invalid command 'SHUTDOW' received
+04.05.2012 18:57:11 org.apache.catalina.core.AprLifecycleListener init
+INFO: Loaded APR based Apache Tomcat Native library 1.1.22.
+04.05.2012 18:57:11 org.apache.catalina.core.AprLifecycleListener init
+INFO: APR capabilities: IPv6 [false], sendfile [true], accept filters [false], random [true].
+04.05.2012 18:57:11 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+04.05.2012 18:57:11 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["http-apr-8080"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 18:57:11 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[HTTP/1.1-8080]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 18:57:11 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 18:57:11 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["ajp-apr-8009"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 18:57:11 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[AJP/1.3-8009]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[AJP/1.3-8009]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 18:57:11 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 910 ms
+04.05.2012 18:57:11 org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+04.05.2012 18:57:11 org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.21
+04.05.2012 18:57:11 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory blazeds
+04.05.2012 18:57:12 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory docs
+04.05.2012 18:57:12 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory examples
+04.05.2012 18:57:12 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory host-manager
+04.05.2012 18:57:12 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory manager
+04.05.2012 18:57:12 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory ROOT
+04.05.2012 18:57:12 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 1201 ms
+04.05.2012 18:57:12 org.apache.catalina.core.StandardServer await
+SCHWERWIEGEND: StandardServer.await: create[localhost:8005]: 
+java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:383)
+	at java.net.ServerSocket.bind(ServerSocket.java:328)
+	at java.net.ServerSocket.<init>(ServerSocket.java:194)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:422)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:709)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:654)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:322)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:450)
+04.05.2012 18:57:12 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-apr-8080"]
+04.05.2012 18:57:12 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 18:57:12 org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service Catalina
+04.05.2012 18:57:13 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-apr-8080"]
+04.05.2012 18:57:13 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:12:47 org.apache.catalina.core.StandardServer await
+WARNUNG: StandardServer.await: Invalid command 'SHUTDOW' received
+04.05.2012 19:12:55 org.apache.catalina.core.AprLifecycleListener init
+INFO: Loaded APR based Apache Tomcat Native library 1.1.22.
+04.05.2012 19:12:55 org.apache.catalina.core.AprLifecycleListener init
+INFO: APR capabilities: IPv6 [false], sendfile [true], accept filters [false], random [true].
+04.05.2012 19:12:56 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+04.05.2012 19:12:56 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["http-apr-8080"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 19:12:56 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[HTTP/1.1-8080]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 19:12:56 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:12:56 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["ajp-apr-8009"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 19:12:56 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[AJP/1.3-8009]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[AJP/1.3-8009]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 19:12:56 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 962 ms
+04.05.2012 19:12:56 org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+04.05.2012 19:12:56 org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.21
+04.05.2012 19:12:56 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory blazeds
+04.05.2012 19:12:57 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory docs
+04.05.2012 19:12:57 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory examples
+04.05.2012 19:12:57 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory host-manager
+04.05.2012 19:12:57 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory manager
+04.05.2012 19:12:57 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory ROOT
+04.05.2012 19:12:57 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 1177 ms
+04.05.2012 19:12:57 org.apache.catalina.core.StandardServer await
+SCHWERWIEGEND: StandardServer.await: create[localhost:8005]: 
+java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:383)
+	at java.net.ServerSocket.bind(ServerSocket.java:328)
+	at java.net.ServerSocket.<init>(ServerSocket.java:194)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:422)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:709)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:654)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:322)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:450)
+04.05.2012 19:12:57 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-apr-8080"]
+04.05.2012 19:12:57 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:12:57 org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service Catalina
+04.05.2012 19:12:57 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-apr-8080"]
+04.05.2012 19:12:57 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:19:49 org.apache.catalina.core.StandardServer await
+WARNUNG: StandardServer.await: read: 
+java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at java.net.SocketInputStream.read(SocketInputStream.java:182)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:473)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:709)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:654)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:322)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:450)
+04.05.2012 19:19:49 org.apache.catalina.core.StandardServer await
+WARNUNG: StandardServer.await: Invalid command 'S' received
+04.05.2012 19:19:52 org.apache.catalina.core.AprLifecycleListener init
+INFO: Loaded APR based Apache Tomcat Native library 1.1.22.
+04.05.2012 19:19:52 org.apache.catalina.core.AprLifecycleListener init
+INFO: APR capabilities: IPv6 [false], sendfile [true], accept filters [false], random [true].
+04.05.2012 19:19:53 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+04.05.2012 19:19:53 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["http-apr-8080"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 19:19:53 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[HTTP/1.1-8080]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 19:19:53 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:19:53 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["ajp-apr-8009"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 19:19:53 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[AJP/1.3-8009]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[AJP/1.3-8009]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 19:19:53 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 967 ms
+04.05.2012 19:19:53 org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+04.05.2012 19:19:53 org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.21
+04.05.2012 19:19:53 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory blazeds
+04.05.2012 19:19:54 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory docs
+04.05.2012 19:19:54 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory examples
+04.05.2012 19:19:54 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory host-manager
+04.05.2012 19:19:54 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory manager
+04.05.2012 19:19:54 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory ROOT
+04.05.2012 19:19:54 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 1172 ms
+04.05.2012 19:19:54 org.apache.catalina.core.StandardServer await
+SCHWERWIEGEND: StandardServer.await: create[localhost:8005]: 
+java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:383)
+	at java.net.ServerSocket.bind(ServerSocket.java:328)
+	at java.net.ServerSocket.<init>(ServerSocket.java:194)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:422)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:709)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:654)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:322)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:450)
+04.05.2012 19:19:54 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-apr-8080"]
+04.05.2012 19:19:54 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:19:54 org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service Catalina
+04.05.2012 19:19:54 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-apr-8080"]
+04.05.2012 19:19:54 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:20:45 org.apache.catalina.core.StandardServer await
+WARNUNG: StandardServer.await: Invalid command 'SHUTDOW' received
+04.05.2012 19:20:48 org.apache.catalina.core.AprLifecycleListener init
+INFO: Loaded APR based Apache Tomcat Native library 1.1.22.
+04.05.2012 19:20:48 org.apache.catalina.core.AprLifecycleListener init
+INFO: APR capabilities: IPv6 [false], sendfile [true], accept filters [false], random [true].
+04.05.2012 19:20:49 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+04.05.2012 19:20:49 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["http-apr-8080"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 19:20:49 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[HTTP/1.1-8080]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 19:20:49 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:20:49 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["ajp-apr-8009"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 19:20:49 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[AJP/1.3-8009]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[AJP/1.3-8009]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 19:20:49 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 907 ms
+04.05.2012 19:20:49 org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+04.05.2012 19:20:49 org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.21
+04.05.2012 19:20:49 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory blazeds
+04.05.2012 19:20:50 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory docs
+04.05.2012 19:20:50 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory examples
+04.05.2012 19:20:50 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory host-manager
+04.05.2012 19:20:50 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory manager
+04.05.2012 19:20:50 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory ROOT
+04.05.2012 19:20:50 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 1179 ms
+04.05.2012 19:20:50 org.apache.catalina.core.StandardServer await
+SCHWERWIEGEND: StandardServer.await: create[localhost:8005]: 
+java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:383)
+	at java.net.ServerSocket.bind(ServerSocket.java:328)
+	at java.net.ServerSocket.<init>(ServerSocket.java:194)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:422)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:709)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:654)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:322)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:450)
+04.05.2012 19:20:50 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-apr-8080"]
+04.05.2012 19:20:50 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:20:50 org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service Catalina
+04.05.2012 19:20:50 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-apr-8080"]
+04.05.2012 19:20:50 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:24:43 org.apache.catalina.core.StandardServer await
+WARNUNG: StandardServer.await: Invalid command 'SHUTDOW' received
+04.05.2012 19:24:45 org.apache.catalina.core.AprLifecycleListener init
+INFO: Loaded APR based Apache Tomcat Native library 1.1.22.
+04.05.2012 19:24:45 org.apache.catalina.core.AprLifecycleListener init
+INFO: APR capabilities: IPv6 [false], sendfile [true], accept filters [false], random [true].
+04.05.2012 19:24:46 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+04.05.2012 19:24:46 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["http-apr-8080"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 19:24:46 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[HTTP/1.1-8080]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 19:24:46 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:24:46 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["ajp-apr-8009"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 19:24:46 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[AJP/1.3-8009]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[AJP/1.3-8009]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 19:24:46 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 922 ms
+04.05.2012 19:24:46 org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+04.05.2012 19:24:46 org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.21
+04.05.2012 19:24:46 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory blazeds
+04.05.2012 19:24:47 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory docs
+04.05.2012 19:24:47 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory examples
+04.05.2012 19:24:47 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory host-manager
+04.05.2012 19:24:47 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory manager
+04.05.2012 19:24:47 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory ROOT
+04.05.2012 19:24:47 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 1189 ms
+04.05.2012 19:24:47 org.apache.catalina.core.StandardServer await
+SCHWERWIEGEND: StandardServer.await: create[localhost:8005]: 
+java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:383)
+	at java.net.ServerSocket.bind(ServerSocket.java:328)
+	at java.net.ServerSocket.<init>(ServerSocket.java:194)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:422)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:709)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:654)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:322)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:450)
+04.05.2012 19:24:47 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-apr-8080"]
+04.05.2012 19:24:47 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:24:47 org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service Catalina
+04.05.2012 19:24:47 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-apr-8080"]
+04.05.2012 19:24:47 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:27:54 org.apache.catalina.core.StandardServer await
+WARNUNG: StandardServer.await: read: 
+java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at java.net.SocketInputStream.read(SocketInputStream.java:182)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:473)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:709)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:654)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:322)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:450)
+04.05.2012 19:27:54 org.apache.catalina.core.StandardServer await
+WARNUNG: StandardServer.await: Invalid command 'S' received
+04.05.2012 19:27:57 org.apache.catalina.core.AprLifecycleListener init
+INFO: Loaded APR based Apache Tomcat Native library 1.1.22.
+04.05.2012 19:27:57 org.apache.catalina.core.AprLifecycleListener init
+INFO: APR capabilities: IPv6 [false], sendfile [true], accept filters [false], random [true].
+04.05.2012 19:27:58 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+04.05.2012 19:27:58 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["http-apr-8080"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 19:27:58 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[HTTP/1.1-8080]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 19:27:58 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:27:58 org.apache.coyote.AbstractProtocol init
+SCHWERWIEGEND: Failed to initialize end point associated with ProtocolHandler ["ajp-apr-8009"]
+java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+04.05.2012 19:27:58 org.apache.catalina.core.StandardService initInternal
+SCHWERWIEGEND: Failed to initialize connector [Connector[AJP/1.3-8009]]
+org.apache.catalina.LifecycleException: Failed to initialize component [Connector[AJP/1.3-8009]]
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:106)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:781)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:573)
+	at org.apache.catalina.startup.Catalina.load(Catalina.java:596)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:281)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:449)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:911)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:102)
+	... 12 more
+Caused by: java.lang.Exception: Socket bind failed: [730048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden.  
+	at org.apache.tomcat.util.net.AprEndpoint.bind(AprEndpoint.java:409)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:492)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:369)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:909)
+	... 13 more
+04.05.2012 19:27:58 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 958 ms
+04.05.2012 19:27:58 org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+04.05.2012 19:27:58 org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.21
+04.05.2012 19:27:58 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory blazeds
+04.05.2012 19:27:59 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory docs
+04.05.2012 19:27:59 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory examples
+04.05.2012 19:27:59 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory host-manager
+04.05.2012 19:27:59 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory manager
+04.05.2012 19:27:59 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory ROOT
+04.05.2012 19:27:59 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 1192 ms
+04.05.2012 19:27:59 org.apache.catalina.core.StandardServer await
+SCHWERWIEGEND: StandardServer.await: create[localhost:8005]: 
+java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:383)
+	at java.net.ServerSocket.bind(ServerSocket.java:328)
+	at java.net.ServerSocket.<init>(ServerSocket.java:194)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:422)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:709)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:654)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:322)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:450)
+04.05.2012 19:27:59 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-apr-8080"]
+04.05.2012 19:27:59 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:27:59 org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service Catalina
+04.05.2012 19:27:59 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-apr-8080"]
+04.05.2012 19:27:59 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-apr-8009"]
+04.05.2012 19:35:45 org.apache.catalina.startup.Catalina stopServer
+SCHWERWIEGEND: Catalina.stop: 
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:529)
+	at java.net.Socket.connect(Socket.java:478)
+	at java.net.Socket.<init>(Socket.java:375)
+	at java.net.Socket.<init>(Socket.java:189)
+	at org.apache.catalina.startup.Catalina.stopServer(Catalina.java:457)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.stopServer(Bootstrap.java:371)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:452)

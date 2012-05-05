@@ -9,5 +9,4 @@ public class BoardData {
 	public void addPiece(String name, String position, String facing) {
 		pieces.add(new Piece(name, position, facing));
 	}
-
 }
