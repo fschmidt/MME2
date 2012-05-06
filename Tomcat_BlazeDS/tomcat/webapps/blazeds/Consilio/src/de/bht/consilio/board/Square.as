@@ -7,6 +7,12 @@ package de.bht.consilio.board
 	import flash.events.*;
 	import flash.utils.*;
 	
+	/**
+	 * Class representing an isometric square on a chessboard
+	 * 
+	 * @author Frank Schmidt
+	 * 
+	 */
 	public class Square extends IsoObject
 	{
 		protected var _height:Number;
@@ -15,6 +21,13 @@ package de.bht.consilio.board
 		
 		protected var _registeredSprite:AnimatedSprite;
 		
+		/**
+		 * Constructor
+		 * 
+		 * @param size size of the square
+		 * @param color color of the square
+		 * 
+		 */
 		public function Square(size:Number, color:uint)
 		{ 
 			super(size);
@@ -24,6 +37,9 @@ package de.bht.consilio.board
 			draw();
 		}
 		
+		/**
+		 * draws the square
+		 */
 		protected function draw():void
 		{
 			graphics.clear();
@@ -45,11 +61,21 @@ package de.bht.consilio.board
 			_id  = value;
 		}
 		
+		/**
+		 * registers an AnimatedSprite on this square
+		 * 
+		 * @param value the sprite to register
+		 * 
+		 */
 		public function registerSprite(value:AnimatedSprite):void
 		{
 			_registeredSprite = value;
 		}
 		
+		/**
+		 * @return the AnimatedSprite registered on this Square 
+		 * 
+		 */
 		public function get registeredSprite():AnimatedSprite
 		{
 			return _registeredSprite;

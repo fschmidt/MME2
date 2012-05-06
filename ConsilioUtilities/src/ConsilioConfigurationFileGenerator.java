@@ -1,11 +1,5 @@
-import java.io.File;
-import java.io.FileFilter;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
 
 public class ConsilioConfigurationFileGenerator {
-	private static final String LINE = "---------------------------------------------";
 	public static final String BASEPATH = System.getProperty("user.home") + "/pieces/";
 	public static final String TARGETPATH = System.getProperty("user.home")
 			+ "/test/";
@@ -14,7 +8,7 @@ public class ConsilioConfigurationFileGenerator {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-//		createBoardConfigurationFile();
+		createBoardConfigurationFile();
 		FileGenerator f = new FileGenerator();
 //		f.createNewFolderLayout();
 		f.createSpriteConfigurationFiles();
@@ -26,7 +20,5 @@ public class ConsilioConfigurationFileGenerator {
 //
 //		JsonParser.createJson(new File(BASEPATH + "boardData.json"), bd,
 //				BoardData.class);
-		
-		
 	}
 }

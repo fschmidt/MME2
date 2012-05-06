@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileFilter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -8,7 +7,6 @@ import java.util.List;
 
 public class FileGenerator {
 
-	private static final String LINE = "---------------------------------------------";
 	public static final String TARGETPATH = System.getProperty("user.home")
 			+ "/test/";
 

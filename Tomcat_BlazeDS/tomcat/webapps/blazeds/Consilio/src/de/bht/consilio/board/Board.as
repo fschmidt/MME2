@@ -9,11 +9,29 @@ package de.bht.consilio.board
 	import flash.text.*;
 	import flash.utils.*;
 	
+	/**
+	 * Class representing a basic chessboard
+	 * 
+	 * @author Frank Schmidt
+	 * 
+	 */
 	public class Board extends Sprite
 	{
+		/**
+		 * dictionary containing the squares. a square can be accessed in chess notation (ie "a1")
+		 */
 		private var squares:Dictionary = new Dictionary();
-		private var pieces:Dictionary = new Dictionary();
+
+		// unused
+//		private var pieces:Dictionary = new Dictionary();
 		
+		/**
+		 * Creates a Chessboard
+		 * 
+		 * @param dark color value for the dark squares
+		 * @param light color value for the light squares
+		 * 
+		 */
 		public function Board( dark:uint, light:uint )
 		{
 			var letters:Array = [ "a", "b", "c", "d", "e", "f", "g", "h" ];
@@ -52,6 +70,8 @@ package de.bht.consilio.board
 					square = new Square(60, color);
 					square.position = new Point3D(c * 60, 0, r * 60);
 					square.id = letter + number.toString();
+					
+					// enable onClick events for every square
 					square.addEventListener(MouseEvent.CLICK, onClick);
 					addChild(square);
 					squares[square.id] = square;
@@ -61,6 +81,12 @@ package de.bht.consilio.board
 			}
 		}
 		
+		/**
+		 * Initialize this board with the given boardData
+		 * 
+		 * @param boardData dynamic json object containing the data for the setup used (all the pieces and their initial position)
+		 * 
+		 */
 		public function init(boardData:Object):void
 		{
 			var pieces:Array = boardData.pieces as Array;
@@ -70,6 +96,14 @@ package de.bht.consilio.board
 			}
 		}
 		
+		/**
+		 * adds a piece to this board
+		 * 
+		 * @param name name of the piece
+		 * @param position the pieces initial position on the board
+		 * @param facing the direction the piece is facing
+		 * 
+		 */
 		private function addPiece(name:String, position:String, facing:String):void 
 		{
 			var piece:AnimatedSprite = new AnimatedSprite(name, position, facing);
@@ -78,6 +112,11 @@ package de.bht.consilio.board
 			addChild(piece);
 		}
 		
+		/**
+		 * Handle mouse click on a square
+		 * @param e the MouseEvent
+		 * 
+		 */
 		private function onClick(e:MouseEvent):void
 		{
 			var s:Square = e.target as Square;
@@ -92,6 +131,13 @@ package de.bht.consilio.board
 			}
 		}
 		
+		/**
+		 * returns the square with the given id
+		 * 
+		 * @param id the squares id (ie "a1")
+		 * @return 
+		 * 
+		 */
 		public function getSquare(id:String):Square
 		{
 			return squares[id] as Square;

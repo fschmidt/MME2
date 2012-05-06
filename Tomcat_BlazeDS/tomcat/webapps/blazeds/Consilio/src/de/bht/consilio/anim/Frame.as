@@ -1,5 +1,11 @@
 package de.bht.consilio.anim
 {
+	/**
+	 * Class containing nessessary information for a frame of an animation to locate it on a sprite sheet
+	 *  
+	 * @author Frank Schmidt
+	 * 
+	 */
 	public class Frame
 	{
 		

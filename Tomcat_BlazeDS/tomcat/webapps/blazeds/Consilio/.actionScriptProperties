@@ -32,8 +32,11 @@
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
   <buildTargets>
     <buildTarget buildTargetName="default">
-      <airSettings airCertificatePath="" airTimestamp="true" anePathSet="false" version="1">
-        <airExcludes/>
+      <airSettings airCertificatePath="C:/Users/Frank/Documents/Studium Medieninformatik/FSV/MME2/repro/Tomcat_BlazeDS/tomcat/webapps/blazeds/Consilio/lib/consilio_certificate.p12" airTimestamp="true" anePathSet="true" version="1">
+        <airExcludes>
+          <pathEntry path="Consilio.swf"/>
+          <pathEntry path="Consilio-app.xml"/>
+        </airExcludes>
         <anePaths/>
       </airSettings>
       <actionScriptSettings version="1"/>

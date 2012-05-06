@@ -13,13 +13,28 @@ package de.bht.consilio.application
 	import spark.core.SpriteVisualElement;
 	
 	
+	/**
+	 * Consilio Application class
+	 *  
+	 * @author Frank Schmidt
+	 * 
+	 */
 	public class ConsilioApplication extends WindowedApplication
 	{
 
 		private static var instance:ConsilioApplication;
 		
+		/**
+		 * The main container 
+		 */
 		public var mainContainer:BorderContainer; // Consilio.mxml reference
+		/**
+		 * The bottom menu 
+		 */
 		public var bottomMenu:BottomMenu;
+		/**
+		 * The actual game =) 
+		 */
 		private var game:ConsilioGame;
 		
 		public function ConsilioApplication()
@@ -29,12 +44,29 @@ package de.bht.consilio.application
 			addEventListener (FlexEvent.CREATION_COMPLETE, creationCompleteHandler);
 		}
 		
+		/**
+		 * Instantiates the game once all mxml components are initialized
+		 * 
+		 * @param event the creationCompleteEvent
+		 * 
+		 */
 		protected function creationCompleteHandler(event:Event):void
 		{
 			game = new ConsilioGame();
 			mainContainer.addElement(game);
 		}
 		
+
+		/**
+		 * Sets an entry in the bottom menu
+		 * 
+		 * @param pic the pieces picture
+		 * @param attackValue the pieces attack value
+		 * @param defenseValue the pieces defense value
+		 * @param moveValue the pieces moveValue
+		 * @param moveTypeValue the pieces moce type (ie "diagonal")
+		 * 
+		 */
 		public function setMenuEntry(pic:Bitmap, attackValue:uint, defenseValue:uint, moveValue:uint, moveTypeValue:String):void
 		{
 			bottomMenu.attack_label.text = "" + attackValue;
@@ -49,6 +81,11 @@ package de.bht.consilio.application
 			bottomMenu.hp_bar.setProgress(2,5);
 		}
 		
+		/**
+		 * 
+		 * @return the current instance of the ConsilioApplication
+		 * 
+		 */
 		public static function getInstance():ConsilioApplication
 		{
 			return instance;

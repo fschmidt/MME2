@@ -2,6 +2,12 @@ package de.bht.consilio.anim
 {
 	import flash.events.Event;
 	
+	/**
+	 * Consilio Event class
+	 *  
+	 * @author Frank Schmidt
+	 * 
+	 */
 	public class ConsilioEvent extends Event
 	{
 		public static const ON_INITIALIZATION_COMPLETE:String = "initialization complete";
