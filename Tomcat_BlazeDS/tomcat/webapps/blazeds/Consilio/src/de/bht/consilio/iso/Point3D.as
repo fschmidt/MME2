@@ -12,5 +12,12 @@ package de.bht.consilio.iso
 			this.y = y;
 			this.z = z;
 		}
+		
+		public function toString():String
+		{
+			return "Point3D: [" + x + ", " + y + ", " + z + "]";
+		}
+		
+		
 	}
 }

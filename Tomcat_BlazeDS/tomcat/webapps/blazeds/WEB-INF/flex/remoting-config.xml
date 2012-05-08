@@ -11,7 +11,11 @@
 		<channel ref="my-amf" />
 	</default-channels>
 
-	<!-- <destination id="myserviceexample"> <properties> <source>de.bht.consilio.server.myserviceexample</source> 
-		</properties> </destination> -->
+	<destination id="userAccountService">
+		<properties>
+			<source>de.bht.consilio.service.UserAccountService</source>
+			<scope>application</scope>
+		</properties>
+	</destination>
 
 </service>

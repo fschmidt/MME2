@@ -1,6 +1,11 @@
 package de.bht.consilio.anim
 {
+	import com.greensock.TweenLite;
+	
+	import de.bht.consilio.board.Square;
 	import de.bht.consilio.iso.IsoObject;
+	import de.bht.consilio.iso.IsoUtils;
+	import de.bht.consilio.iso.Point3D;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -233,6 +238,15 @@ package de.bht.consilio.anim
 			}			
 		}
 		
+		public function moveTo(s:Square):void
+		{
+			var screenPosition:Point = IsoUtils.isoToScreen(s.position);
+			this.position = s.position;
+			trace(screenPosition);
+//			trace("This x: " + this.x + ", This y: " + this.y + ", sq x: " + s.x + ", sq y: " + s.y);
+//			TweenLite.to(this, 8, {x:this.x+60, y:this.y-30, onComplete:stopCurrentAnimation});
+		}
+		
 		/**
 		 * Make this piece visible
 		 */
@@ -259,6 +273,10 @@ package de.bht.consilio.anim
 		
 		public function get picture():Bitmap {
 			return _picture;
+		}
+		
+		public function get facing():String {
+			return _facing;
 		}
 		
 		/**

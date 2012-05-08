@@ -14,7 +14,10 @@ package de.bht.consilio.anim
 		
 		public static const ON_RESOURCE_LOAD_COMPLETE:String = "resource load complete";
 		
+		public static const LOGIN:String = "login complete";
+		
 		private var _data:Object;
+		
 
 		public function ConsilioEvent(type:String, data:Object=null, bubbles:Boolean=false, cancelable:Boolean=false)
 		{

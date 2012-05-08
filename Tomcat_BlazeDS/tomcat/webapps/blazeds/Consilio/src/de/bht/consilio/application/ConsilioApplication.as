@@ -41,7 +41,7 @@ package de.bht.consilio.application
 		{
 			super();
 			instance = this;
-			addEventListener (FlexEvent.CREATION_COMPLETE, creationCompleteHandler);
+//			addEventListener (FlexEvent.CREATION_COMPLETE, initMainView);
 		}
 		
 		/**
@@ -50,7 +50,7 @@ package de.bht.consilio.application
 		 * @param event the creationCompleteEvent
 		 * 
 		 */
-		protected function creationCompleteHandler(event:Event):void
+		protected function initMainView():void
 		{
 			game = new ConsilioGame();
 			mainContainer.addElement(game);

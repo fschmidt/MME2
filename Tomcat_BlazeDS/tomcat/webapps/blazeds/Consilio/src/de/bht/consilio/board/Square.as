@@ -7,6 +7,8 @@ package de.bht.consilio.board
 	import flash.events.*;
 	import flash.utils.*;
 	
+	import flashx.textLayout.events.SelectionEvent;
+	
 	/**
 	 * Class representing an isometric square on a chessboard
 	 * 
@@ -18,7 +20,7 @@ package de.bht.consilio.board
 		protected var _height:Number;
 		protected var _id:String;
 		protected var _color:uint
-		
+		protected var _selected:Boolean;
 		protected var _registeredSprite:AnimatedSprite;
 		
 		/**
@@ -33,22 +35,27 @@ package de.bht.consilio.board
 			super(size);
 			_height = height;
 			_color = color;
-			
-			draw();
+			_selected = false;
+			draw(_color);
 		}
 		
 		/**
 		 * draws the square
 		 */
-		protected function draw():void
+		protected function draw(color:uint):void
 		{
 			graphics.clear();
-			graphics.beginFill(_color);
+			graphics.beginFill(color);
 			graphics.moveTo(-size, 0);
 			graphics.lineTo(0, -size * .5);
 			graphics.lineTo(size, 0);
 			graphics.lineTo(0, size * .5);
 			graphics.lineTo(-size, 0);
+		}
+		
+		public function redraw(color:uint):void
+		{
+			draw(color);
 		}
 		
 		public function get id():String
@@ -62,23 +69,32 @@ package de.bht.consilio.board
 		}
 		
 		/**
-		 * registers an AnimatedSprite on this square
-		 * 
-		 * @param value the sprite to register
-		 * 
-		 */
-		public function registerSprite(value:AnimatedSprite):void
-		{
-			_registeredSprite = value;
-		}
-		
-		/**
 		 * @return the AnimatedSprite registered on this Square 
 		 * 
 		 */
 		public function get registeredSprite():AnimatedSprite
 		{
 			return _registeredSprite;
+		}
+		
+		public function set registeredSprite(value:AnimatedSprite):void
+		{
+			_registeredSprite = value;
+		}
+		
+		public function get color():uint
+		{
+			return _color;			
+		}
+		
+		public function setSelected(selected:Boolean):void
+		{
+			_selected = selected;
+		}
+		
+		public function isSelected():Boolean
+		{
+			return _selected;
 		}
 	}
 }

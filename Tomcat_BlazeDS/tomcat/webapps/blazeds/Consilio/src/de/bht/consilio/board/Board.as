@@ -2,10 +2,12 @@ package de.bht.consilio.board
 {
 	import de.bht.consilio.anim.AnimatedSprite;
 	import de.bht.consilio.application.ConsilioApplication;
+	import de.bht.consilio.iso.IsoUtils;
 	import de.bht.consilio.iso.Point3D;
 	
 	import flash.display.*;
 	import flash.events.*;
+	import flash.geom.Point;
 	import flash.text.*;
 	import flash.utils.*;
 	
@@ -21,9 +23,10 @@ package de.bht.consilio.board
 		 * dictionary containing the squares. a square can be accessed in chess notation (ie "a1")
 		 */
 		private var squares:Dictionary = new Dictionary();
-
-		// unused
-//		private var pieces:Dictionary = new Dictionary();
+		private var _dark:uint;
+		private var _light:uint;
+		private var _selected:uint = 0xff0000;
+		private var _selectedSquare:Square;
 		
 		/**
 		 * Creates a Chessboard
@@ -34,6 +37,8 @@ package de.bht.consilio.board
 		 */
 		public function Board( dark:uint, light:uint )
 		{
+			_dark = dark;
+			_light = light;
 			var letters:Array = [ "a", "b", "c", "d", "e", "f", "g", "h" ];
 			var number:int = letters.length;
 			var letter:String;
@@ -71,8 +76,6 @@ package de.bht.consilio.board
 					square.position = new Point3D(c * 60, 0, r * 60);
 					square.id = letter + number.toString();
 					
-					// enable onClick events for every square
-					square.addEventListener(MouseEvent.CLICK, onClick);
 					addChild(square);
 					squares[square.id] = square;
 				}
@@ -108,7 +111,10 @@ package de.bht.consilio.board
 		{
 			var piece:AnimatedSprite = new AnimatedSprite(name, position, facing);
 			piece.position = getSquare(position).position;
-			getSquare(position).registerSprite(piece);
+			getSquare(position).registeredSprite = piece;
+			
+			// enable onClick events for every square
+			getSquare(position).addEventListener(MouseEvent.CLICK, onClick);
 			addChild(piece);
 		}
 		
@@ -122,13 +128,60 @@ package de.bht.consilio.board
 			var s:Square = e.target as Square;
 			if(s.registeredSprite)
 			{
-				// temporary
-				//				Logger.log(Logger.INFO, "CharCode: " + str.charCodeAt(0));
-				var current:AnimatedSprite = s.registeredSprite;
-				current.startCurrentAnimation();
-				ConsilioApplication.getInstance().setMenuEntry(current.picture, 2, 2, 1, "diagonal");
-				
+				//Charcodes are 97 - a to 104 - h
+				trace("CharCode: " + s.id.charCodeAt(0));
+				trace("Letter: " + s.id.charAt(0));
+				if(!s.isSelected())
+				{
+					if(_selectedSquare != null)
+					{
+						_selectedSquare.setSelected(false);
+						_selectedSquare.registeredSprite.stopCurrentAnimation();
+						_selectedSquare.redraw(_selectedSquare.color);
+					}
+					
+					_selectedSquare = s;
+					var current:AnimatedSprite = s.registeredSprite;
+					current.startCurrentAnimation();
+					ConsilioApplication.getInstance().setMenuEntry(current.picture, 2, 2, 1, "diagonal");
+					s.redraw(_selected);
+					
+					var sp:Point = IsoUtils.isoToScreen(s.position);
+					trace(s.id + ": " + sp);
+					
+					var sp2:Point = IsoUtils.isoToScreen(s.registeredSprite.position);
+					trace("Piece: " + ": " + sp2);
+					
+					// test movement
+					var sq:Square = getHorizontalAdjectedSquare(s, current.facing);
+					var sqp:Point = IsoUtils.isoToScreen(sq.position);
+					trace(sq.id + ": " + sqp);
+					sq.redraw(0x00ff00);
+					sq.addEventListener(MouseEvent.CLICK, function(e:Event):void {
+						e.currentTarget.removeEventListener( e.type, arguments.callee );
+						s.registeredSprite.moveTo(sq);
+//						sq.registeredSprite = s.registeredSprite;
+//						sq.addEventListener(MouseEvent.CLICK, onClick);
+//						s.registeredSprite = null;
+						s.removeEventListener(MouseEvent.CLICK, onClick);
+					});
+					
+				}
 			}
+		}
+		
+		private function getHorizontalAdjectedSquare(square:Square, direction:String):Square
+		{
+			if(direction=="ne")
+			{
+				return squares[square.id.charAt(0) + (parseInt(square.id.charAt(1)) + 1)];
+				
+			} else if (direction=="sw"){
+				return squares[square.id.charAt(0) + (parseInt(square.id.charAt(1)) + -1)];
+			} else {
+				return null;
+			}
+			
 		}
 		
 		/**
