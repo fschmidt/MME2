@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<app:ConsilioApplication xmlns:app="de.bht.consilio.application.*"
+						 xmlns:fx="http://ns.adobe.com/mxml/2009"
+						 xmlns:s="library://ns.adobe.com/flex/spark"
+						 xmlns:mx="library://ns.adobe.com/flex/mx"
+						 xmlns:ConsilioCustomComponents="de.bht.ConsilioCustomComponents.*"
+						 width="1280" height="720" currentState="beforeLogin"
+						 xmlns:view="de.bht.consilio.view.*"
+						 windowComplete="creationComplete(event)">
+	<app:layout>
+		<s:BasicLayout/>
+	</app:layout>
+	
+	<app:states>
+		<s:State name="afterLogin"/>
+		<s:State name="beforeLogin"/>
+	</app:states>
+	
+	<!-- Consumer and Producer declarations for chat functionality-->
+	<fx:Declarations>
+		<mx:Consumer id="consumer" destination="chat" fault="faultHandler(event);"
+					 message="messageHandler(event.message)"/>
+		<mx:Producer id="producer" destination="chat" fault="faultHandler(event);"/>
+		
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import de.bht.consilio.anim.ConsilioEvent;
+			
+			import mx.messaging.events.MessageFaultEvent;
+			import mx.messaging.messages.AsyncMessage;
+			import mx.messaging.messages.IMessage;
+			
+			var name:String;
+			
+			// Handle message sent
+			private function send():void {
+				var message:IMessage = new AsyncMessage();
+				message.body.chatMessage = msg.text;
+				producer.send(message);
+				msg.text = "";
+			}
+			
+			// Handle message received
+			private function messageHandler(message:IMessage):void {
+				log.text += message.body.chatMessage + "\n";
+			}
+			
+			// Handle message fault
+			private function faultHandler(event:MessageFaultEvent):void {
+				log.text += "Received fault: " + event.faultString + "\n";
+			}
+			
+			protected function loginHandler(event:ConsilioEvent):void
+			{
+				name = loginPanel.username.text;
+				var pw:String = loginPanel.password.text;
+				
+				
+				trace("NAME: " + name);
+				
+				currentState="afterLogin";
+				consumer.subscribe();
+				initMainView();
+			}
+			
+			protected function creationComplete(e:Event):void {
+				trace("Window Complete");
+				loginPanel.addEventListener(ConsilioEvent.LOGIN, loginHandler);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<view:LoginPanel id="loginPanel" includeIn="beforeLogin" horizontalCenter="0"
+					 verticalCenter="0" />
+	
+	
+	<!-- container for the game -->
+	<s:BorderContainer id="mainContainer" includeIn="afterLogin" x="0" y="0" width="100%" height="100%"
+					   backgroundColor="#676464" borderWeight="0" cornerRadius="0">
+	</s:BorderContainer>
+	
+	<!-- the chat component -->
+	<mx:Panel includeIn="afterLogin" right="5" bottom="5" width="400" height="200" title="Chat">
+		<mx:TextArea id="log" width="100%" height="100%" borderVisible="false"/>
+		<mx:ControlBar>
+			<mx:TextInput id="msg" width="100%" enter="send()"/>
+			<mx:Button label="Send" click="send()"/>
+		</mx:ControlBar>
+	</mx:Panel>
+	
+	<!-- bottom menu bar -->
+	<ConsilioCustomComponents:BottomMenu id="bottomMenu" includeIn="afterLogin" left="5" bottom="5"/>
+	
+	
+</app:ConsilioApplication>

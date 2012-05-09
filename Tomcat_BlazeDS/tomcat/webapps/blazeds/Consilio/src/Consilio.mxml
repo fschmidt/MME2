@@ -32,10 +32,12 @@
 			import mx.messaging.messages.AsyncMessage;
 			import mx.messaging.messages.IMessage;
 			
+			private var username:String;
+			
 			// Handle message sent
 			private function send():void {
 				var message:IMessage = new AsyncMessage();
-				message.body.chatMessage = msg.text;
+				message.body.chatMessage = username + ": " + msg.text;
 				producer.send(message);
 				msg.text = "";
 			}
@@ -52,11 +54,11 @@
 			
 			protected function loginHandler(event:ConsilioEvent):void
 			{
-				var name:String = loginPanel.username.text;
+				username = loginPanel.username.text;
 				var pw:String = loginPanel.password.text;
 				
 				
-				trace("NAME: " + name);
+				trace("NAME: " + username);
 				
 				currentState="afterLogin";
 				consumer.subscribe();

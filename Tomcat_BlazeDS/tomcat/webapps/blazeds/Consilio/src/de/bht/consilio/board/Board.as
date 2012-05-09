@@ -27,6 +27,7 @@ package de.bht.consilio.board
 		private var _light:uint;
 		private var _selected:uint = 0xff0000;
 		private var _selectedSquare:Square;
+		private var _target:Square;
 		
 		/**
 		 * Creates a Chessboard
@@ -138,6 +139,9 @@ package de.bht.consilio.board
 						_selectedSquare.setSelected(false);
 						_selectedSquare.registeredSprite.stopCurrentAnimation();
 						_selectedSquare.redraw(_selectedSquare.color);
+						_target.removeEventListener(MouseEvent.CLICK, move);
+						_target.redraw(_target.color);
+						_selectedSquare.addEventListener(MouseEvent.CLICK, onClick);
 					}
 					
 					_selectedSquare = s;
@@ -153,23 +157,31 @@ package de.bht.consilio.board
 					trace("Piece: " + ": " + sp2);
 					
 					// test movement
-					var sq:Square = getHorizontalAdjectedSquare(s, current.facing);
-					var sqp:Point = IsoUtils.isoToScreen(sq.position);
-					trace(sq.id + ": " + sqp);
-					sq.redraw(0x00ff00);
-					sq.addEventListener(MouseEvent.CLICK, function(e:Event):void {
-						e.currentTarget.removeEventListener( e.type, arguments.callee );
-						s.registeredSprite.moveTo(sq);
-//						sq.registeredSprite = s.registeredSprite;
-//						sq.addEventListener(MouseEvent.CLICK, onClick);
-//						s.registeredSprite = null;
+					_target = getHorizontalAdjectedSquare(s, current.facing);
+					if(_target.registeredSprite == null){
+						var sqp:Point = IsoUtils.isoToScreen(_target.position);
+						trace(_target.id + ": " + sqp);
+						_target.redraw(0x00ff00);
 						s.removeEventListener(MouseEvent.CLICK, onClick);
-					});
-					
+						_target.addEventListener(MouseEvent.CLICK, move);
+					} 
 				}
 			}
 		}
 		
+		private function move(e:Event):void {
+			e.currentTarget.removeEventListener( e.type, arguments.callee );
+			_selectedSquare.registeredSprite.moveTo(_target);
+			_selectedSquare.registeredSprite.stopCurrentAnimation();
+			_target.registeredSprite = _selectedSquare.registeredSprite;
+			_target.addEventListener(MouseEvent.CLICK, onClick);
+			_selectedSquare.registeredSprite = null;
+			_target.redraw(_target.color);
+			_selectedSquare.redraw(_selectedSquare.color);
+			_selectedSquare = null;
+			
+			
+		}
 		private function getHorizontalAdjectedSquare(square:Square, direction:String):Square
 		{
 			if(direction=="ne")
