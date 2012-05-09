@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexProperties enableServiceManager="false" flexServerFeatures="4" flexServerType="2" fmlDataModelLocation=".model/nurseAd.fml" serverContextRoot="/blazeds" serverRoot="C:/Users/Frank/Documents/Studium Medieninformatik/FSV/MME2/repro/Tomcat_BlazeDS/tomcat/webapps/blazeds" serverRootURL="http://localhost:8080/blazeds" toolCompile="true" useServerFlexSDK="false" version="2"/>
+

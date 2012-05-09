@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="false" key="com.adobe.flexbuilder.project.ui.last.flexserver.usedefaults"/>
+	<item value="D:\Studium\MME_II\MME2\Tomcat_BlazeDS\tomcat\webapps\blazeds" key="com.adobe.flexbuilder.project.ui.last.flexserver.location"/>
+	<item value="/blazeds" key="com.adobe.flexbuilder.project.ui.last.flexserver.contextroot"/>
+	<item value="http://localhost:8080/blazeds" key="com.adobe.flexbuilder.project.ui.last.flexserver.url"/>
+</section>
