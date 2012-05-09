@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="800" height="200" contentBackgroundColor="#7E7D7D">
+	<s:layout>
+		<s:HorizontalLayout paddingBottom="5" paddingLeft="5"/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Panel width="800" height="200">
+		<s:VGroup left="200" top="10" width="200" height="150">
+			<mx:ProgressBar id="hp_bar" width="200" label="HP" chromeColor="#17CC17" disabledColor="#787A78" 
+							indeterminate="false" labelPlacement="center" maximum="10" mode="manual"/>
+			<s:TileGroup width="200" height="120" orientation="columns" requestedRowCount="5">
+				<s:Label width="90" height="18" color="#575757" fontFamily="Arial" fontSize="12"
+						 fontStyle="italic" fontWeight="bold" text="Attack" textAlign="left"
+						 verticalAlign="middle"/>
+				<s:Label width="90" height="18" color="#575757" fontFamily="Arial" fontSize="12"
+						 fontStyle="italic" fontWeight="bold" text="Defense" textAlign="left"
+						 verticalAlign="middle"/>
+				<s:Label width="90" height="18" color="#575757" fontFamily="Arial" fontSize="12"
+						 fontStyle="italic" fontWeight="bold" text="Move" textAlign="left"
+						 verticalAlign="middle"/>
+				<s:Label width="90" height="18" color="#575757" fontFamily="Arial" fontSize="12"
+						 fontStyle="italic" fontWeight="bold" text="Move Type" textAlign="left"
+						 verticalAlign="middle"/>
+				<s:Label width="90" height="18" color="#575757" fontFamily="Arial" fontSize="12"
+						 fontStyle="italic" fontWeight="bold" text="Label" textAlign="left"
+						 verticalAlign="middle"/>
+				<s:Label id="attack_label" width="90" height="18" color="#575757" fontFamily="Arial"
+						 fontSize="12" fontStyle="italic" fontWeight="bold" paddingRight="10"
+						 textAlign="left" verticalAlign="middle"/>
+				<s:Label id="defense_label" width="90" height="18" color="#575757" fontFamily="Arial"
+						 fontSize="12" fontStyle="italic" fontWeight="bold" paddingRight="10"
+						 textAlign="left" verticalAlign="middle"/>
+				<s:Label id="move_label" width="90" height="18" color="#575757" fontFamily="Arial"
+						 fontSize="12" fontStyle="italic" fontWeight="bold" paddingRight="10"
+						 textAlign="left" verticalAlign="middle"/>
+				<s:Label id="move_type_label" width="90" height="18" color="#575757"
+						 fontFamily="Arial" fontSize="12" fontStyle="italic" fontWeight="bold"
+						 paddingRight="10" textAlign="left" verticalAlign="middle"/>
+				<s:Label id="some_label" width="90" height="18" color="#575757" fontFamily="Arial"
+						 fontSize="12" fontStyle="italic" fontWeight="bold" paddingRight="10"
+						 textAlign="left" verticalAlign="middle"/>
+			</s:TileGroup>
+		</s:VGroup>
+		<s:BorderContainer id="imageContainer" left="40" top="20" width="120" height="120"
+						   borderWeight="1" cornerRadius="5">
+		</s:BorderContainer>
+	</s:Panel>
+</s:Group>
+
+
