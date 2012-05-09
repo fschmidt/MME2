@@ -21,6 +21,7 @@
 		<mx:Consumer id="consumer" destination="chat" fault="faultHandler(event);"
 					 message="messageHandler(event.message)"/>
 		<mx:Producer id="producer" destination="chat" fault="faultHandler(event);"/>
+		
 	</fx:Declarations>
 	
 	<fx:Script>
