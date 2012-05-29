@@ -25,7 +25,7 @@ package de.bht.consilio.board
 		private var squares:Dictionary = new Dictionary();
 		private var _dark:uint;
 		private var _light:uint;
-		private var _selected:uint = 0xff0000;
+		private var _selected:uint = 0x0000ff;
 		private var _selectedSquare:Square;
 		private var _target:Square;
 		
@@ -139,15 +139,19 @@ package de.bht.consilio.board
 						_selectedSquare.setSelected(false);
 						_selectedSquare.registeredSprite.stopCurrentAnimation();
 						_selectedSquare.redraw(_selectedSquare.color);
+						_selectedSquare.addEventListener(MouseEvent.CLICK, onClick);			
+					}
+					if (_target != null){
 						_target.removeEventListener(MouseEvent.CLICK, move);
 						_target.redraw(_target.color);
-						_selectedSquare.addEventListener(MouseEvent.CLICK, onClick);
+						_target.addEventListener(MouseEvent.CLICK, onClick);
+						_target.removeEventListener(MouseEvent.CLICK, attack);
 					}
 					
 					_selectedSquare = s;
 					var current:AnimatedSprite = s.registeredSprite;
 					current.startCurrentAnimation();
-					ConsilioApplication.getInstance().setMenuEntry(current.picture, 2, 2, 1, "diagonal");
+					ConsilioApplication.getInstance().setMenuEntry(current.picture, 2, 2, 1, "diagonal",current.maxLivePoints,current.livePoints);
 					s.redraw(_selected);
 					
 					var sp:Point = IsoUtils.isoToScreen(s.position);
@@ -160,16 +164,41 @@ package de.bht.consilio.board
 					_target = getHorizontalAdjectedSquare(s, current.facing);
 					if(_target.registeredSprite == null){
 						var sqp:Point = IsoUtils.isoToScreen(_target.position);
-						trace(_target.id + ": " + sqp);
+						trace("Move: " + _target.id + ": " + sqp);
 						_target.redraw(0x00ff00);
 						s.removeEventListener(MouseEvent.CLICK, onClick);
 						_target.addEventListener(MouseEvent.CLICK, move);
-					} 
+					} else if(s.registeredSprite.facing != _target.registeredSprite.facing){
+						trace("attack: "+_selectedSquare+":"+_target);
+						_target.redraw(0xff0000);
+						s.removeEventListener(MouseEvent.CLICK, onClick);
+						_target.removeEventListener(MouseEvent.CLICK, onClick);
+						_target.addEventListener(MouseEvent.CLICK, attack);
+					}
 				}
 			}
 		}
 		
-		private function move(e:Event):void {
+		protected function attack(e:MouseEvent):void
+		{
+			_selectedSquare.registeredSprite.stopCurrentAnimation();
+			_target.registeredSprite.livePoints--;
+			
+			//TODO remove Sprite
+			
+			_target.addEventListener(MouseEvent.CLICK, onClick);
+			_target.removeEventListener(MouseEvent.CLICK, attack);
+			_target.redraw(_target.color);
+			
+			_selectedSquare.redraw(_selectedSquare.color);
+			_selectedSquare.addEventListener(MouseEvent.CLICK, onClick);
+			
+			_selectedSquare = null;
+			_target = null;
+		}
+		
+		private function move(e:Event):void 
+		{			
 			e.currentTarget.removeEventListener( e.type, arguments.callee );
 			_selectedSquare.registeredSprite.moveTo(_target);
 			_selectedSquare.registeredSprite.stopCurrentAnimation();
@@ -178,10 +207,11 @@ package de.bht.consilio.board
 			_selectedSquare.registeredSprite = null;
 			_target.redraw(_target.color);
 			_selectedSquare.redraw(_selectedSquare.color);
-			_selectedSquare = null;
 			
-			
+			_selectedSquare = null;	
+			_target = null;
 		}
+		
 		private function getHorizontalAdjectedSquare(square:Square, direction:String):Square
 		{
 			if(direction=="ne")

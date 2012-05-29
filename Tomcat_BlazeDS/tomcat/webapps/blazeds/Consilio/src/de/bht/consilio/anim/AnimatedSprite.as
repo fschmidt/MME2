@@ -76,6 +76,11 @@ package de.bht.consilio.anim
 		 */
 		private var _picture:Bitmap;
 		
+		private var _party:uint;
+		
+		private var _maxLivePoints:uint = 5;
+		private var _livePoints:uint = 5;
+		
 		public function AnimatedSprite(name:String, boardPosition:String, facing:String)
 		{
 			// since pieces are never scaled given size can be zero
@@ -277,6 +282,18 @@ package de.bht.consilio.anim
 		
 		public function get facing():String {
 			return _facing;
+		}
+		
+		public function get maxLivePoints():uint {
+			return _maxLivePoints;
+		}
+		
+		public function get livePoints():uint {
+			return _livePoints;
+		}
+		
+		public function set livePoints(livePoints:uint):void {
+			_livePoints = livePoints;
 		}
 		
 		/**

@@ -67,18 +67,19 @@ package de.bht.consilio.application
 		 * @param moveTypeValue the pieces moce type (ie "diagonal")
 		 * 
 		 */
-		public function setMenuEntry(pic:Bitmap, attackValue:uint, defenseValue:uint, moveValue:uint, moveTypeValue:String):void
+		public function setMenuEntry(pic:Bitmap, attackValue:uint, defenseValue:uint, moveValue:uint, moveTypeValue:String, hp_max:uint, hp_akt:uint):void
 		{
 			bottomMenu.attack_label.text = "" + attackValue;
 			bottomMenu.defense_label.text = "" + defenseValue;
 			bottomMenu.move_label.text = "" + moveValue;
-			bottomMenu.move_type_label.text = moveTypeValue;
+			bottomMenu.move_type_label.text = moveTypeValue
+			bottomMenu.imageContainer.removeAllElements();
 			var s:SpriteVisualElement = new SpriteVisualElement();
 			s.addChild(pic);
 			bottomMenu.imageContainer.addElement(s);
 			bottomMenu.hp_bar.minimum = 0;
-			bottomMenu.hp_bar.label = "HP: 2/5"
-			bottomMenu.hp_bar.setProgress(2,5);
+			bottomMenu.hp_bar.label = "HP: "+ hp_akt +"/"+hp_max;
+			bottomMenu.hp_bar.setProgress(hp_akt,hp_max);
 		}
 		
 		/**
