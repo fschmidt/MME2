@@ -5,8 +5,11 @@ package de.bht.consilio.game
 	import com.greensock.loading.ImageLoader;
 	import com.greensock.loading.LoaderMax;
 	
+	import de.bht.ConsilioCustomComponents.BottomMenu;
 	import de.bht.consilio.anim.AnimatedSprite;
 	import de.bht.consilio.board.Board;
+	import de.bht.consilio.controller.GameController;
+	import de.bht.consilio.util.Constants;
 	
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
@@ -43,11 +46,8 @@ package de.bht.consilio.game
 			LoaderMax.activate([ImageLoader]);
 			
 			// create the board
-			chessboard = new Board( 0x333333, 0x999999 );
+			chessboard = new Board( Constants.SQUARE_COLOR_WHITE, Constants.SQUARE_COLOR_BLACK );
 			addChild(chessboard);
-			
-			chessboard.x = 512;
-			chessboard.y = 60;
 			
 			// load the board data
 			var myRequest:URLRequest = new URLRequest("img/boards/boardData.json");
@@ -87,7 +87,7 @@ package de.bht.consilio.game
 		 */
 		private function _progressHandler(event:LoaderEvent):void
 		{
-			trace(event.target.progress);
+//			trace(event.target.progress);
 		}
 		
 		/**
@@ -99,6 +99,7 @@ package de.bht.consilio.game
 		private function _queueCompleteHandler(event:LoaderEvent):void
 		{
 			chessboard.init(boardData);
+			var g:GameController = new GameController(chessboard, true);
 		}
 		
 		/**
@@ -112,7 +113,7 @@ package de.bht.consilio.game
 		{
 			var i:ImageLoader = event.target as ImageLoader;
 			var name:String = i.url.substr(SPRITE_SHEETS_LOCATION.length);
-			trace(name);
+//			trace(name);
 			AnimatedSprite.addSpriteSheet(name, (i.rawContent as Bitmap).bitmapData);
 		}
 	}

@@ -1,15 +1,20 @@
 package de.bht.consilio.board
 {
 	import de.bht.consilio.anim.AnimatedSprite;
+	import de.bht.consilio.anim.Piece;
+	import de.bht.consilio.anim.command.HorizontalMovementType;
 	import de.bht.consilio.application.ConsilioApplication;
 	import de.bht.consilio.iso.IsoUtils;
 	import de.bht.consilio.iso.Point3D;
+	import de.bht.consilio.util.Constants;
 	
 	import flash.display.*;
 	import flash.events.*;
 	import flash.geom.Point;
 	import flash.text.*;
 	import flash.utils.*;
+	
+	import org.osmf.logging.Logger;
 	
 	/**
 	 * Class representing a basic chessboard
@@ -22,7 +27,7 @@ package de.bht.consilio.board
 		/**
 		 * dictionary containing the squares. a square can be accessed in chess notation (ie "a1")
 		 */
-		private var squares:Dictionary = new Dictionary();
+		private var _squares:Dictionary = new Dictionary();
 		private var _dark:uint;
 		private var _light:uint;
 		private var _selected:uint = 0x0000ff;
@@ -73,16 +78,19 @@ package de.bht.consilio.board
 						color = light;
 					}
 					
-					square = new Square(60, color);
-					square.position = new Point3D(c * 60, 0, r * 60);
+					square = new Square(Constants.SQUARE_DEFAULT_SIZE, color);
+					square.position = new Point3D(c * Constants.SQUARE_DEFAULT_SIZE, 0, r * Constants.SQUARE_DEFAULT_SIZE);
 					square.id = letter + number.toString();
 					
 					addChild(square);
-					squares[square.id] = square;
+					_squares[square.id] = square;
 				}
 				
 				number--;
 			}
+			
+			this.x = Constants.BOARD_DEFAULT_POSITION_X;
+			this.y = Constants.BOARD_DEFAULT_POSITION_Y;
 		}
 		
 		/**
@@ -110,13 +118,26 @@ package de.bht.consilio.board
 		 */
 		private function addPiece(name:String, position:String, facing:String):void 
 		{
-			var piece:AnimatedSprite = new AnimatedSprite(name, position, facing);
+			var piece:Piece = new Piece(name, position, facing, isOwnPiece(position), new HorizontalMovementType());
 			piece.position = getSquare(position).position;
-			getSquare(position).registeredSprite = piece;
-			
+			getSquare(position).registeredPiece = piece;
+			getSquare(position).isOccupied = true;
+						
 			// enable onClick events for every square
-			getSquare(position).addEventListener(MouseEvent.CLICK, onClick);
+//			if(piece.isOwnPiece) {
+//				getSquare(position).addEventListener(MouseEvent.CLICK, onClick);
+//			}
 			addChild(piece);
+		}
+		
+		/**
+		 * @return true whether this piece is property of this player, false if its an opponents piece
+		 * 
+		 */
+		private function isOwnPiece(position:String):Boolean
+		{
+			var rowNumber:String = position.charAt(1);
+			return rowNumber.match("1") || rowNumber.match("2");
 		}
 		
 		/**
@@ -127,7 +148,7 @@ package de.bht.consilio.board
 		private function onClick(e:MouseEvent):void
 		{
 			var s:Square = e.target as Square;
-			if(s.registeredSprite)
+			if(s.registeredPiece)
 			{
 				//Charcodes are 97 - a to 104 - h
 				trace("CharCode: " + s.id.charCodeAt(0));
@@ -137,7 +158,7 @@ package de.bht.consilio.board
 					if(_selectedSquare != null)
 					{
 						_selectedSquare.setSelected(false);
-						_selectedSquare.registeredSprite.stopCurrentAnimation();
+						_selectedSquare.registeredPiece.stopCurrentAnimation();
 						_selectedSquare.redraw(_selectedSquare.color);
 						_selectedSquare.addEventListener(MouseEvent.CLICK, onClick);			
 					}
@@ -149,26 +170,25 @@ package de.bht.consilio.board
 					}
 					
 					_selectedSquare = s;
-					var current:AnimatedSprite = s.registeredSprite;
+					var current:AnimatedSprite = s.registeredPiece;
 					current.startCurrentAnimation();
-					ConsilioApplication.getInstance().setMenuEntry(current.picture, 2, 2, 1, "diagonal",current.maxLivePoints,current.livePoints);
 					s.redraw(_selected);
 					
 					var sp:Point = IsoUtils.isoToScreen(s.position);
 					trace(s.id + ": " + sp);
 					
-					var sp2:Point = IsoUtils.isoToScreen(s.registeredSprite.position);
+					var sp2:Point = IsoUtils.isoToScreen(s.registeredPiece.position);
 					trace("Piece: " + ": " + sp2);
 					
 					// test movement
 					_target = getHorizontalAdjectedSquare(s, current.facing);
-					if(_target.registeredSprite == null){
+					if(_target.registeredPiece == null){
 						var sqp:Point = IsoUtils.isoToScreen(_target.position);
 						trace("Move: " + _target.id + ": " + sqp);
 						_target.redraw(0x00ff00);
 						s.removeEventListener(MouseEvent.CLICK, onClick);
 						_target.addEventListener(MouseEvent.CLICK, move);
-					} else if(s.registeredSprite.facing != _target.registeredSprite.facing){
+					} else if(s.registeredPiece.facing != _target.registeredPiece.facing){
 						trace("attack: "+_selectedSquare+":"+_target);
 						_target.redraw(0xff0000);
 						s.removeEventListener(MouseEvent.CLICK, onClick);
@@ -181,8 +201,8 @@ package de.bht.consilio.board
 		
 		protected function attack(e:MouseEvent):void
 		{
-			_selectedSquare.registeredSprite.stopCurrentAnimation();
-			_target.registeredSprite.livePoints--;
+			_selectedSquare.registeredPiece.stopCurrentAnimation();
+			_target.registeredPiece.livePoints--;
 			
 			//TODO remove Sprite
 			
@@ -200,11 +220,11 @@ package de.bht.consilio.board
 		private function move(e:Event):void 
 		{			
 			e.currentTarget.removeEventListener( e.type, arguments.callee );
-			_selectedSquare.registeredSprite.moveTo(_target);
-			_selectedSquare.registeredSprite.stopCurrentAnimation();
-			_target.registeredSprite = _selectedSquare.registeredSprite;
+			_selectedSquare.registeredPiece.moveTo(_target);
+			_selectedSquare.registeredPiece.stopCurrentAnimation();
+			_target.registeredPiece = _selectedSquare.registeredPiece;
 			_target.addEventListener(MouseEvent.CLICK, onClick);
-			_selectedSquare.registeredSprite = null;
+			_selectedSquare.registeredPiece = null;
 			_target.redraw(_target.color);
 			_selectedSquare.redraw(_selectedSquare.color);
 			
@@ -216,14 +236,18 @@ package de.bht.consilio.board
 		{
 			if(direction=="ne")
 			{
-				return squares[square.id.charAt(0) + (parseInt(square.id.charAt(1)) + 1)];
+				return _squares[square.id.charAt(0) + (parseInt(square.id.charAt(1)) + 1)];
 				
 			} else if (direction=="sw"){
-				return squares[square.id.charAt(0) + (parseInt(square.id.charAt(1)) + -1)];
+				return _squares[square.id.charAt(0) + (parseInt(square.id.charAt(1)) + -1)];
 			} else {
 				return null;
 			}
 			
+		}
+		
+		public function get squares():Dictionary {
+			return _squares;
 		}
 		
 		/**
@@ -235,7 +259,7 @@ package de.bht.consilio.board
 		 */
 		public function getSquare(id:String):Square
 		{
-			return squares[id] as Square;
+			return _squares[id] as Square;
 		}
 	}
 }

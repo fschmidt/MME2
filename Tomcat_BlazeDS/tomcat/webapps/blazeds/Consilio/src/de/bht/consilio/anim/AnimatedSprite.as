@@ -247,7 +247,7 @@ package de.bht.consilio.anim
 		{
 			var screenPosition:Point = IsoUtils.isoToScreen(s.position);
 			this.position = s.position;
-			trace(screenPosition);
+//			trace(screenPosition);
 //			trace("This x: " + this.x + ", This y: " + this.y + ", sq x: " + s.x + ", sq y: " + s.y);
 //			TweenLite.to(this, 8, {x:this.x+60, y:this.y-30, onComplete:stopCurrentAnimation});
 		}

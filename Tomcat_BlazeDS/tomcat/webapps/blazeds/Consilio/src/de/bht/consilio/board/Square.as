@@ -1,6 +1,7 @@
 package de.bht.consilio.board
 {
 	import de.bht.consilio.anim.AnimatedSprite;
+	import de.bht.consilio.anim.Piece;
 	import de.bht.consilio.iso.IsoObject;
 	
 	import flash.display.*;
@@ -19,9 +20,10 @@ package de.bht.consilio.board
 	{
 		protected var _height:Number;
 		protected var _id:String;
-		protected var _color:uint
+		protected var _color:uint;
 		protected var _selected:Boolean;
-		protected var _registeredSprite:AnimatedSprite;
+		protected var _isOccupied:Boolean;
+		protected var _registeredPiece:Piece;
 		
 		/**
 		 * Constructor
@@ -72,14 +74,14 @@ package de.bht.consilio.board
 		 * @return the AnimatedSprite registered on this Square 
 		 * 
 		 */
-		public function get registeredSprite():AnimatedSprite
+		public function get registeredPiece():Piece
 		{
-			return _registeredSprite;
+			return _registeredPiece;
 		}
 		
-		public function set registeredSprite(value:AnimatedSprite):void
+		public function set registeredPiece(value:Piece):void
 		{
-			_registeredSprite = value;
+			_registeredPiece = value;
 		}
 		
 		public function get color():uint
@@ -95,6 +97,16 @@ package de.bht.consilio.board
 		public function isSelected():Boolean
 		{
 			return _selected;
+		}
+		
+		public function set isOccupied(isOccupied:Boolean):void
+		{
+			_isOccupied = isOccupied;
+		}
+		
+		public function get isOccupied():Boolean
+		{
+			return _isOccupied;
 		}
 	}
 }

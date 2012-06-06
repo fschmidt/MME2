@@ -1,4 +1,4 @@
-package de.bht.consilio.anim
+package de.bht.consilio.event
 {
 	import flash.events.Event;
 	
