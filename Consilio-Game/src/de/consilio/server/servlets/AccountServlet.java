@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 
 import de.consilio.server.dao.UserAccountDao;
 import de.consilio.server.model.AccountRegistrationException;
+import de.consilio.server.model.Response;
 import de.consilio.server.model.UserAccount;
 import de.consilio.server.util.Constants;
 
@@ -47,6 +48,7 @@ public class AccountServlet extends HttpServlet {
 		if(accountByName != null) {
 			if(accountsEqual(account, accountByName)){
 				try {
+					Response<UserAccount> response = new Response<UserAccount>(true, "success", "0", accountByName);
 					resp.getWriter().write(new Gson().toJson(accountByName));
 				} catch (IOException e) {
 					e.printStackTrace();
