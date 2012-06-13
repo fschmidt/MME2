@@ -84,6 +84,8 @@
 	<view:LoginPanel id="loginPanel" includeIn="login" horizontalCenter="0"
 					 verticalCenter="0" />
 	
+	<view:RegisterPanel id="registerPanel" includeIn="register" horizontalCenter="0"
+					 verticalCenter="0" />
 	
 	<!-- container for the game -->
 	<s:BorderContainer id="mainContainer" includeIn="game" x="0" y="0" width="100%" height="100%"

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="400" height="300">
+	<fx:Script>
+		private function clearRegisterInputs():void {
+			registerEmail.text = "";
+			registerName.text = "";
+			registerPassword.text = "";
+		}
+	</fx:Script>
+	
+	<s:Panel width="100%" height="100%" title="Register">
+		<mx:Form id="registerForm" x="35" y="26" width="293" dropShadowVisible="false" horizontalCenter="0"
+				 textAlign="left">
+			<mx:FormItem label="Email" required="true">
+				<s:TextInput id="registerEmail"/>
+			</mx:FormItem>
+			<mx:FormItem label="Name" required="true">
+				<s:TextInput id="registerName"/>
+			</mx:FormItem>
+			<mx:FormItem label="Password" required="true">
+				<s:TextInput id="registerPassword" displayAsPassword="true"/>
+			</mx:FormItem>
+			<mx:FormItem label="Remove Password" required="true">
+				<s:TextInput id="removePassword" displayAsPassword="true"/>
+			</mx:FormItem>
+		</mx:Form>
+		<s:HGroup left="0" bottom="0" width="100%" gap="240" horizontalAlign="center" paddingBottom="5"
+				  paddingLeft="5" paddingRight="5" paddingTop="5" textAlign="left"
+				  verticalAlign="top">
+			<s:Button id="cancelButton" label="Cancel"
+					  click="clearRegisterInputs();parentApplication.currentState='login'"/>
+			<s:Button id="registerButton" label="Register"/>
+		</s:HGroup>
+	</s:Panel>
+</s:Group>

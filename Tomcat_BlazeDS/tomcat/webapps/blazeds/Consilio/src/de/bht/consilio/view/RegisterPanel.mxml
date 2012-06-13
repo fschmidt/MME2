@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="356" height="293">
+	<fx:Script>
+		private function clearRegisterInputs():void {
+			registerEmail.text = "";
+			registerName.text = "";
+			registerPassword.text = "";
+		}
+	</fx:Script>
+	
+	<s:Panel width="100%" height="100%" title="Register">
+		<mx:Form x="35" y="26" width="293" height="174">
+			<mx:FormItem label="Email" required="true">
+				<s:TextInput id="registerEmail"/>
+			</mx:FormItem>
+			<mx:FormItem label="Name" required="true">
+				<s:TextInput id="registerName"/>
+			</mx:FormItem>
+			<mx:FormItem label="Password" required="true">
+				<s:TextInput id="registerPassword" displayAsPassword="true"/>
+			</mx:FormItem>
+			<mx:FormItem label="Remove Password" required="true">
+				<s:TextInput id="removePassword" displayAsPassword="true"/>
+			</mx:FormItem>
+		</mx:Form>
+		<!--s:controlBarContent-->
+		<s:Button id="submit" x="258" y="208" label="Continue"/>
+		<s:Button x="35" y="208" label="Cancel"
+				  click="clearRegisterInputs();parentApplication.currentState='beforeLogin'"/>
+		<!--/s:controlBarContent-->
+	</s:Panel>
+	<fx:Declarations>
+		<mx:StringValidator maxLength="30" property="text" required="true" source="{registerEmail}"
+							trigger="{registerEmail}" triggerEvent="focusOut"/>
+		<mx:StringValidator maxLength="30" property="text" required="true" source="{registerName}"
+							trigger="{registerName}" triggerEvent="focusOut"/>	
+		<mx:StringValidator maxLength="30" property="text" required="true"
+							source="{registerPassword}" trigger="{registerPassword}"
+							triggerEvent="focusOut"/>
+	</fx:Declarations>
+	
+	
+</s:Group>
