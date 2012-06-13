@@ -27,7 +27,7 @@ public class GameServlet extends HttpServlet {
 	private static final Logger log = Logger.getLogger(GameServlet.class
 			.getName());
 
-	public void doGet(HttpServletRequest req, HttpServletResponse resp)
+	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		
 		String gameId = req.getParameter(Constants.GAME_ID);

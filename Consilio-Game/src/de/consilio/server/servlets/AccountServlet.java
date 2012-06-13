@@ -29,6 +29,8 @@ public class AccountServlet extends HttpServlet {
 
 		UserAccount account = new Gson().fromJson(params, UserAccount.class);
 		
+		log.warning(account.toString());
+		
 		if(mode.equals("login")) {
 			handleLogin(account, resp);
 		} else if(mode.equals("register")) {
@@ -47,17 +49,20 @@ public class AccountServlet extends HttpServlet {
 				try {
 					resp.getWriter().write(new Gson().toJson(accountByName));
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
+		} else {
+			try {
+				resp.getWriter().write(new Gson().toJson(new UserAccount()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		
-		
 	}
 
 	private boolean accountsEqual(UserAccount account, UserAccount accountByName) {
-		return accountByName.getEmail().equals(account.getEmail())&& accountByName.getPassword().equals(account.getPassword());
+		return accountByName.getPassword().equals(account.getPassword());
 	}
 
 	private void handleAccountRegistration(UserAccount account, HttpServletResponse resp) throws AccountRegistrationException {

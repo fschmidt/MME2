@@ -3,20 +3,15 @@ function onOpened() {
 }
 
 function onMessage(msg) {
-//	if(onMessageReceived) {
-//		onMessageReceived(msg);
-//	} else {
-//		alert(msg.data);
-//	}
-	alert(msg.data);
+	onMessageReceived(msg.data);
 }
 
 function onError(err) {
-    alert(err);
+	onErrorReceived(err);
 }
 
 function onClose() {
-    alert("Channel closed!");
+    onChannelClosed();
 }
 
 function sendMessage(path, params) {

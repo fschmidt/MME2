@@ -4,7 +4,7 @@
 						 xmlns:s="library://ns.adobe.com/flex/spark"
 						 xmlns:mx="library://ns.adobe.com/flex/mx"
 						 xmlns:ConsilioCustomComponents="de.bht.ConsilioCustomComponents.*"
-						 width="1280" height="720" currentState="beforeLogin"
+						 width="1280" height="720" currentState="login"
 						 xmlns:view="de.bht.consilio.view.*"
 						 windowComplete="creationComplete(event)">
 	<app:layout>
@@ -12,8 +12,10 @@
 	</app:layout>
 	
 	<app:states>
-		<s:State name="afterLogin"/>
-		<s:State name="beforeLogin"/>
+		<s:State name="game"/>
+		<s:State name="login"/>
+		<s:State name="register"/>
+		<s:State name="setup"/>
 	</app:states>
 	
 	<!-- Consumer and Producer declarations for chat functionality-->
@@ -22,6 +24,8 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import de.bht.consilio.controller.RemoteServiceController;
+			import de.bht.consilio.controller.RemotingEvent;
 			import de.bht.consilio.event.ConsilioEvent;
 			
 			import flash.events.Event;
@@ -32,70 +36,62 @@
 			import mx.controls.HTML;
 			import mx.events.AIREvent;
 			
-			private var username:String;
-			
-			private var messagePath:String = "message";
-			
-			private var html:HTMLLoader;
-			
-			private var onMessageReceived:Function = onMessageReceivedHandler;
+			private var _userId:String;
 			
 			// Handle message sent
 			private function send():void {
-				var message:String = username + ": " + msg.text;
-				html.window.sendMessage(messagePath, "Message=" + message);
+				
 			}
 			
 			
 			protected function loginHandler(event:ConsilioEvent):void
 			{
-				username = loginPanel.username.text;
+				var username:String = loginPanel.username.text;
 				var pw:String = loginPanel.password.text;
 				
+				RemoteServiceController.getInstance().login(username, pw);
 				
-				trace("NAME: " + username);
+				RemoteServiceController.getInstance().addEventListener(RemotingEvent.LOGIN_COMPLETE, handleLoginComplete);
+				RemoteServiceController.getInstance().addEventListener(RemotingEvent.LOGIN_FAILED, handleLoginFailed);
 				
-				currentState="afterLogin";
-				initMainView();
 			}
+			
 			protected function creationComplete(e:Event):void {
 				trace("Window Complete");
-				initHTML();
 				loginPanel.addEventListener(ConsilioEvent.LOGIN, loginHandler);
 			}
 			
-			protected function initHTML():void {
-				html = new HTMLLoader();
-				html.load(new URLRequest("http://consilio-game.appspot.com/consilio_game"));
-				html.width = 0;
-				html.height = 0;
-				html.addEventListener(Event.COMPLETE, htmlInitComplete);
+			protected function handleLoginComplete(e:RemotingEvent):void {
+				trace("Login Complete");
+				RemoteServiceController.getInstance().removeEventListener(RemotingEvent.LOGIN_COMPLETE, handleLoginComplete);
+				RemoteServiceController.getInstance().removeEventListener(RemotingEvent.LOGIN_FAILED, handleLoginFailed);
+				
+				_userId = e.message;
+				
+				currentState="game";
+				initMainView();
 			}
 			
-			protected function htmlInitComplete(e:Event):void {
-				e.target.window.onMessageReceived = onMessageReceived;
-				trace("HTML init complete");
-			}
-			
-			public function onMessageReceivedHandler(message):void {
-				trace(message.data);
-				log.text += message.data;
+			protected function handleLoginFailed(e:RemotingEvent):void {
+				Alert.show("Login Failed, please try again or ask your compiler");
+				RemoteServiceController.getInstance().removeEventListener(RemotingEvent.LOGIN_COMPLETE, handleLoginComplete);
+				RemoteServiceController.getInstance().removeEventListener(RemotingEvent.LOGIN_FAILED, handleLoginFailed);
 			}
 			
 		]]>
 	</fx:Script>
 	
-	<view:LoginPanel id="loginPanel" includeIn="beforeLogin" horizontalCenter="0"
+	<view:LoginPanel id="loginPanel" includeIn="login" horizontalCenter="0"
 					 verticalCenter="0" />
 	
 	
 	<!-- container for the game -->
-	<s:BorderContainer id="mainContainer" includeIn="afterLogin" x="0" y="0" width="100%" height="100%"
+	<s:BorderContainer id="mainContainer" includeIn="game" x="0" y="0" width="100%" height="100%"
 					   backgroundColor="#676464" borderWeight="0" cornerRadius="0">
 	</s:BorderContainer>
 	
 	<!-- the chat component -->
-	<mx:Panel includeIn="afterLogin" right="5" bottom="5" width="400" height="200" title="Chat">
+	<mx:Panel includeIn="game" right="5" bottom="5" width="400" height="200" title="Chat">
 		<mx:TextArea id="log" width="100%" height="100%" borderVisible="false"/>
 		<mx:ControlBar>
 			<mx:TextInput id="msg" width="100%" enter="send()"/>
@@ -104,7 +100,7 @@
 	</mx:Panel>
 	
 	<!-- bottom menu bar -->
-	<ConsilioCustomComponents:BottomMenu id="bottomMenu" includeIn="afterLogin" left="5" bottom="5"/>
+	<ConsilioCustomComponents:BottomMenu id="bottomMenu" includeIn="game" left="5" bottom="5"/>
 	
 	
 </app:ConsilioApplication>

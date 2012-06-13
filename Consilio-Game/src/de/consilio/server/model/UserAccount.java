@@ -45,4 +45,10 @@ public class UserAccount {
 	public String getEmail() {
 		return email;
 	}
+
+	@Override
+	public String toString() {
+		return "UserAccount [key=" + key + ", name=" + name + ", password="
+				+ password + ", email=" + email + "]";
+	}
 }
