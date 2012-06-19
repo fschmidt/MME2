@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="400" height="300">
+	<s:states>
+		<s:State name="list"/>
+		<s:State name="create"/>
+	</s:states>
+	
+	<fx:Declarations>
+
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import de.bht.consilio.controller.RemoteServiceController;
+			import de.bht.consilio.controller.RemotingEvent;
+			
+			import mx.collections.ArrayList;
+			protected function joinHandler():void
+			{
+				if(list.selectedItem) {
+					var selection:Object = list.selectedItem;
+					trace("joining game: " + selection.gameId);
+					RemoteServiceController.getInstance().game(false, selection.gameId, selection.gameKey);
+				}
+			}
+			private function createHandler():void 
+			{
+				RemoteServiceController.getInstance().game(true, gameId.text);
+			}
+			
+			private function refreshHandler():void {
+				RemoteServiceController.getInstance().getAllPublicGames();
+				RemoteServiceController.getInstance().addEventListener(RemotingEvent.GAME_LIST_RECEIVED, refreshList);
+			}
+			
+			public function refreshList(e:RemotingEvent):void
+			{
+				var games:Array = e.data as Array;
+				var input:ArrayList = new ArrayList(games);
+				list.dataProvider = input;
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Panel width="100%" height="100%" title="Game List" includeIn="list">
+		<s:controlBarContent>
+			<s:Button id="joinButton" label="Join" click="joinHandler()"/>
+			<s:Button id="createButton" left="10" top="10" label="Create Game"
+					  click="currentState='create'"/>
+			<s:Button id="refreshButton" label="Refresh" click="refreshHandler()"/>
+		</s:controlBarContent>
+		<mx:DataGrid id="list" width="100%" height="100%">
+			<mx:columns>
+				<mx:DataGridColumn dataField="gameId"/>
+				<mx:DataGridColumn dataField="owner"/>
+			</mx:columns>
+		</mx:DataGrid>
+	</s:Panel>
+	
+	<s:Panel width="100%" height="100%" title="Create Game" includeIn="create">
+		<s:controlBarContent>
+			<s:Button id="create" label="Create" click="createHandler()"/>
+			<s:Button id="cancel" label="Cancel" click="currentState='list'"/>
+		</s:controlBarContent>
+		<mx:Form id="createGameForm" y="26" width="293" dropShadowVisible="false" horizontalCenter="0"
+				 textAlign="left">
+			<mx:FormItem width="100%" label="Name" required="true">
+				<s:TextInput id="gameId" width="100%"/>
+			</mx:FormItem>
+		</mx:Form>
+	</s:Panel>	
+</s:Group>

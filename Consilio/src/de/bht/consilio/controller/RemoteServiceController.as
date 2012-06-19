@@ -23,6 +23,10 @@ package de.bht.consilio.controller
 		
 		private var _jsGameAdapter:HTMLLoader;
 		
+		private var _userId:String;
+		
+		private var _gameKey:String;
+		
 		public function RemoteServiceController(p_key:SingletonBlocker){
 			if (p_key == null) {
 				throw new Error("Error: Instantiation failed: Use Singleton.getInstance() instead of new.");
@@ -49,15 +53,42 @@ package de.bht.consilio.controller
 			callRemoteService("account", requestVars, function(e:Event):void {
 				var loader:URLLoader = URLLoader(e.target);
 				var resp:Object = JSON.parse(e.target.data);
-				if(resp.name){
-					dispatchEvent(new RemotingEvent(RemotingEvent.LOGIN_COMPLETE, resp.name as String));
+				trace(resp.toString());
+				if(resp.success == true){
+					trace(resp.data.name as String);
+					_userId = resp.data.name as String;
+					dispatchEvent(new RemotingEvent(RemotingEvent.LOGIN_COMPLETE, resp.data.name as String));
 				} else {
-					dispatchEvent(new RemotingEvent(RemotingEvent.LOGIN_FAILED, "who knows"));
+					dispatchEvent(new RemotingEvent(RemotingEvent.LOGIN_FAILED, resp.message));
 				}
 			});
 		}
 		
-		public function game(userId:String, create:Boolean, gameId:String = null)
+		public function register(username:String,  password:String, email:String):void {
+			var account:Object = new Object();
+			account.name = username;
+			account.password = password;
+			account.email = email;
+			
+			var requestVars:URLVariables = new URLVariables();
+			
+			requestVars["mode"] = "register";
+			requestVars["account"] = JSON.stringify(account);
+			
+			callRemoteService("account", requestVars, function(e:Event):void {
+				var loader:URLLoader = URLLoader(e.target);
+				var resp:Object = JSON.parse(e.target.data);
+				trace(resp.toString());
+				if(resp.success == true){
+					trace(resp.data.name as String);
+					dispatchEvent(new RemotingEvent(RemotingEvent.REGISTRATION_COMPLETE, resp.data.name as String));
+				} else {
+					dispatchEvent(new RemotingEvent(RemotingEvent.REGISTRATION_FAILED, resp.message));
+				}
+			});
+		}
+		
+		public function game(create:Boolean, gameId:String = null, gameKey:String = null) : void
 		{
 			_jsGameAdapter = new HTMLLoader();
 			
@@ -67,27 +98,79 @@ package de.bht.consilio.controller
 			
 			if(create) {
 				requestVars["mode"] = "create";
-			} else if (gameId){
+				requestVars["gameId"] = gameId;
+			} else if (gameKey){
 				requestVars["mode"] = "join";
+				requestVars["gameKey"] = gameKey;
 			} else {
 				throw new Error("No Game ID passed upon joining a game");
 			}
-			requestVars["userId"] = userId;
-			requestVars["gameId"] = gameId;
+			requestVars["userId"] = _userId;
 			
 			request.data = requestVars;
 			request.method = URLRequestMethod.POST;
 			
 			_jsGameAdapter.load(request);
-			_jsGameAdapter.addEventListener(Event.COMPLETE, function(e:Event):void{
+			_jsGameAdapter.addEventListener(Event.COMPLETE, function(e:Event):void {
 				e.target.window.onMessageReceived = onGameMessageReceived;
+				_gameKey = e.target.window.gameId;
+				trace("Game ID from JSAdapter: " + e.target.window.gameId);
+				dispatchEvent(new RemotingEvent(RemotingEvent.GAME_COMPLETE, null));
 			});
+		}
+		
+		public function getAllPublicGames():void
+		{
+			
+			var requestVars:URLVariables = new URLVariables();
+			
+			requestVars["mode"] = "list";
+
+			callRemoteService("game", requestVars, function(e:Event):void {
+				var loader:URLLoader = URLLoader(e.target);
+				var resp:Object = JSON.parse(e.target.data);
+				trace(resp.toString());
+				if(resp.success == true){
+					dispatchEvent(new RemotingEvent(RemotingEvent.GAME_LIST_RECEIVED, "list", resp.data));
+				} else {
+					dispatchEvent(new RemotingEvent(RemotingEvent.GAME_LIST_FAILED, resp.message));
+				}
+			});
+		}
+		
+		public function send(message:String):void {
+			var chatMessage:Object = new Object();
+			chatMessage.userId = _userId;
+			chatMessage.gameId = _gameKey;
+			chatMessage.type = "private";
+			chatMessage.message = message;
+			
+			
+			var url:String = CONSILIO_SERVICE_URI + "message";
+			var request:URLRequest = new URLRequest(url);
+			var requestVariables:URLVariables = new URLVariables();
+			requestVariables["params"] = JSON.stringify(chatMessage);
+			request.data = requestVariables;
+			request.method = URLRequestMethod.POST;
+			var urlLoader:URLLoader = new URLLoader();
+			urlLoader.dataFormat = URLLoaderDataFormat.TEXT;
+			urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+			
+			try {
+				urlLoader.load(request);
+			} catch (e:Error) {
+				trace(e);
+			}
 		}
 		
 		private function onGameMessageReceived(msg):void
 		{
-			var message:Object = JSON.parse(msg);
-			dispatchEvent(new RemotingEvent(RemotingEvent.GAME_MESSAGE_RECEIVED, msg));
+//			var message:Object = JSON.parse(msg);
+//			if(message.type == "public") {
+//				
+//			}
+				dispatchEvent(new RemotingEvent(RemotingEvent.CHAT_MESSAGE_RECEIVED, msg));
 		}
 		
 		private function callRemoteService(service:String, requestVariables:URLVariables, handler:Function):void
@@ -101,7 +184,7 @@ package de.bht.consilio.controller
 			var urlLoader:URLLoader = new URLLoader();
 			urlLoader.dataFormat = URLLoaderDataFormat.TEXT;
 			urlLoader.addEventListener(Event.COMPLETE, handler);
-			urlLoader.addEventListener(HTTPStatusEvent.HTTP_STATUS, httpStatusHandler);
+//			urlLoader.addEventListener(HTTPStatusEvent.HTTP_STATUS, httpStatusHandler);
 			urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
 			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
 			for (var prop:String in requestVariables) {

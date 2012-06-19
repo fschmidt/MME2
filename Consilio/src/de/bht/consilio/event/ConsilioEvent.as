@@ -14,7 +14,9 @@ package de.bht.consilio.event
 		
 		public static const ON_RESOURCE_LOAD_COMPLETE:String = "resource load complete";
 		
-		public static const LOGIN:String = "login complete";
+		public static const LOGIN:String = "login requested";
+		
+		public static const REGISTER:String = "login requested";
 		
 		private var _data:Object;
 		

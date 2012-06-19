@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import de.consilio.server.dao.UserAccountDao;
-import de.consilio.server.model.AccountRegistrationException;
-import de.consilio.server.model.Response;
 import de.consilio.server.model.UserAccount;
 import de.consilio.server.util.Constants;
+import de.consilio.server.util.ErrorCode;
+import de.consilio.server.util.ResponseHelper;
 
 @SuppressWarnings("serial")
 public class AccountServlet extends HttpServlet {
@@ -29,37 +29,46 @@ public class AccountServlet extends HttpServlet {
 		String params = req.getParameter("account");
 
 		UserAccount account = new Gson().fromJson(params, UserAccount.class);
-		
+
 		log.warning(account.toString());
-		
-		if(mode.equals("login")) {
-			handleLogin(account, resp);
-		} else if(mode.equals("register")) {
-			try {
-				handleAccountRegistration(account, resp);
-			} catch (AccountRegistrationException e) {
-				resp.getWriter().write(e.getMessage());
-			}
+
+		if (mode.equals("login")) {
+			writeResponse(handleLogin(account), resp);
+		} else if (mode.equals("register")) {
+			writeResponse(handleAccountRegistration(account), resp);
 		}
 	}
 
-	private void handleLogin(UserAccount account, HttpServletResponse resp) {
-		UserAccount accountByName = new UserAccountDao().getAccountByName(account.getName());
-		if(accountByName != null) {
-			if(accountsEqual(account, accountByName)){
-				try {
-					Response<UserAccount> response = new Response<UserAccount>(true, "success", "0", accountByName);
-					resp.getWriter().write(new Gson().toJson(accountByName));
-				} catch (IOException e) {
-					e.printStackTrace();
+	private String handleLogin(UserAccount account) {
+		UserAccountDao uad = new UserAccountDao();
+		try {
+			UserAccount accountByName = uad
+					.getAccountByName(account.getName());
+			if (accountByName != null) {
+				if (accountsEqual(account, accountByName)) {
+					String response = ResponseHelper.createSuccess(accountByName);
+					// TODO Debug
+					log.warning("Response:" + response);
+					return response;
+				} else {
+					String response = ResponseHelper.createFailure(
+							ErrorCode.PASSWORD_MISMATCH, "Wrong password");
+					// TODO Debug
+					log.warning("Response:" + response);
+					return response;
 				}
+			} else {
+				String response = ResponseHelper.createFailure(
+						ErrorCode.NO_SUCH_USER, "The user does not exist");
+				// TODO Debug
+				log.warning("Response:" + response);
+				return response;
 			}
-		} else {
-			try {
-				resp.getWriter().write(new Gson().toJson(new UserAccount()));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			uad.closeAllConnections();
 		}
 	}
 
@@ -67,20 +76,49 @@ public class AccountServlet extends HttpServlet {
 		return accountByName.getPassword().equals(account.getPassword());
 	}
 
-	private void handleAccountRegistration(UserAccount account, HttpServletResponse resp) throws AccountRegistrationException {
-		List<UserAccount> accounts = new UserAccountDao().getAll();
-		for (UserAccount userAccount : accounts) {
-			if(userAccount.getEmail().equals(account.getEmail())) {
-				throw new AccountRegistrationException("The Email is already in use");
-			} else if(userAccount.getName().equals(account.getName())) {
-				throw new AccountRegistrationException("The UserName is already in use");
-			}
-		}
-		UserAccount newAccount = new UserAccountDao().persist(account);
+	private String handleAccountRegistration(UserAccount account) {
+		UserAccountDao uad = new UserAccountDao();
 		try {
-			resp.getWriter().write(new Gson().toJson(newAccount));
+			List<UserAccount> accounts = uad.getAll();
+			if(accounts == null) {
+				String response = ResponseHelper.createFailure(
+						ErrorCode.UNKNOWN_ERROR,
+						"Something bad happened");
+				return response;
+			}
+			for (UserAccount userAccount : accounts) {
+				if (userAccount.getEmail().equals(account.getEmail())) {
+					String response = ResponseHelper.createFailure(
+							ErrorCode.EMAIL_ALREADY_IN_USE,
+							"The Email is already in use");
+					return response;
+
+				} else if (userAccount.getName().equals(account.getName())) {
+					String response = ResponseHelper.createFailure(
+							ErrorCode.EMAIL_ALREADY_IN_USE,
+							"The User Name is already in use");
+					return response;
+				}
+			}
+
+			UserAccount newAccount = new UserAccountDao().persist(account);
+
+			String response = ResponseHelper.createSuccess(newAccount);
+			// TODO Debug
+			log.warning("Response:" + response);
+			return response;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			uad.closeAllConnections();
+		}
+	}
+
+	private void writeResponse(String response, HttpServletResponse resp) {
+		try {
+			resp.getWriter().write(response);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

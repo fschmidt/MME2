@@ -4,8 +4,8 @@
 						 xmlns:s="library://ns.adobe.com/flex/spark"
 						 xmlns:mx="library://ns.adobe.com/flex/mx"
 						 xmlns:ConsilioCustomComponents="de.bht.ConsilioCustomComponents.*"
-						 width="1280" height="720" currentState="login"
 						 xmlns:view="de.bht.consilio.view.*"
+						 width="1280" height="720" currentState="login"
 						 windowComplete="creationComplete(event)">
 	<app:layout>
 		<s:BasicLayout/>
@@ -14,8 +14,8 @@
 	<app:states>
 		<s:State name="game"/>
 		<s:State name="login"/>
-		<s:State name="register"/>
-		<s:State name="setup"/>
+		<s:State enterState="onEnterRegisterState()" name="register"/>
+		<s:State enterState="onEnterSetupState()" name="setup"/>
 	</app:states>
 	
 	<!-- Consumer and Producer declarations for chat functionality-->
@@ -32,6 +32,7 @@
 			import flash.html.HTMLLoader;
 			import flash.net.URLRequest;
 			
+			import mx.collections.ArrayList;
 			import mx.controls.Alert;
 			import mx.controls.HTML;
 			import mx.events.AIREvent;
@@ -40,7 +41,14 @@
 			
 			// Handle message sent
 			private function send():void {
-				
+				if(msg.text!="") {
+					RemoteServiceController.getInstance().send(msg.text);
+					msg.text="";
+				}
+			}
+			
+			private function handleChatMessage(e:RemotingEvent):void {
+				log.text = log.text +  e.message;
 			}
 			
 			
@@ -56,9 +64,38 @@
 				
 			}
 			
+			protected function registrationHandler(event:ConsilioEvent):void
+			{
+				var username:String = registerPanel.registerName.text;
+				var email:String = registerPanel.registerEmail.text;
+				var pw:String = registerPanel.registerPassword.text;
+				
+				RemoteServiceController.getInstance().register(username, pw, email);
+				
+				RemoteServiceController.getInstance().addEventListener(RemotingEvent.REGISTRATION_COMPLETE, handleRegistrationComplete);
+				RemoteServiceController.getInstance().addEventListener(RemotingEvent.REGISTRATION_FAILED, handleRegistrationFailed);
+				
+			}
+			
 			protected function creationComplete(e:Event):void {
 				trace("Window Complete");
 				loginPanel.addEventListener(ConsilioEvent.LOGIN, loginHandler);
+			}
+			
+			protected function onEnterRegisterState():void {
+				registerPanel.addEventListener(ConsilioEvent.REGISTER, registrationHandler);
+			}
+			
+			protected function onEnterSetupState():void {
+				RemoteServiceController.getInstance().getAllPublicGames();
+				RemoteServiceController.getInstance().addEventListener(RemotingEvent.GAME_LIST_RECEIVED, gameList.refreshList);
+				RemoteServiceController.getInstance().addEventListener(RemotingEvent.GAME_LIST_FAILED, gameListFailed);
+				RemoteServiceController.getInstance().addEventListener(RemotingEvent.GAME_COMPLETE, gameCompleteHandler);
+			}
+			
+			private function gameListFailed(e:RemotingEvent):void
+			{
+				trace(e.message);
 			}
 			
 			protected function handleLoginComplete(e:RemotingEvent):void {
@@ -68,24 +105,48 @@
 				
 				_userId = e.message;
 				
-				currentState="game";
-				initMainView();
+				loginPanel.removeEventListener(ConsilioEvent.LOGIN, loginHandler);
+				
+				currentState="setup";
 			}
 			
 			protected function handleLoginFailed(e:RemotingEvent):void {
-				Alert.show("Login Failed, please try again or ask your compiler");
+				Alert.show(e.message);
 				RemoteServiceController.getInstance().removeEventListener(RemotingEvent.LOGIN_COMPLETE, handleLoginComplete);
 				RemoteServiceController.getInstance().removeEventListener(RemotingEvent.LOGIN_FAILED, handleLoginFailed);
+			}
+			
+			protected function handleRegistrationComplete(e:RemotingEvent):void {
+				trace("Registration Complete");
+				Alert.show("Registration Complete. Please Login to play");
+				currentState="login";
+				loginPanel.username.text = e.message;
+				RemoteServiceController.getInstance().removeEventListener(RemotingEvent.REGISTRATION_COMPLETE, handleRegistrationComplete);
+				RemoteServiceController.getInstance().removeEventListener(RemotingEvent.REGISTRATION_FAILED, handleRegistrationFailed);
+			}
+			
+			protected function handleRegistrationFailed(e:RemotingEvent):void {
+				Alert.show(e.message);
+				RemoteServiceController.getInstance().removeEventListener(RemotingEvent.REGISTRATION_COMPLETE, handleRegistrationComplete);
+				RemoteServiceController.getInstance().removeEventListener(RemotingEvent.REGISTRATION_FAILED, handleRegistrationFailed);
+			}
+			
+			protected function gameCompleteHandler(e:RemotingEvent):void {
+				RemoteServiceController.getInstance().removeEventListener(RemotingEvent.GAME_COMPLETE, gameCompleteHandler);
+				RemoteServiceController.getInstance().addEventListener(RemotingEvent.CHAT_MESSAGE_RECEIVED, handleChatMessage);
+				currentState="game";
+				initMainView();
 			}
 			
 		]]>
 	</fx:Script>
 	
-	<view:LoginPanel id="loginPanel" includeIn="login" horizontalCenter="0"
-					 verticalCenter="0" />
+	<view:LoginPanel id="loginPanel" includeIn="login" horizontalCenter="0" verticalCenter="0"/>
 	
 	<view:RegisterPanel id="registerPanel" includeIn="register" horizontalCenter="0"
-					 verticalCenter="0" />
+						verticalCenter="0"/>
+	
+	<view:GamesList id="gameList" includeIn="setup" horizontalCenter="0" verticalCenter="0"/>
 	
 	<!-- container for the game -->
 	<s:BorderContainer id="mainContainer" includeIn="game" x="0" y="0" width="100%" height="100%"

@@ -2,7 +2,6 @@
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
     <classEntry path="de.bht.ConsilioCustomComponents.BottomMenu"/>
-    <classEntry path="de.bht.ConsilioCustomComponents.GamesList"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

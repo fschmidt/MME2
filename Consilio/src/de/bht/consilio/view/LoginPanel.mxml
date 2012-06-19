@@ -2,7 +2,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
 		 xmlns:s="library://ns.adobe.com/flex/spark"
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 width="400" height="300">
+		 width="400" height="220">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
@@ -12,13 +12,6 @@
 			import de.bht.consilio.event.ConsilioEvent;
 			protected function loginHandler(event:MouseEvent):void
 			{
-				trace("Hello from loginHandler");
-				//			if(username.text=="" || password.text==""){
-				//				Alert.show("Keine Daten eingegeben","Error");
-				//			}else {
-				//				Alert.show("Hallo "+username.text,"Box");
-				//			}
-				
 				this.dispatchEvent(new ConsilioEvent(ConsilioEvent.LOGIN));
 			}
 			private function clearRegisterInputs():void {
@@ -33,6 +26,10 @@
 	</fx:Metadata>
 	
 	<s:Panel width="100%" height="100%" title="Login">
+		<s:controlBarContent>
+			<mx:Button id="login" label="Login" click="loginHandler(event)"/>
+			<s:Button id="registerButton" label="Register" click="clearRegisterInputs();parentApplication.currentState='register'"/>
+		</s:controlBarContent>
 		<mx:Form id="loginForm" y="26" width="293" dropShadowVisible="false" horizontalCenter="0"
 				 textAlign="left">
 			<mx:FormItem width="100%" label="Username" required="true">
@@ -42,12 +39,6 @@
 				<s:TextInput id="password" width="100%" displayAsPassword="true"/>
 			</mx:FormItem>
 		</mx:Form>
-		<s:HGroup left="0" bottom="0" width="100%" contentBackgroundColor="#C0C0C0" gap="240"
-				  horizontalAlign="center" paddingBottom="5" paddingLeft="5" paddingRight="5"
-				  paddingTop="5" textAlign="left" verticalAlign="top">
-			<s:Button id="registerButton" label="Register" click="clearRegisterInputs();parentApplication.currentState='register'"/>
-			<mx:Button id="login" right="0" label="Login" click="loginHandler(event)"/>
-		</s:HGroup>
 	</s:Panel>	
 	
 </s:Group>

@@ -3,10 +3,10 @@ package de.consilio.server.model;
 public class Response<T> {
 	private Boolean success;
 	private String message;
-	private String errorCode;
+	private Integer errorCode;
 	private T data;
 	
-	public Response(Boolean success, String message, String errorCode, T data) {
+	public Response(Boolean success, String message, Integer errorCode, T data) {
 		this.success = success;
 		this.message = message;
 		this.errorCode = errorCode;
@@ -32,11 +32,11 @@ public class Response<T> {
 		this.message = message;
 	}
 	
-	public String getErrorCode() {
+	public Integer getErrorCode() {
 		return errorCode;
 	}
 	
-	public void setErrorCode(String errorCode) {
+	public void setErrorCode(Integer errorCode) {
 		this.errorCode = errorCode;
 	}
 	
