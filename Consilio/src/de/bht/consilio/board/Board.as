@@ -99,12 +99,12 @@ package de.bht.consilio.board
 		 * @param boardData dynamic json object containing the data for the setup used (all the pieces and their initial position)
 		 * 
 		 */
-		public function init(boardData:Object):void
+		public function init(boardData:Object, isWhitePlayer:Boolean):void
 		{
 			var pieces:Array = boardData.pieces as Array;
 			
 			for (var i:int = 0; i < pieces.length; i++) {
-				addPiece(pieces[i].name, pieces[i].position, pieces[i].facing);
+				addPiece(pieces[i].name, pieces[i].position, pieces[i].facing, isWhitePlayer);
 			}
 		}
 		
@@ -116,9 +116,9 @@ package de.bht.consilio.board
 		 * @param facing the direction the piece is facing
 		 * 
 		 */
-		private function addPiece(name:String, position:String, facing:String):void 
+		private function addPiece(name:String, position:String, facing:String, isWhitePlayer:Boolean):void 
 		{
-			var piece:Piece = new Piece(name, position, facing, isOwnPiece(position), new HorizontalMovementType());
+			var piece:Piece = new Piece(name, position, facing, isOwnPiece(position, isWhitePlayer), new HorizontalMovementType());
 			piece.position = getSquare(position).position;
 			getSquare(position).registeredPiece = piece;
 			getSquare(position).isOccupied = true;
@@ -134,10 +134,14 @@ package de.bht.consilio.board
 		 * @return true whether this piece is property of this player, false if its an opponents piece
 		 * 
 		 */
-		private function isOwnPiece(position:String):Boolean
+		private function isOwnPiece(position:String, isWhitePlayer:Boolean):Boolean
 		{
 			var rowNumber:String = position.charAt(1);
-			return rowNumber.match("1") || rowNumber.match("2");
+			if(isWhitePlayer) {
+				return rowNumber.match("1") || rowNumber.match("2");
+			} else {
+				return rowNumber.match("7") || rowNumber.match("8");
+			}
 		}
 		
 		/**

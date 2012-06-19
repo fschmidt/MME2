@@ -51,7 +51,7 @@ package de.bht.consilio.application
 		 * @param event the creationCompleteEvent
 		 * 
 		 */
-		protected function initMainView():void
+		protected function initMainView(isWhitePlayer:Boolean):void
 		{
 //			var msve:SpriteVisualElement = new SpriteVisualElement();
 //			msve.addChild(SpriteSheets.getInstance().sheetForName("axestan_shield"));
@@ -61,7 +61,7 @@ package de.bht.consilio.application
 //			trace(SpriteSheets.getInstance().sheetDescriptionForName("axestan_shield").frames[0].filename);
 //			
 //			mainContainer.addElement(msve);
-			game = new ConsilioGame();
+			game = new ConsilioGame(isWhitePlayer);
 			
 //			uncomment for debugging memory usage
 			trace("Memory used: " + Number( System.totalMemory / 1024 / 1024 ).toFixed( 2 ) + "Mb");

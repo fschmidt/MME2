@@ -29,7 +29,7 @@ public class GameDao {
 		return newGame;
 	}
 
-	public Game getGameById(String gameId) {
+	public Game getGameByKey(String gameId) {
 		pm = PMF.get().getPersistenceManager();
 		return pm.getObjectById(Game.class, KeyFactory.stringToKey(gameId));
 	}

@@ -8,6 +8,7 @@ package de.bht.consilio.controller
 	import de.bht.consilio.board.Square;
 	import de.bht.consilio.event.BoardEvent;
 	import de.bht.consilio.game.ConsilioGame;
+	import de.bht.consilio.gsdl.Turn;
 	import de.bht.consilio.iso.IsoUtils;
 	import de.bht.consilio.util.Constants;
 	
@@ -56,6 +57,7 @@ package de.bht.consilio.controller
 					s.removeEventListener(MouseEvent.CLICK, onClick);
 				}
 			}
+			_isOwnTurn = !_isOwnTurn;
 		}
 		
 		private function onClick(e:Event):void
@@ -135,6 +137,12 @@ package de.bht.consilio.controller
 			
 			var target:Square = e.target as Square;
 			
+			var currentTurn:Object = new Object();
+			
+			currentTurn.action = "move";
+			currentTurn.source = _selectedSquare.id;
+			currentTurn.target = target.id;
+			
 			_selectedSquare.registeredPiece.moveTo(target);
 			_selectedSquare.setSelected(false);
 			_selectedSquare.registeredPiece.stopCurrentAnimation();
@@ -146,6 +154,20 @@ package de.bht.consilio.controller
 			_selectedSquare.redraw(_selectedSquare.color);
 			
 			_selectedSquare = null;
+			
+			endTurn();
+			RemoteServiceController.getInstance().turn(currentTurn);
+			RemoteServiceController.getInstance().addEventListener(RemotingEvent.GAME_MESSAGE_RECEIVED, onOpponentTurn);
+		}
+		
+		private function onOpponentTurn(e:RemotingEvent) {
+			var opTurn:Turn = e.data as Turn;
+			if(opTurn.action == "move") {
+				_board.getSquare(opTurn.source).registeredPiece.moveTo(_board.getSquare(opTurn.target));
+			}
+			
+			_isOwnTurn = !_isOwnTurn;
+			startTurn();
 		}
 		
 		/**

@@ -1,5 +1,7 @@
 package de.bht.consilio.controller
 {
+	import de.bht.consilio.gsdl.Turn;
+	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.HTTPStatusEvent;
@@ -115,7 +117,7 @@ package de.bht.consilio.controller
 				e.target.window.onMessageReceived = onGameMessageReceived;
 				_gameKey = e.target.window.gameId;
 				trace("Game ID from JSAdapter: " + e.target.window.gameId);
-				dispatchEvent(new RemotingEvent(RemotingEvent.GAME_COMPLETE, null));
+				dispatchEvent(new RemotingEvent(RemotingEvent.GAME_COMPLETE, null, create));
 			});
 		}
 		
@@ -142,7 +144,7 @@ package de.bht.consilio.controller
 			var chatMessage:Object = new Object();
 			chatMessage.userId = _userId;
 			chatMessage.gameId = _gameKey;
-			chatMessage.type = "private";
+			chatMessage.type = "private_chat_message";
 			chatMessage.message = message;
 			
 			
@@ -164,13 +166,43 @@ package de.bht.consilio.controller
 			}
 		}
 		
+		public function turn(turn:Object):void {
+			
+			var url:String = CONSILIO_SERVICE_URI + "turn";
+			var request:URLRequest = new URLRequest(url);
+			
+			var requestVars:URLVariables = new URLVariables();
+			
+			var t:String = JSON.stringify(turn);
+			trace("Sending: " + t);
+			
+			requestVars["turn"] = JSON.stringify(turn);
+			requestVars["userId"] = _userId;
+			requestVars["gameKey"] = _gameKey;
+			
+			request.data = requestVars;
+			request.method = URLRequestMethod.POST;
+			var urlLoader:URLLoader = new URLLoader();
+			urlLoader.dataFormat = URLLoaderDataFormat.TEXT;
+			urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+			
+			try {
+				urlLoader.load(request);
+			} catch (e:Error) {
+				trace(e);
+			}
+		}
+		
 		private function onGameMessageReceived(msg):void
 		{
-//			var message:Object = JSON.parse(msg);
-//			if(message.type == "public") {
-//				
-//			}
-				dispatchEvent(new RemotingEvent(RemotingEvent.CHAT_MESSAGE_RECEIVED, msg));
+			trace("Remote Message: " + msg);
+			var remoteMessage:Object = JSON.parse(msg);
+			if(remoteMessage.type == "private_chat_message") {
+				dispatchEvent(new RemotingEvent(RemotingEvent.CHAT_MESSAGE_RECEIVED, remoteMessage.userId + ": " + remoteMessage.message + "\n"));
+			} else if (remoteMessage.type == "gsdl_message") {
+				dispatchEvent(new RemotingEvent(RemotingEvent.GAME_MESSAGE_RECEIVED, null, remoteMessage));
+			}
 		}
 		
 		private function callRemoteService(service:String, requestVariables:URLVariables, handler:Function):void

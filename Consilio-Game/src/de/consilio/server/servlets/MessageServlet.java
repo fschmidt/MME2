@@ -14,6 +14,7 @@ import com.google.appengine.api.channel.ChannelServiceFactory;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.gson.Gson;
 
+import de.consilio.server.model.AbstractMessage;
 import de.consilio.server.model.ChatMessage;
 import de.consilio.server.model.Game;
 import de.consilio.server.persistence.PMF;
@@ -39,15 +40,11 @@ public class MessageServlet extends HttpServlet {
 			
 			log.warning(message.toString());
 			
-			if (message.getType().equals(ChatMessage.PUBLIC)) {
+			if (message.getType().equals(AbstractMessage.PUBLIC_CHAT_MESSAGE)) {
 				handlePublicMessage(message);
-			} else if (message.getType().equals(ChatMessage.PRIVATE)) {
+			} else if (message.getType().equals(AbstractMessage.PRIVATE_CHAT_MESSAGE)) {
 				handlePrivateMessage(message);
 			}
-		} else {
-			// try to build a test message
-			message = new ChatMessage("Frank", "something", ChatMessage.PRIVATE, "HelloWorld");
-			log.warning("Constructed :: " + message.toString());
 		}
 
 	}
@@ -58,18 +55,19 @@ public class MessageServlet extends HttpServlet {
 		game = pm.getObjectById(Game.class,
 				KeyFactory.stringToKey(message.getGameId()));
 		if (game != null) {
+			String msg = new Gson().toJson(message);
 			ChannelService channelService = ChannelServiceFactory
 					.getChannelService();
 			channelService.sendMessage(new ChannelMessage(ChannelId
 					.getChannelId(game.getWhite(), message.getGameId()),
-					message.getMessage()));
+					msg));
 			channelService.sendMessage(new ChannelMessage(ChannelId
 					.getChannelId(game.getBlack(), message.getGameId()),
-					message.getMessage()));
+					msg));
 		}
 	}
 
-	private void handlePublicMessage(ChatMessage message) {
+	private void handlePublicMessage(AbstractMessage message) {
 		// TODO Auto-generated method stub
 	}
 

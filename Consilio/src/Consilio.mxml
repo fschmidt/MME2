@@ -48,7 +48,7 @@
 			}
 			
 			private function handleChatMessage(e:RemotingEvent):void {
-				log.text = log.text +  e.message;
+				log.text = log.text + e.message;
 			}
 			
 			
@@ -135,7 +135,7 @@
 				RemoteServiceController.getInstance().removeEventListener(RemotingEvent.GAME_COMPLETE, gameCompleteHandler);
 				RemoteServiceController.getInstance().addEventListener(RemotingEvent.CHAT_MESSAGE_RECEIVED, handleChatMessage);
 				currentState="game";
-				initMainView();
+				initMainView(e.data);
 			}
 			
 		]]>

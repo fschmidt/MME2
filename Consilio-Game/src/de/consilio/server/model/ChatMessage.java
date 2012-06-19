@@ -1,23 +1,16 @@
 package de.consilio.server.model;
 
-public class ChatMessage {
-	public static final String PUBLIC = "public";
-	public static final String PRIVATE = "private";
-	
+public class ChatMessage extends AbstractMessage {
 	private String userId;
 	private String gameId;
-	private String type;
 	private String message;
 	
-	public ChatMessage() {
-		
-	}
+	public ChatMessage() {}
 	
 	public ChatMessage(String userId, String gameId, String type, String message) {
-		super();
+		super(type);
 		this.userId = userId;
 		this.gameId = gameId;
-		this.type = type;
 		this.message = message;
 	}
 	
@@ -26,9 +19,6 @@ public class ChatMessage {
 	}
 	public String getGameId() {
 		return gameId;
-	}
-	public String getType() {
-		return type;
 	}
 	public String getMessage() {
 		return message;

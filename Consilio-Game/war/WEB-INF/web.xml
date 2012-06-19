@@ -31,6 +31,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/account</url-pattern>
 	</servlet-mapping>
 	
+		<servlet>
+		<servlet-name>TurnServlet</servlet-name>
+		<servlet-class>de.consilio.server.servlets.TurnServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TurnServlet</servlet-name>
+		<url-pattern>/turn</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>

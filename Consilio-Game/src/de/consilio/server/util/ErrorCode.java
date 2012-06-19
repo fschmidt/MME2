@@ -10,6 +10,8 @@ public final class ErrorCode {
 	public static final int USER_NAME_ALREADY_IN_USE = ACCOUNT_ERROR + 4;
 
 	public static final int UNKNOWN_ERROR = ACCOUNT_ERROR;
+
+	public static final int GSDL_ERROR = 3000;
 	
 	private ErrorCode(){};
 }

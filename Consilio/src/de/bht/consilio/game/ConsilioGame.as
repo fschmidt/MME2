@@ -33,15 +33,15 @@ package de.bht.consilio.game
 		private var chessboard:Board;
 		private var boardData:Object;
 		
-		public function ConsilioGame(){
-			init();
+		public function ConsilioGame(isWhitePlayer:Boolean){
+			init(isWhitePlayer);
 		}
 		
 		/**
 		 * Initializes the game by loading the boardData and initializing the board
 		 * 
 		 */
-		private function init():void
+		private function init(isWhitePlayer:Boolean):void
 		{
 			LoaderMax.activate([ImageLoader]);
 			
@@ -56,7 +56,7 @@ package de.bht.consilio.game
 				e.currentTarget.removeEventListener( e.type, arguments.callee );
 				boardData = JSON.parse(e.target.data);
 				
-				chessboard.init(boardData);
+				chessboard.init(boardData, isWhitePlayer);
 				var g:GameController = new GameController(chessboard, true);
 				
 //				var pieces:Array = boardData.pieces as Array;
