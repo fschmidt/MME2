@@ -1,6 +1,7 @@
 package de.bht.consilio.application
 {
-	import de.bht.ConsilioCustomComponents.BottomMenu;
+	import de.bht.consilio.custom_components.view.ActionMenu;
+	import de.bht.consilio.custom_components.view.BottomMenu;
 	import de.bht.consilio.game.ConsilioGame;
 	
 	import flash.display.Bitmap;
@@ -35,6 +36,10 @@ package de.bht.consilio.application
 		 */
 		public var bottomMenu:BottomMenu;
 		/**
+		 * The action menu 
+		 */
+		public var actionMenu:ActionMenu;
+		/**
 		 * The actual game  
 		 */
 		private var game:ConsilioGame;
@@ -53,14 +58,6 @@ package de.bht.consilio.application
 		 */
 		protected function initMainView(isWhitePlayer:Boolean):void
 		{
-//			var msve:SpriteVisualElement = new SpriteVisualElement();
-//			msve.addChild(SpriteSheets.getInstance().sheetForName("axestan_shield"));
-//			
-//			var axejson:Object = SpriteSheets.getInstance().descriptionForName("axestan_shield");
-//			trace(axejson.name);
-//			trace(SpriteSheets.getInstance().sheetDescriptionForName("axestan_shield").frames[0].filename);
-//			
-//			mainContainer.addElement(msve);
 			game = new ConsilioGame(isWhitePlayer);
 			
 //			uncomment for debugging memory usage

@@ -76,11 +76,6 @@ package de.bht.consilio.anim
 		 */
 		private var _picture:Bitmap;
 		
-		private var _party:uint;
-		
-		private var _maxLivePoints:uint = 5;
-		private var _livePoints:uint = 5;
-		
 		public function AnimatedSprite(name:String, boardPosition:String, facing:String)
 		{
 			// since pieces are never scaled given size can be zero
@@ -194,6 +189,13 @@ package de.bht.consilio.anim
 			removeEventListener(Event.ENTER_FRAME, animate);
 		}
 		
+		public function setCurrentAnimation(animationName:String):void {
+			_currentAnimation = _animationData[animationName + " " + _facing];
+			_currentFrameIndex = 0;
+			var f:Frame = _currentAnimation.frames[_currentFrameIndex];
+			_currentFrame.bitmapData.copyPixels(spriteSheets[name], new Rectangle(f.x, f.y, f.w, f.h), new Point(0, 0));
+		}
+		
 		/**
 		 * Rendering function. Called when this piece listens to OnEnterFrameEvents (startAnimation was called)
 		 * 
@@ -205,19 +207,17 @@ package de.bht.consilio.anim
 			
 			if(_animationIndex >= 3) {
 				_animationIndex = 0;
-				
-				if(_currentFrameIndex >= _currentAnimation.frames.length-1)
-				{
-					_currentFrameIndex = 0;
-				} 
-				else 
-				{
+
 					_currentFrameIndex++;
-				}
 				
 				var f:Frame = _currentAnimation.frames[_currentFrameIndex];
 				
 				_currentFrame.bitmapData.copyPixels(spriteSheets[name], new Rectangle(f.x, f.y, f.w, f.h), new Point(0, 0));
+				if(_currentFrameIndex >= _currentAnimation.frames.length-2)
+				{
+					_currentFrameIndex = 0;
+					dispatchEvent(new AnimationEvent(AnimationEvent.ANIMATION_FINISHED));
+				} 
 			}			
 		}
 		
@@ -225,6 +225,7 @@ package de.bht.consilio.anim
 		{
 			var screenPosition:Point = IsoUtils.isoToScreen(s.position);
 			this.position = s.position;
+			this.stopCurrentAnimation();
 //			trace(screenPosition);
 //			trace("This x: " + this.x + ", This y: " + this.y + ", sq x: " + s.x + ", sq y: " + s.y);
 //			TweenLite.to(this, 8, {x:this.x+60, y:this.y-30, onComplete:stopCurrentAnimation});
@@ -260,18 +261,6 @@ package de.bht.consilio.anim
 		
 		public function get facing():String {
 			return _facing;
-		}
-		
-		public function get maxLivePoints():uint {
-			return _maxLivePoints;
-		}
-		
-		public function get livePoints():uint {
-			return _livePoints;
-		}
-		
-		public function set livePoints(livePoints:uint):void {
-			_livePoints = livePoints;
 		}
 		
 		/**

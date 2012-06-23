@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
-    <classEntry path="de.bht.ConsilioCustomComponents.BottomMenu"/>
+    <classEntry path="de.bht.consilio.custom_components.view.BottomMenu"/>
+    <classEntry path="de.bht.consilio.custom_components.view.ActionMenu"/>
+    <classEntry path="de.bht.consilio.custom_components.event.ActionEvent"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

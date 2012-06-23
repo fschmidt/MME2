@@ -6,7 +6,7 @@
 						 xmlns:ConsilioCustomComponents="de.bht.ConsilioCustomComponents.*"
 						 xmlns:view="de.bht.consilio.view.*"
 						 width="1280" height="720" currentState="login"
-						 windowComplete="creationComplete(event)">
+						 windowComplete="creationComplete(event)" xmlns:ns="de.bht.consilio.custom_components.*" xmlns:ns1="de.bht.consilio.custom_components.view.*">
 	<app:layout>
 		<s:BasicLayout/>
 	</app:layout>
@@ -79,7 +79,9 @@
 			
 			protected function creationComplete(e:Event):void {
 				trace("Window Complete");
-				loginPanel.addEventListener(ConsilioEvent.LOGIN, loginHandler);
+				// TODO: DEBUG
+				gameCompleteHandler(new RemotingEvent(RemotingEvent.GAME_COMPLETE, null, true));
+				//loginPanel.addEventListener(ConsilioEvent.LOGIN, loginHandler);
 			}
 			
 			protected function onEnterRegisterState():void {
@@ -163,7 +165,9 @@
 	</mx:Panel>
 	
 	<!-- bottom menu bar -->
-	<ConsilioCustomComponents:BottomMenu id="bottomMenu" includeIn="game" left="5" bottom="5"/>
+	<ns1:BottomMenu id="bottomMenu" includeIn="game" left="5" bottom="5"/>
+	
+	<ns1:ActionMenu id="actionMenu" includeIn="game" visible="false"/>
 	
 	
 </app:ConsilioApplication>

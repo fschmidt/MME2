@@ -2,7 +2,9 @@ package de.bht.consilio.board
 {
 	import de.bht.consilio.anim.AnimatedSprite;
 	import de.bht.consilio.anim.Piece;
+	import de.bht.consilio.controller.GameController;
 	import de.bht.consilio.iso.IsoObject;
+	import de.bht.consilio.util.Constants;
 	
 	import flash.display.*;
 	import flash.events.*;
@@ -21,9 +23,10 @@ package de.bht.consilio.board
 		protected var _height:Number;
 		protected var _id:String;
 		protected var _color:uint;
-		protected var _selected:Boolean;
 		protected var _isOccupied:Boolean;
 		protected var _registeredPiece:Piece;
+		
+		private var clickAction:Function;
 		
 		/**
 		 * Constructor
@@ -37,7 +40,6 @@ package de.bht.consilio.board
 			super(size);
 			_height = height;
 			_color = color;
-			_selected = false;
 			draw(_color);
 		}
 		
@@ -53,6 +55,40 @@ package de.bht.consilio.board
 			graphics.lineTo(size, 0);
 			graphics.lineTo(0, size * .5);
 			graphics.lineTo(-size, 0);
+		}
+		
+		public function makeSelectable(selectable:Boolean):void {
+			if(selectable) {
+				this.addEventListener(MouseEvent.CLICK, onSquareClick);
+			} else {
+				this.removeEventListener(MouseEvent.CLICK, onSquareClick);
+			}
+		}
+		
+		private function onSquareClick(e:Event):void
+		{
+			trace("clicked on selectable square");
+			
+			GameController.getInstance().disableSelections();
+			
+			GameController.getInstance().setMenuEntry(_registeredPiece);
+			this.redraw(Constants.SQUARE_COLOR_SELECTED);
+			if(GameController.getInstance().isOwnTurn && _registeredPiece.isOwnPiece) {
+				GameController.getInstance().attachActionMenu(this);
+			}
+		}
+		
+		public function setClickAction(f:Function, source:Object):void {
+			clickAction = function(e:Event):void {
+				f(source, e.target);
+			};
+			this.addEventListener(MouseEvent.CLICK, clickAction);
+		}
+		
+		public function removeCurrentClickAction():void {
+			if(clickAction != null) {
+				this.removeEventListener(MouseEvent.CLICK, clickAction);
+			}
 		}
 		
 		public function redraw(color:uint):void
@@ -82,21 +118,14 @@ package de.bht.consilio.board
 		public function set registeredPiece(value:Piece):void
 		{
 			_registeredPiece = value;
+			if(_registeredPiece) {
+				_registeredPiece.boardPosition = this.id;
+			}
 		}
 		
 		public function get color():uint
 		{
 			return _color;			
-		}
-		
-		public function setSelected(selected:Boolean):void
-		{
-			_selected = selected;
-		}
-		
-		public function isSelected():Boolean
-		{
-			return _selected;
 		}
 		
 		public function set isOccupied(isOccupied:Boolean):void

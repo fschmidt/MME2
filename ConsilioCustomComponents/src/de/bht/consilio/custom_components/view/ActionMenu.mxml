@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100" height="180" textAlign="center" creationComplete="onCreationComplete()">
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import de.bht.consilio.command.DefaultActionController;
+			import de.bht.consilio.command.IActionController;
+			import de.bht.consilio.custom_components.event.ActionEvent;
+			
+			private var _controller:IActionController;
+			
+			public function setActionController(controller:IActionController):void {
+				_controller = controller;
+				
+				if(_controller.canMove()) {
+					move_button.enabled = true;
+				} else {
+					move_button.enabled = false;
+				}
+				
+				if(_controller.canAttack()) {
+					attack_button.enabled = true;
+				} else {
+					attack_button.enabled = false;
+				}
+				
+				// set special buttons depending on whether specials are available on the given controller
+				if(_controller.hasSpecialAction_1()) {
+					special_button_1.enabled = true;
+				} else {
+					special_button_1.enabled = false;
+				}
+				
+				if(_controller.hasSpecialAction_2()) {
+					special_button_2.enabled = true;
+				} else {
+					special_button_2.enabled = false;
+				}
+				
+				if(_controller.hasSpecialAction_3()) {
+					special_button_3.enabled = true;
+				} else {
+					special_button_3.enabled = false;
+				}
+				
+				if(_controller.hasSpecialAction_4()) {
+					special_button_4.enabled = true;
+				} else {
+					special_button_4.enabled = false;
+				}
+			}
+			
+			public function removeActionController():void {
+				_controller = new DefaultActionController();
+			}
+			
+			private function onCreationComplete():void {
+				if(_controller == null) {
+					_controller = new DefaultActionController();
+				}
+			}
+			
+			private function moveAction(event:MouseEvent):void
+			{
+				_controller.move();
+			}
+			
+			private function attackAction(event:MouseEvent):void
+			{
+				_controller.attack();
+			}
+			
+			private function specialAction(event:MouseEvent):void
+			{
+				switch(event.target)
+				{
+					case special_button_1:
+					{
+						_controller.special_1();
+						break;
+					}
+					case special_button_2:
+					{
+						_controller.special_2();
+						break;
+					}
+					case special_button_3:
+					{
+						_controller.special_3();
+						break;
+					}
+					case special_button_4:
+					{
+						_controller.special_4();
+						break;
+					}
+					default:
+					{
+						break;
+					}
+				}
+			}
+			
+			
+		]]>	</fx:Script>
+	
+	<s:Panel id="actionMenuPanel" width="100" height="180" title="Action">
+		<s:layout>
+			<s:VerticalLayout gap="0" horizontalAlign="left"/>
+		</s:layout>
+		<s:Button id="move_button" y="21" width="100" height="25" label="Move" click="moveAction(event)"/>
+		<s:Button id="attack_button" y="54" width="100" height="25" label="Attack" click="attackAction(event)"/>
+		<s:Button id="special_button_1" y="105" width="100" height="25" label="Special 1" enabled="false" click="specialAction(event)"/>
+		<s:Button id="special_button_2" y="127" width="100" height="25" label="Special 2" enabled="false" click="specialAction(event)"/>
+		<s:Button id="special_button_3" y="156" width="100" height="25" label="Special 3" enabled="false" click="specialAction(event)"/>
+		<s:Button id="special_button_4" y="185" width="100" height="25" label="Special 4" enabled="false" click="specialAction(event)"/>
+	</s:Panel>
+</s:Group>

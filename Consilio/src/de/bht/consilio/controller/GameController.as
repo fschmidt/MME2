@@ -1,173 +1,134 @@
 package de.bht.consilio.controller
 {
-	import de.bht.ConsilioCustomComponents.BottomMenu;
-	import de.bht.consilio.anim.AnimatedSprite;
+	import de.bht.consilio.anim.Attributes;
 	import de.bht.consilio.anim.Piece;
 	import de.bht.consilio.application.ConsilioApplication;
 	import de.bht.consilio.board.Board;
 	import de.bht.consilio.board.Square;
-	import de.bht.consilio.event.BoardEvent;
-	import de.bht.consilio.game.ConsilioGame;
+	import de.bht.consilio.custom_components.view.ActionMenu;
+	import de.bht.consilio.custom_components.view.BottomMenu;
 	import de.bht.consilio.gsdl.Turn;
-	import de.bht.consilio.iso.IsoUtils;
-	import de.bht.consilio.util.Constants;
 	
-	import flash.display.Bitmap;
-	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
+	import flash.utils.Dictionary;
 	
 	import spark.core.SpriteVisualElement;
 	
 	public class GameController extends EventDispatcher
 	{	
+		public static var instance:GameController;
 		private var _isOwnTurn:Boolean;
 		private var _bottomMenu:BottomMenu;
 		private var _board:Board;
-		private var _selectedSquare:Square;
+		private var _actionMenu:ActionMenu;
+		private var _activeSquares:Array;
 		
-		public function GameController(board:Board, isOwnTurn:Boolean)
+		public function GameController(board:Board, actionMenu:ActionMenu, isOwnTurn:Boolean, p_key:SingletonBlocker)
 		{
 			_board = board;
 			_bottomMenu = ConsilioApplication.getInstance().bottomMenu;
+			_actionMenu = actionMenu;
 			_isOwnTurn = isOwnTurn;
 			if(_isOwnTurn) {
 				startTurn();
 			}
 		}
 		
-		private function startTurn():void
+		public static function newGameController(board:Board, actionMenu:ActionMenu, isOwnTurn:Boolean):GameController
 		{
+			instance = new GameController(board, actionMenu, isOwnTurn, new SingletonBlocker());
+			return instance;
+		}
+		
+		public static function getInstance():GameController {
+			if (instance == null) {
+				throw new Error("Error in GameController: Called getInstance() before newGameController(...)");
+			}
+			return instance;
+		}
+		
+		public function startTurn():void
+		{
+			RemoteServiceController.getInstance().addEventListener(RemotingEvent.GAME_MESSAGE_RECEIVED, onOpponentTurn);
+			
 			for each (var s:Square in _board.squares)
 			{
-				if(s.registeredPiece && s.registeredPiece.isOwnPiece)
+				if(s.registeredPiece)
 				{
-					s.addEventListener(MouseEvent.CLICK, onClick);
+					s.makeSelectable(true);
 				}
 			}
 		}
 		
-		private function endTurn():void
+		public function endTurn():void
 		{
-			for each (var s:Square in _board.squares)
+			for each (var s:Square in _activeSquares) 
 			{
-				if(s.registeredPiece && s.registeredPiece.isOwnPiece)
-				{
-					s.removeEventListener(MouseEvent.CLICK, onClick);
-				}
+				
 			}
+			
 			_isOwnTurn = !_isOwnTurn;
 		}
 		
-		private function onClick(e:Event):void
-		{
-			trace("click");
+		public function disableAllActions():void {
 			
-			var s:Square = e.target as Square;
+			detachActionMenu();
 			
-			
-			
-			if(!s.isSelected())
+			for(var i:String in _board.squares)
 			{
-				s.removeEventListener(MouseEvent.CLICK, onClick);
-				
-				if(_selectedSquare != null)
-				{
-					deactivateAccessibleSquares();
-					deselectSquare();
-				}
-				
-				setAsSelectedSquare(s);
-				
-				activateAccessibleSquares(s);			
-			}
+				var s:Square = _board.squares[i];
+				s.removeCurrentClickAction();
+				s.redraw(s.color);
+			};
 		}
-		
-		private function setAsSelectedSquare(s:Square): void
-		{
-			_selectedSquare = s;
-			var current:Piece = s.registeredPiece;
-			current.startCurrentAnimation();
-			setMenuEntry(current.picture, 2, 2, 1, current.movementType.getType() ,current.maxLivePoints,current.livePoints);
-			s.redraw(Constants.SQUARE_COLOR_SELECTED);
-		}
-		
-		private function activateAccessibleSquares(s:Square):void
-		{
-			var res:Array = s.registeredPiece.movementType.getAccessableSquares(s.id);
+
+		public function disableSelections():void {
 			
-			for(var i:String in res)
+			detachActionMenu();
+			
+			for(var i:String in _board.squares)
 			{
-				var s:Square = (_board.squares[res[i]] as Square);
-				if(!s.isOccupied)
-				{
-					s.addEventListener(MouseEvent.CLICK, moveTo);
-					s.redraw(Constants.SQUARE_COLOR_EMPTY_TARGET);
-				}
-			}
+				var s:Square = _board.squares[i];
+				s.redraw(s.color);
+			};
 		}
 		
-		private function deactivateAccessibleSquares():void
-		{
-			var res:Array = _selectedSquare.registeredPiece.movementType.getAccessableSquares(_selectedSquare.id);
-			
-			for(var i:String in res)
-			{
-				var s:Square = (_board.squares[res[i]] as Square);
-				if(!s.isOccupied)
-				{
-					s.removeEventListener(MouseEvent.CLICK, moveTo);
-					s.redraw(s.color);
-				}
-			}
-		}
-		
-		private function deselectSquare():void
-		{
-			_selectedSquare.setSelected(false);
-			_selectedSquare.registeredPiece.stopCurrentAnimation();
-			_selectedSquare.redraw(_selectedSquare.color);
-			_selectedSquare.addEventListener(MouseEvent.CLICK, onClick);
-		}
-		
-		private function moveTo(e:Event):void
-		{
-			e.currentTarget.removeEventListener( e.type, arguments.callee );
-			
-			var target:Square = e.target as Square;
-			
-			var currentTurn:Object = new Object();
-			
-			currentTurn.action = "move";
-			currentTurn.source = _selectedSquare.id;
-			currentTurn.target = target.id;
-			
-			_selectedSquare.registeredPiece.moveTo(target);
-			_selectedSquare.setSelected(false);
-			_selectedSquare.registeredPiece.stopCurrentAnimation();
-			target.registeredPiece = _selectedSquare.registeredPiece;
-			target.addEventListener(MouseEvent.CLICK, onClick);
-			_selectedSquare.registeredPiece = null;
-			_selectedSquare.isOccupied = false;
-			target.redraw(target.color);
-			_selectedSquare.redraw(_selectedSquare.color);
-			
-			_selectedSquare = null;
-			
-			endTurn();
-			RemoteServiceController.getInstance().turn(currentTurn);
-			RemoteServiceController.getInstance().addEventListener(RemotingEvent.GAME_MESSAGE_RECEIVED, onOpponentTurn);
-		}
-		
-		private function onOpponentTurn(e:RemotingEvent) {
+		private function onOpponentTurn(e:RemotingEvent):void {
 			var opTurn:Turn = e.data as Turn;
 			if(opTurn.action == "move") {
+				trace("OpTurn Action = " + opTurn.action);
 				_board.getSquare(opTurn.source).registeredPiece.moveTo(_board.getSquare(opTurn.target));
 			}
 			
 			_isOwnTurn = !_isOwnTurn;
 			startTurn();
+		}
+		
+		public function get squares() : Dictionary {
+			return _board.squares;
+		}
+		
+		public function getSquareById(id:String):Square
+		{
+			return _board.getSquare(id);
+		}
+		
+		public function get isOwnTurn():Boolean {
+			return _isOwnTurn;
+		}
+		
+		public function attachActionMenu(square:Square):void {
+			
+			//TODO: correct the position
+			_actionMenu.x = square.x;
+			_actionMenu.y = square.y;
+			_actionMenu.setActionController(square.registeredPiece.control);
+			_actionMenu.visible = true;
+		}
+		
+		private function detachActionMenu():void {
+			_actionMenu.removeActionController();
+			_actionMenu.visible = false;
 		}
 		
 		/**
@@ -180,19 +141,22 @@ package de.bht.consilio.controller
 		 * @param moveTypeValue the pieces moce type (ie "diagonal")
 		 * 
 		 */
-		private function setMenuEntry(pic:Bitmap, attackValue:uint, defenseValue:uint, moveValue:uint, moveTypeValue:String, hp_max:uint, hp_akt:uint):void
+		public function setMenuEntry(piece:Piece):void
 		{
-			_bottomMenu.attack_label.text = "" + attackValue;
-			_bottomMenu.defense_label.text = "" + defenseValue;
-			_bottomMenu.move_label.text = "" + moveValue;
-			_bottomMenu.move_type_label.text = moveTypeValue
+			_bottomMenu.attack_label.text = "" + piece.attributes.attack;
+			_bottomMenu.defense_label.text = "" + piece.attributes.defense;
+			_bottomMenu.move_label.text = "" + piece.attributes.movement;
+			_bottomMenu.move_type_label.text = piece.attributes.movementType;
 			_bottomMenu.imageContainer.removeAllElements();
+			
 			var s:SpriteVisualElement = new SpriteVisualElement();
-			s.addChild(pic);
+			s.addChild(piece.picture);
+			
 			_bottomMenu.imageContainer.addElement(s);
 			_bottomMenu.hp_bar.minimum = 0;
-			_bottomMenu.hp_bar.label = "HP: "+ hp_akt +"/"+hp_max;
-			_bottomMenu.hp_bar.setProgress(hp_akt,hp_max);
+			_bottomMenu.hp_bar.label = "HP: "+ piece.attributes.currentHP + "/" + piece.attributes.maxHP;
+			_bottomMenu.hp_bar.setProgress(piece.attributes.currentHP, piece.attributes.maxHP);
 		}
 	}
 }
+internal class SingletonBlocker {}

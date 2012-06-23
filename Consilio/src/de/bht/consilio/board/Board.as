@@ -1,8 +1,12 @@
 package de.bht.consilio.board
 {
 	import de.bht.consilio.anim.AnimatedSprite;
+	import de.bht.consilio.anim.Attributes;
 	import de.bht.consilio.anim.Piece;
-	import de.bht.consilio.anim.command.HorizontalMovementType;
+	import de.bht.consilio.anim.command.ActionController;
+	import de.bht.consilio.anim.command.BasicHorizontalMoveCommand;
+	import de.bht.consilio.anim.command.NullAttackCommand;
+	import de.bht.consilio.anim.command.NullSpecialCommand;
 	import de.bht.consilio.application.ConsilioApplication;
 	import de.bht.consilio.iso.IsoUtils;
 	import de.bht.consilio.iso.Point3D;
@@ -118,15 +122,13 @@ package de.bht.consilio.board
 		 */
 		private function addPiece(name:String, position:String, facing:String, isWhitePlayer:Boolean):void 
 		{
-			var piece:Piece = new Piece(name, position, facing, isOwnPiece(position, isWhitePlayer), new HorizontalMovementType());
+			//tmp
+			var att:Attributes = new Attributes(6, 2, 1, 1, "horizontal");
+			var piece:Piece = new Piece(name, position, facing, isOwnPiece(position, isWhitePlayer), att);
 			piece.position = getSquare(position).position;
 			getSquare(position).registeredPiece = piece;
 			getSquare(position).isOccupied = true;
 						
-			// enable onClick events for every square
-//			if(piece.isOwnPiece) {
-//				getSquare(position).addEventListener(MouseEvent.CLICK, onClick);
-//			}
 			addChild(piece);
 		}
 		
@@ -142,98 +144,6 @@ package de.bht.consilio.board
 			} else {
 				return rowNumber.match("7") || rowNumber.match("8");
 			}
-		}
-		
-		/**
-		 * Handle mouse click on a square
-		 * @param e the MouseEvent
-		 * 
-		 */
-		private function onClick(e:MouseEvent):void
-		{
-			var s:Square = e.target as Square;
-			if(s.registeredPiece)
-			{
-				//Charcodes are 97 - a to 104 - h
-				trace("CharCode: " + s.id.charCodeAt(0));
-				trace("Letter: " + s.id.charAt(0));
-				if(!s.isSelected())
-				{
-					if(_selectedSquare != null)
-					{
-						_selectedSquare.setSelected(false);
-						_selectedSquare.registeredPiece.stopCurrentAnimation();
-						_selectedSquare.redraw(_selectedSquare.color);
-						_selectedSquare.addEventListener(MouseEvent.CLICK, onClick);			
-					}
-					if (_target != null){
-						_target.removeEventListener(MouseEvent.CLICK, move);
-						_target.redraw(_target.color);
-						_target.addEventListener(MouseEvent.CLICK, onClick);
-						_target.removeEventListener(MouseEvent.CLICK, attack);
-					}
-					
-					_selectedSquare = s;
-					var current:AnimatedSprite = s.registeredPiece;
-					current.startCurrentAnimation();
-					s.redraw(_selected);
-					
-					var sp:Point = IsoUtils.isoToScreen(s.position);
-					trace(s.id + ": " + sp);
-					
-					var sp2:Point = IsoUtils.isoToScreen(s.registeredPiece.position);
-					trace("Piece: " + ": " + sp2);
-					
-					// test movement
-					_target = getHorizontalAdjectedSquare(s, current.facing);
-					if(_target.registeredPiece == null){
-						var sqp:Point = IsoUtils.isoToScreen(_target.position);
-						trace("Move: " + _target.id + ": " + sqp);
-						_target.redraw(0x00ff00);
-						s.removeEventListener(MouseEvent.CLICK, onClick);
-						_target.addEventListener(MouseEvent.CLICK, move);
-					} else if(s.registeredPiece.facing != _target.registeredPiece.facing){
-						trace("attack: "+_selectedSquare+":"+_target);
-						_target.redraw(0xff0000);
-						s.removeEventListener(MouseEvent.CLICK, onClick);
-						_target.removeEventListener(MouseEvent.CLICK, onClick);
-						_target.addEventListener(MouseEvent.CLICK, attack);
-					}
-				}
-			}
-		}
-		
-		protected function attack(e:MouseEvent):void
-		{
-			_selectedSquare.registeredPiece.stopCurrentAnimation();
-			_target.registeredPiece.livePoints--;
-			
-			//TODO remove Sprite
-			
-			_target.addEventListener(MouseEvent.CLICK, onClick);
-			_target.removeEventListener(MouseEvent.CLICK, attack);
-			_target.redraw(_target.color);
-			
-			_selectedSquare.redraw(_selectedSquare.color);
-			_selectedSquare.addEventListener(MouseEvent.CLICK, onClick);
-			
-			_selectedSquare = null;
-			_target = null;
-		}
-		
-		private function move(e:Event):void 
-		{			
-			e.currentTarget.removeEventListener( e.type, arguments.callee );
-			_selectedSquare.registeredPiece.moveTo(_target);
-			_selectedSquare.registeredPiece.stopCurrentAnimation();
-			_target.registeredPiece = _selectedSquare.registeredPiece;
-			_target.addEventListener(MouseEvent.CLICK, onClick);
-			_selectedSquare.registeredPiece = null;
-			_target.redraw(_target.color);
-			_selectedSquare.redraw(_selectedSquare.color);
-			
-			_selectedSquare = null;	
-			_target = null;
 		}
 		
 		private function getHorizontalAdjectedSquare(square:Square, direction:String):Square
