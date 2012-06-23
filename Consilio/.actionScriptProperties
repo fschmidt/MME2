@@ -21,6 +21,7 @@
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
+  <theme themeIsDefault="false" themeIsSDK="true" themeLocation="${SDK_THEMES_DIR}/samples/themes/zen"/>
   <applications>
     <application path="Consilio.mxml">
       <airExcludes/>

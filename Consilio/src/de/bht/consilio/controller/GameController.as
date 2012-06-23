@@ -8,8 +8,10 @@ package de.bht.consilio.controller
 	import de.bht.consilio.custom_components.view.ActionMenu;
 	import de.bht.consilio.custom_components.view.BottomMenu;
 	import de.bht.consilio.gsdl.Turn;
+	import de.bht.consilio.iso.IsoUtils;
 	
 	import flash.events.EventDispatcher;
+	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
 	import spark.core.SpriteVisualElement;
@@ -120,10 +122,15 @@ package de.bht.consilio.controller
 		public function attachActionMenu(square:Square):void {
 			
 			//TODO: correct the position
-			_actionMenu.x = square.x;
-			_actionMenu.y = square.y;
+			var screenPosition:Point = IsoUtils.isoToScreen(square.registeredPiece.position);
+			_actionMenu.x = screenPosition.x + 550;
+			_actionMenu.y = screenPosition.y - 30;
 			_actionMenu.setActionController(square.registeredPiece.control);
 			_actionMenu.visible = true;
+		}
+		
+		public function hideActionMenu():void {
+			_actionMenu.visible = false;
 		}
 		
 		private function detachActionMenu():void {

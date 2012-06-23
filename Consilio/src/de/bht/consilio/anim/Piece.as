@@ -1,8 +1,10 @@
 package de.bht.consilio.anim
 {
 	import de.bht.consilio.anim.command.ActionController;
+	import de.bht.consilio.anim.command.AdvancedHorizontalMoveCommand;
+	import de.bht.consilio.anim.command.AdvancedVerticalMoveCommand;
 	import de.bht.consilio.anim.command.BasicHorizontalAttackCommand;
-	import de.bht.consilio.anim.command.BasicHorizontalMoveCommand;
+	import de.bht.consilio.anim.command.BasicMoveCommand;
 	import de.bht.consilio.anim.command.IMoveCommand;
 	import de.bht.consilio.anim.command.NullAttackCommand;
 	import de.bht.consilio.command.IActionController;
@@ -20,7 +22,7 @@ package de.bht.consilio.anim
 		{
 			super(name, boardPosition, facing);
 			_isOwnPiece = isOwnPiece;
-			_controller = new ActionController(new BasicHorizontalMoveCommand(this), new BasicHorizontalAttackCommand(this));
+			_controller = new ActionController(new AdvancedVerticalMoveCommand(this), new BasicHorizontalAttackCommand(this));
 			_attributes = attributes;
 		}
 		

@@ -6,6 +6,13 @@ package de.bht.consilio.anim.command
 	import de.bht.consilio.controller.RemoteServiceController;
 	import de.bht.consilio.util.Constants;
 
+
+	/**
+	 * Deprecated, use AdvancedHorizontalMoveCommand instead
+	 * 
+	 * @author Frank Schmidt
+	 * 
+	 */
 	public class BasicHorizontalAttackCommand implements IAttackCommand
 	{
 		private var _piece:Piece;

@@ -31,6 +31,9 @@ package de.bht.consilio.game
 		
 		private static var SPRITE_SHEETS_LOCATION:String = "img/sprite_sheets/";
 		
+		[Embed(source="img/battle.jpg")]
+		private var background:Class;
+		
 		private var chessboard:Board;
 		private var boardData:Object;
 		
@@ -48,6 +51,8 @@ package de.bht.consilio.game
 			
 			// create the board
 			chessboard = new Board( Constants.SQUARE_COLOR_WHITE, Constants.SQUARE_COLOR_BLACK );
+			var bg:Bitmap = new background();
+			addChild(bg);
 			addChild(chessboard);
 			
 			// load the board data

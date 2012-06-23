@@ -32,36 +32,42 @@ package de.bht.consilio.anim.command
 		public function move():void
 		{
 			_current = _move;
+			GameController.getInstance().hideActionMenu();
 			_move.execute();
 		}
 		
 		public function attack():void
 		{
 			_current = _attack;
+			GameController.getInstance().hideActionMenu();
 			_attack.execute();
 		}
 		
 		public function special_1():void
 		{
 			_current = _special_1;
+			GameController.getInstance().hideActionMenu();
 			_special_1.execute();
 		}
 		
 		public function special_2():void
 		{
 			_current = _special_2;
+			GameController.getInstance().hideActionMenu();
 			_special_2.execute();
 		}
 		
 		public function special_3():void
 		{
 			_current = _special_3;
+			GameController.getInstance().hideActionMenu();
 			_special_3.execute();
 		}
 		
 		public function special_4():void
 		{
 			_current = _special_3;
+			GameController.getInstance().hideActionMenu();
 			_special_4.execute();
 		}
 		

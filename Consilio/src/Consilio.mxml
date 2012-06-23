@@ -5,7 +5,7 @@
 						 xmlns:mx="library://ns.adobe.com/flex/mx"
 						 xmlns:ConsilioCustomComponents="de.bht.ConsilioCustomComponents.*"
 						 xmlns:view="de.bht.consilio.view.*"
-						 width="1280" height="720" currentState="login"
+						 width="1280" height="720" showStatusBar="false" currentState="login"
 						 windowComplete="creationComplete(event)" xmlns:ns="de.bht.consilio.custom_components.*" xmlns:ns1="de.bht.consilio.custom_components.view.*">
 	<app:layout>
 		<s:BasicLayout/>

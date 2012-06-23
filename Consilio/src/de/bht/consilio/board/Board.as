@@ -4,7 +4,7 @@ package de.bht.consilio.board
 	import de.bht.consilio.anim.Attributes;
 	import de.bht.consilio.anim.Piece;
 	import de.bht.consilio.anim.command.ActionController;
-	import de.bht.consilio.anim.command.BasicHorizontalMoveCommand;
+	import de.bht.consilio.anim.command.BasicMoveCommand;
 	import de.bht.consilio.anim.command.NullAttackCommand;
 	import de.bht.consilio.anim.command.NullSpecialCommand;
 	import de.bht.consilio.application.ConsilioApplication;
@@ -123,7 +123,7 @@ package de.bht.consilio.board
 		private function addPiece(name:String, position:String, facing:String, isWhitePlayer:Boolean):void 
 		{
 			//tmp
-			var att:Attributes = new Attributes(6, 2, 1, 1, "horizontal");
+			var att:Attributes = new Attributes(6, 2, 1, 2, "horizontal");
 			var piece:Piece = new Piece(name, position, facing, isOwnPiece(position, isWhitePlayer), att);
 			piece.position = getSquare(position).position;
 			getSquare(position).registeredPiece = piece;
