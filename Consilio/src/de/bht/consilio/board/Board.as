@@ -123,8 +123,7 @@ package de.bht.consilio.board
 		private function addPiece(name:String, position:String, facing:String, isWhitePlayer:Boolean):void 
 		{
 			//tmp
-			var att:Attributes = new Attributes(6, 2, 1, 2, "horizontal");
-			var piece:Piece = new Piece(name, position, facing, isOwnPiece(position, isWhitePlayer), att);
+			var piece:Piece = new Piece(name, position, facing, isOwnPiece(position, isWhitePlayer), Attributes.newAttributesForPiece(name));
 			piece.position = getSquare(position).position;
 			getSquare(position).registeredPiece = piece;
 			getSquare(position).isOccupied = true;

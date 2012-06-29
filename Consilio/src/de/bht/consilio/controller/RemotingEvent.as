@@ -6,6 +6,9 @@ package de.bht.consilio.controller
 	{
 		public static const GAME_MESSAGE_RECEIVED:String = "on game message received";
 		public static const CHAT_MESSAGE_RECEIVED:String = "on chat message received";
+		
+		public static const PLAYER_JOINED:String = "on player joined";
+		
 		public static const GAME_LIST_RECEIVED:String = "on game list received";
 		public static const GAME_LIST_FAILED:String = "on game complete";
 		public static const GAME_COMPLETE:String = "on game list failed";

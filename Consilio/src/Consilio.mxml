@@ -37,6 +37,8 @@
 			import mx.controls.HTML;
 			import mx.events.AIREvent;
 			
+			import spark.components.BusyIndicator;
+			
 			private var _userId:String;
 			
 			// Handle message sent
@@ -80,8 +82,8 @@
 			protected function creationComplete(e:Event):void {
 				trace("Window Complete");
 				// TODO: DEBUG
-				gameCompleteHandler(new RemotingEvent(RemotingEvent.GAME_COMPLETE, null, true));
-				//loginPanel.addEventListener(ConsilioEvent.LOGIN, loginHandler);
+//				gameCompleteHandler(new RemotingEvent(RemotingEvent.GAME_COMPLETE, null, true));
+				loginPanel.addEventListener(ConsilioEvent.LOGIN, loginHandler);
 			}
 			
 			protected function onEnterRegisterState():void {
@@ -169,5 +171,8 @@
 	
 	<ns1:ActionMenu id="actionMenu" includeIn="game" visible="false"/>
 	
+	<s:BusyIndicator id="busyIndicator" includeIn="game" width="300" height="300" minWidth="100"
+					 minHeight="100" enabled="false" visible="false" horizontalCenter="0" verticalCenter="0"/>
+	<s:Label id="busyLabel" enabled="false" visible="false" alpha="0.5 " fontSize="36" horizontalCenter="0" text="some Text" verticalCenter="-190"/>
 	
 </app:ConsilioApplication>

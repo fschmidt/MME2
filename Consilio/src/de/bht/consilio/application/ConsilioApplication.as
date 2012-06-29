@@ -12,6 +12,8 @@ package de.bht.consilio.application
 	import mx.events.FlexEvent;
 	
 	import spark.components.BorderContainer;
+	import spark.components.BusyIndicator;
+	import spark.components.Label;
 	import spark.components.WindowedApplication;
 	import spark.core.SpriteVisualElement;
 	
@@ -39,6 +41,11 @@ package de.bht.consilio.application
 		 * The action menu 
 		 */
 		public var actionMenu:ActionMenu;
+		
+		public var busyIndicator:BusyIndicator;
+		
+		public var busyLabel:Label;
+		
 		/**
 		 * The actual game  
 		 */
@@ -63,6 +70,7 @@ package de.bht.consilio.application
 //			uncomment for debugging memory usage
 			trace("Memory used: " + Number( System.totalMemory / 1024 / 1024 ).toFixed( 2 ) + "Mb");
 			mainContainer.addElement(game);
+			showBusyIndicator("Waiting for another Player to join.");
 		}
 
 		/**
@@ -73,6 +81,21 @@ package de.bht.consilio.application
 		public static function getInstance():ConsilioApplication
 		{
 			return instance;
+		}
+		
+		public function showBusyIndicator(text:String):void {
+			busyIndicator.enabled = true;
+			busyIndicator.visible = true;
+			busyLabel.text = text;
+			busyLabel.enabled = true;
+			busyLabel.visible = true;
+		}
+		
+		public function disableBusyIndicator():void {
+			busyIndicator.enabled = false;
+			busyIndicator.visible = false;
+			busyLabel.enabled = false;
+			busyLabel.visible = false;
 		}
 	}
 }

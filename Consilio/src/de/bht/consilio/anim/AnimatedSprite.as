@@ -6,6 +6,7 @@ package de.bht.consilio.anim
 	import de.bht.consilio.iso.IsoObject;
 	import de.bht.consilio.iso.IsoUtils;
 	import de.bht.consilio.iso.Point3D;
+	import de.bht.consilio.spritesheets.anim.SpriteSheets;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;

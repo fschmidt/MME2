@@ -4,6 +4,7 @@ package de.bht.consilio.anim.command
 	import de.bht.consilio.board.Square;
 	import de.bht.consilio.controller.GameController;
 	import de.bht.consilio.controller.RemoteServiceController;
+	import de.bht.consilio.event.ActionEvent;
 	import de.bht.consilio.util.Constants;
 
 
@@ -24,7 +25,8 @@ package de.bht.consilio.anim.command
 		
 		public function hasTarget():Boolean
 		{
-			return (GameController.getInstance().squares[getForwardAdjectedSquareId(_piece.boardPosition)] as Square).isOccupied;
+			var s:Square = (GameController.getInstance().squares[getForwardAdjectedSquareId(_piece.boardPosition)] as Square);
+			return s.isOccupied && !s.registeredPiece.isOwnPiece;
 		}
 		
 		public function execute():void
@@ -42,13 +44,17 @@ package de.bht.consilio.anim.command
 		private function attack(source:Square, target:Square):void
 		{
 			GameController.getInstance().disableAllActions();
-			var currentTurn:Object = new Object();
-			
-			// send turn data to opponent
-			currentTurn.action = "attack";
-			currentTurn.source = source.id;
-			currentTurn.target = target.id;
-			RemoteServiceController.getInstance().turn(currentTurn);
+
+			target.registeredPiece.addEventListener(ActionEvent.COMPLETE, function(e:ActionEvent):void {
+				e.currentTarget.removeEventListener( e.type, arguments.callee );
+				GameController.getInstance().endTurn();
+				// send turn data to opponent
+				var currentTurn:Object = new Object();
+				currentTurn.action = "attack";
+				currentTurn.source = source.id;
+				currentTurn.target = target.id;
+				RemoteServiceController.getInstance().turn(currentTurn);
+			});
 			
 			source.registeredPiece.attack(target.registeredPiece);
 			target.redraw(target.color);

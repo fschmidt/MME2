@@ -14,5 +14,21 @@ package de.bht.consilio.util
 		
 		public static const SQUARE_DEFAULT_SIZE:uint = 60;
 		
+		
+		public static const ATTACK_TYPE_BASIC:String = "attack";
+		public static const ATTACK_TYPE_SHOOTING:String = "shooting";
+		public static const ATTACK_TYPE_MAGIC_SPELLING:String = "magic spelling";
+		
+		public static const MOVEMENT_TYPE_HORIZONTAL:String = "horizontal";
+		public static const MOVEMENT_TYPE_HORIZONTAL_ADVANCED:String = "horizontal_advanced";
+		public static const MOVEMENT_TYPE_VERTICAL:String = "vertical";
+		public static const MOVEMENT_TYPE_BOTH:String = "both";
+		
+		public static const ANIMATION_TALKING:String = "talking";
+		public static const ANIMATION_WALKING:String = "walking";
+		public static const ANIMATION_LOOKING:String = "looking";
+		public static const ANIMATION_GREETING:String = "greeting";
+		public static const ANIMATION_KNIT:String = "knit";
+		
 	}
 }

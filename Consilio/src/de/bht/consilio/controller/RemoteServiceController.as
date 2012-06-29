@@ -15,6 +15,7 @@ package de.bht.consilio.controller
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
 	
+	import mx.controls.Alert;
 	import mx.controls.HTML;
 	
 	public class RemoteServiceController extends EventDispatcher
@@ -200,8 +201,12 @@ package de.bht.consilio.controller
 			var remoteMessage:Object = JSON.parse(msg);
 			if(remoteMessage.type == "private_chat_message") {
 				dispatchEvent(new RemotingEvent(RemotingEvent.CHAT_MESSAGE_RECEIVED, remoteMessage.userId + ": " + remoteMessage.message + "\n"));
-			} else if (remoteMessage.type == "gsdl_message") {
-				dispatchEvent(new RemotingEvent(RemotingEvent.GAME_MESSAGE_RECEIVED, null, remoteMessage));
+			} else if (remoteMessage.type == "join_message") {
+				trace(remoteMessage.userId + "joined the game");
+				Alert.show(remoteMessage.userId + " joined the game. Your turn to start.");
+				dispatchEvent(new RemotingEvent(RemotingEvent.PLAYER_JOINED, remoteMessage.userId, null));
+			} else {
+				dispatchEvent(new RemotingEvent(RemotingEvent.GAME_MESSAGE_RECEIVED, null, remoteMessage.data));
 			}
 		}
 		

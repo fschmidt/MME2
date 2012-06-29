@@ -1,5 +1,6 @@
 package de.bht.consilio.controller
 {
+	import de.bht.consilio.anim.AnimationEvent;
 	import de.bht.consilio.anim.Attributes;
 	import de.bht.consilio.anim.Piece;
 	import de.bht.consilio.application.ConsilioApplication;
@@ -7,12 +8,16 @@ package de.bht.consilio.controller
 	import de.bht.consilio.board.Square;
 	import de.bht.consilio.custom_components.view.ActionMenu;
 	import de.bht.consilio.custom_components.view.BottomMenu;
+	import de.bht.consilio.event.ConsilioEvent;
 	import de.bht.consilio.gsdl.Turn;
 	import de.bht.consilio.iso.IsoUtils;
 	
+	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
+	
+	import mx.controls.Alert;
 	
 	import spark.core.SpriteVisualElement;
 	
@@ -31,9 +36,18 @@ package de.bht.consilio.controller
 			_bottomMenu = ConsilioApplication.getInstance().bottomMenu;
 			_actionMenu = actionMenu;
 			_isOwnTurn = isOwnTurn;
+			
 			if(_isOwnTurn) {
-				startTurn();
+				RemoteServiceController.getInstance().addEventListener(RemotingEvent.PLAYER_JOINED, startGame);
+			} else {
+				RemoteServiceController.getInstance().addEventListener(RemotingEvent.GAME_MESSAGE_RECEIVED, onOpponentTurn);
 			}
+		}
+		
+		private function startGame(e:RemotingEvent):void {
+			RemoteServiceController.getInstance().removeEventListener(RemotingEvent.PLAYER_JOINED, startGame);
+			ConsilioApplication.getInstance().disableBusyIndicator();
+			startTurn();
 		}
 		
 		public static function newGameController(board:Board, actionMenu:ActionMenu, isOwnTurn:Boolean):GameController
@@ -51,25 +65,26 @@ package de.bht.consilio.controller
 		
 		public function startTurn():void
 		{
-			RemoteServiceController.getInstance().addEventListener(RemotingEvent.GAME_MESSAGE_RECEIVED, onOpponentTurn);
-			
 			for each (var s:Square in _board.squares)
 			{
 				if(s.registeredPiece)
 				{
 					s.makeSelectable(true);
+					s.registeredPiece.canStartIdleAnimation(true);
 				}
 			}
 		}
 		
 		public function endTurn():void
 		{
-			for each (var s:Square in _activeSquares) 
+			for each (var s:Square in _board.squares)
 			{
-				
+				s.makeSelectable(false);
 			}
-			
 			_isOwnTurn = !_isOwnTurn;
+			
+			RemoteServiceController.getInstance().addEventListener(RemotingEvent.GAME_MESSAGE_RECEIVED, onOpponentTurn);
+			ConsilioApplication.getInstance().showBusyIndicator("Waiting for opponents turn");
 		}
 		
 		public function disableAllActions():void {
@@ -83,7 +98,7 @@ package de.bht.consilio.controller
 				s.redraw(s.color);
 			};
 		}
-
+		
 		public function disableSelections():void {
 			
 			detachActionMenu();
@@ -92,16 +107,24 @@ package de.bht.consilio.controller
 			{
 				var s:Square = _board.squares[i];
 				s.redraw(s.color);
+				if(s.registeredPiece) {
+					s.registeredPiece.stopCurrentAnimation();
+				}
 			};
 		}
 		
 		private function onOpponentTurn(e:RemotingEvent):void {
-			var opTurn:Turn = e.data as Turn;
+			
+			RemoteServiceController.getInstance().removeEventListener(RemotingEvent.GAME_MESSAGE_RECEIVED, onOpponentTurn);
+			ConsilioApplication.getInstance().disableBusyIndicator();
+			var opTurn:Object = e.data;
 			if(opTurn.action == "move") {
 				trace("OpTurn Action = " + opTurn.action);
 				_board.getSquare(opTurn.source).registeredPiece.moveTo(_board.getSquare(opTurn.target));
+			} else if (opTurn.action == "attack") {
+				trace("OpTurn Action = " + opTurn.action);
+				_board.getSquare(opTurn.source).registeredPiece.attack(_board.getSquare(opTurn.target).registeredPiece);
 			}
-			
 			_isOwnTurn = !_isOwnTurn;
 			startTurn();
 		}
@@ -164,6 +187,23 @@ package de.bht.consilio.controller
 			_bottomMenu.hp_bar.label = "HP: "+ piece.attributes.currentHP + "/" + piece.attributes.maxHP;
 			_bottomMenu.hp_bar.setProgress(piece.attributes.currentHP, piece.attributes.maxHP);
 		}
+		
+		
+		public function removeFromGame(piece:Piece):void {
+			if(piece.name == "bjorn" || piece.name == "black_knight") {
+				handleGameWon();
+			}
+			var s:Square = getSquareById(piece.boardPosition);
+			s.removeCurrentClickAction();
+			s.registeredPiece = null;
+			s.isOccupied = false;
+			s.makeSelectable(false);
+		}
+		
+		private function handleGameWon():void {
+			Alert.show("WOW, you won the game. We'll go and tell your opponent about it");
+		}
+		
 	}
 }
 internal class SingletonBlocker {}

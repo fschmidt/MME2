@@ -73,6 +73,7 @@ package de.bht.consilio.board
 			
 			GameController.getInstance().setMenuEntry(_registeredPiece);
 			this.redraw(Constants.SQUARE_COLOR_SELECTED);
+			this.registeredPiece.startCurrentAnimation();
 			if(GameController.getInstance().isOwnTurn && _registeredPiece.isOwnPiece) {
 				GameController.getInstance().attachActionMenu(this);
 			}

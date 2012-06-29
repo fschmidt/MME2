@@ -13,12 +13,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.channel.ChannelMessage;
 import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.gson.Gson;
 
 import de.consilio.server.dao.GameDao;
+import de.consilio.server.model.ChatMessage;
 import de.consilio.server.model.Game;
 import de.consilio.server.model.GameNVP;
 import de.consilio.server.persistence.PMF;
@@ -124,6 +127,13 @@ public class GameServlet extends HttpServlet {
 
 			resp.setContentType("text/html");
 			resp.getWriter().write(index);
+			
+			// tell the white player someone joined the game
+			String msg = new Gson().toJson(new ChatMessage(game.getBlack(), gameId, "join_message", "unused"));
+			channelService.sendMessage(new ChannelMessage(ChannelId
+					.getChannelId(game.getWhite(), gameId),
+					msg));
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

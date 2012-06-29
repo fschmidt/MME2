@@ -4,6 +4,7 @@ package de.bht.consilio.anim.command
 	import de.bht.consilio.board.Square;
 	import de.bht.consilio.controller.GameController;
 	import de.bht.consilio.controller.RemoteServiceController;
+	import de.bht.consilio.event.ActionEvent;
 	import de.bht.consilio.util.Constants;
 
 	public class AdvancedHorizontalMoveCommand implements IMoveCommand
@@ -24,7 +25,7 @@ package de.bht.consilio.anim.command
 			GameController.getInstance().disableAllActions();
 		}
 		
-		private function activateAccessibleSquares():void
+		public function activateAccessibleSquares():void
 		{
 			var res:Array = getAccessableSquares(_piece.boardPosition);
 			
@@ -37,24 +38,18 @@ package de.bht.consilio.anim.command
 		
 		private function moveTo(source:Square, target:Square):void
 		{
+			source.registeredPiece.addEventListener(ActionEvent.COMPLETE, function(e:ActionEvent):void {
+				e.currentTarget.removeEventListener( e.type, arguments.callee );
+				GameController.getInstance().endTurn();
+				// send turn data to opponent
+				var currentTurn:Object = new Object();
+				currentTurn.action = "move";
+				currentTurn.source = source.id;
+				currentTurn.target = target.id;
+				RemoteServiceController.getInstance().turn(currentTurn);
+			});
 			GameController.getInstance().disableAllActions();
-			var currentTurn:Object = new Object();
-			
-			// send turn data to opponent
-			currentTurn.action = "move";
-			currentTurn.source = source.id;
-			currentTurn.target = target.id;
-			RemoteServiceController.getInstance().turn(currentTurn);
-			
 			source.registeredPiece.moveTo(target);
-			target.registeredPiece = source.registeredPiece;
-			target.makeSelectable(true);
-			target.isOccupied = true;
-			source.registeredPiece = null;
-			source.isOccupied = false;
-			target.redraw(target.color);
-			source.redraw(source.color);
-			source.makeSelectable(false);
 		}
 		
 		public function hasTarget():Boolean {
@@ -89,6 +84,30 @@ package de.bht.consilio.anim.command
 					result.push(s);
 					last = next;
 				}
+				
+				last = position;
+				for(i = 0; i<_piece.attributes.movement; i++)
+				{
+					next = getLefthandAdjectedSquareId(last);
+					var s:Square = GameController.getInstance().getSquareById(next);
+					if(s == null || s.isOccupied) {
+						break;
+					}
+					result.push(s);
+					last = next;
+				}
+				
+				last = position;
+				for(i = 0; i<_piece.attributes.movement; i++)
+				{
+					next = getRighthandAdjectedSquareId(last);
+					var s:Square = GameController.getInstance().getSquareById(next);
+					if(s == null || s.isOccupied) {
+						break;
+					}
+					result.push(s);
+					last = next;
+				}
 			}
 			return result;
 		}
@@ -97,6 +116,16 @@ package de.bht.consilio.anim.command
 		{
 			return id.charAt(0) + (parseInt(id.charAt(1)) + 1);
 			
+		}
+		
+		private function getLefthandAdjectedSquareId(id:String):String
+		{
+			return String.fromCharCode(id.charCodeAt(0) - 1) + id.charAt(1);
+		}
+		
+		private function getRighthandAdjectedSquareId(id:String):String
+		{
+			return String.fromCharCode(id.charCodeAt(0) + 1) + id.charAt(1);
 		}
 		
 		private function getBackwardAdjectedSquareId(id:String):String
