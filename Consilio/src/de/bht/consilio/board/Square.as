@@ -70,11 +70,14 @@ package de.bht.consilio.board
 			trace("clicked on selectable square");
 			
 			GameController.getInstance().disableSelections();
+			GameController.getInstance().disableAllActions();
 			
 			GameController.getInstance().setMenuEntry(_registeredPiece);
 			this.redraw(Constants.SQUARE_COLOR_SELECTED);
 			this.registeredPiece.startCurrentAnimation();
+			
 			if(GameController.getInstance().isOwnTurn && _registeredPiece.isOwnPiece) {
+				trace("Own Turn");
 				GameController.getInstance().attachActionMenu(this);
 			}
 		}

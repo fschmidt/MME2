@@ -6,8 +6,8 @@ package de.bht.consilio.anim.command
 	import de.bht.consilio.controller.RemoteServiceController;
 	import de.bht.consilio.event.ActionEvent;
 	import de.bht.consilio.util.Constants;
-
-
+	
+	
 	/**
 	 * Deprecated, use AdvancedHorizontalMoveCommand instead
 	 * 
@@ -26,7 +26,7 @@ package de.bht.consilio.anim.command
 		public function hasTarget():Boolean
 		{
 			var s:Square = (GameController.getInstance().squares[getForwardAdjectedSquareId(_piece.boardPosition)] as Square);
-			return s.isOccupied && !s.registeredPiece.isOwnPiece;
+			return s!=null && s.isOccupied && !s.registeredPiece.isOwnPiece;
 		}
 		
 		public function execute():void
@@ -44,7 +44,7 @@ package de.bht.consilio.anim.command
 		private function attack(source:Square, target:Square):void
 		{
 			GameController.getInstance().disableAllActions();
-
+			
 			target.registeredPiece.addEventListener(ActionEvent.COMPLETE, function(e:ActionEvent):void {
 				e.currentTarget.removeEventListener( e.type, arguments.callee );
 				GameController.getInstance().endTurn();
@@ -63,7 +63,11 @@ package de.bht.consilio.anim.command
 		
 		private function getForwardAdjectedSquareId(id:String):String
 		{
-			return id.charAt(0) + (parseInt(id.charAt(1)) + 1);
+			if(_piece.facing == "ne") {
+				return id.charAt(0) + (parseInt(id.charAt(1)) + 1);
+			} else {
+				return id.charAt(0) + (parseInt(id.charAt(1)) - 1);
+			}
 		}
 	}
 }

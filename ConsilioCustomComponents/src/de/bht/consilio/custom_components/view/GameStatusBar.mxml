@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="500" height="100">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			
+			public function updateStatusBar(powerWhite:uint, powerBlack:uint, turn:uint):void {
+				whitePowerText.text = powerWhite + "";
+				blackPowerText.text = powerBlack + "";
+				turnText.text = "Turn: " + turn;
+				balanceBar.value = (powerBlack - powerWhite)%50;
+			}
+			
+			public function initStatusBar(gameName:String, nameWhite:String, nameBlack:String, powerWhite:uint, powerBlack:uint, turn:uint):void {
+				gameNameText.text = gameName;
+				whitePlayerText.text = nameWhite;
+				blackPlayerText.text = nameBlack;
+				updateStatusBar(powerWhite, powerBlack, turn);
+			}
+			
+		]]>	</fx:Script>
+		<s:HSlider id="balanceBar" top="-20" width="80%" horizontalCenter="0" maximum="50"
+				   minimum="-50" />
+		<s:BorderContainer left="20" width="150" height="50" backgroundAlpha="0.3"
+						   borderVisible="true" cornerRadius="5" dropShadowVisible="true"
+						   verticalCenter="0">
+			<s:Label id="whtPlayerLabel" y="10" left="10" text="White: "/>
+			<s:Label id="whitePlayerText" y="10" right="10" text="WhitePlayer"/>
+			<s:Label id="whitePowerText" y="30" right="10" text="10000"/>
+			<s:Label id="whtPowerLabel" y="30" left="10" text="Power:"/>
+		</s:BorderContainer>
+		<s:BorderContainer right="20" width="150" height="50" backgroundAlpha="0.3"
+						   borderVisible="true" cornerRadius="5" dropShadowVisible="true"
+						   verticalCenter="0">
+			<s:Label id="blkPlayerLabel" y="10" left="10" text="Black:"/>
+			<s:Label id="blackPlayerText" y="10" right="10" text="BlackPlayer"/>
+			<s:Label id="blackPowerText" y="30" right="10" text="10000"/>
+			<s:Label id="blkPowerLabel" y="30" left="10" text="Power:"/>
+		</s:BorderContainer>
+		<s:Label id="gameNameText" fontSize="18" horizontalCenter="0" text="GameName"
+				 verticalCenter="-12"/>
+		<s:Label id="turnText" fontSize="18" horizontalCenter="0" text="Turn:"
+			 verticalCenter="12"/>
+</s:Panel>

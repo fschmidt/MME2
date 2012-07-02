@@ -2,11 +2,13 @@ package de.bht.consilio.util
 {
 	import de.bht.consilio.anim.Attributes;
 	import de.bht.consilio.anim.Piece;
+	import de.bht.consilio.anim.command.AdvancedAttackCommand;
 	import de.bht.consilio.anim.command.AdvancedHorizontalMoveCommand;
 	import de.bht.consilio.anim.command.AdvancedVerticalMoveCommand;
 	import de.bht.consilio.anim.command.BasicHorizontalAttackCommand;
 	import de.bht.consilio.anim.command.IAttackCommand;
 	import de.bht.consilio.anim.command.IMoveCommand;
+	import de.bht.consilio.anim.command.MagicAttackCommand;
 	import de.bht.consilio.anim.command.MoveCommandCombination;
 	import de.bht.consilio.anim.command.ShootingAttackCommand;
 	
@@ -37,7 +39,7 @@ package de.bht.consilio.util
 		}
 		
 		public static function attackCommandForAttributes(attributes:Attributes, piece:Piece):IAttackCommand {
-			switch(attributes.movementType)
+			switch(attributes.attackType)
 			{
 				case Constants.ATTACK_TYPE_BASIC: {
 					return new BasicHorizontalAttackCommand(piece);
@@ -46,7 +48,10 @@ package de.bht.consilio.util
 					return new ShootingAttackCommand(piece, attributes.attackRange);
 				}
 				case Constants.ATTACK_TYPE_MAGIC_SPELLING: {
-					return new ShootingAttackCommand(piece, attributes.attackRange);
+					return new MagicAttackCommand(piece, attributes.attackRange);
+				}
+				case Constants.ATTACK_TYPE_ADVANCED: {
+					return new AdvancedAttackCommand(piece);
 				}
 				default: 
 					return new BasicHorizontalAttackCommand(piece);

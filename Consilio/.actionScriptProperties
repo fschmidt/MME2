@@ -33,8 +33,14 @@
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
   <buildTargets>
     <buildTarget buildTargetName="default">
-      <airSettings airCertificatePath="C:/Users/Frank/Documents/Studium Medieninformatik/FSV/MME2/Project_Resources/consilio_certificate.p12" airTimestamp="true" anePathSet="true" version="1">
-        <airExcludes/>
+      <airSettings airCertificatePath="C:/Users/Frank/Desktop/consilioctf.p12" airTimestamp="true" anePathSet="true" version="1">
+        <airExcludes>
+          <pathEntry path="bmg/test.mp3"/>
+          <pathEntry path="bmg/music_license.txt"/>
+          <pathEntry path="bmg/Folder.jpg"/>
+          <pathEntry path="bmg/AlbumArtSmall.jpg"/>
+          <pathEntry path="bmg/AssaultOnMistCastle.mp3"/>
+        </airExcludes>
         <anePaths/>
       </airSettings>
       <actionScriptSettings version="1"/>

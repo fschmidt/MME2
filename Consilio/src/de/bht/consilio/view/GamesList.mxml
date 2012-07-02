@@ -13,6 +13,7 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import de.bht.consilio.application.ConsilioApplication;
 			import de.bht.consilio.controller.RemoteServiceController;
 			import de.bht.consilio.controller.RemotingEvent;
 			
@@ -21,12 +22,15 @@
 			{
 				if(list.selectedItem) {
 					var selection:Object = list.selectedItem;
-					trace("joining game: " + selection.gameId);
+					trace("joining game: " + selection.gameId + ", owner: " + selection.owner);
+					ConsilioApplication.getInstance().setOpponentId(selection.owner);
+					ConsilioApplication.getInstance().setGameName(selection.gameId);
 					RemoteServiceController.getInstance().game(false, selection.gameId, selection.gameKey);
 				}
 			}
 			private function createHandler():void 
 			{
+				ConsilioApplication.getInstance().setGameName(gameId.text);
 				RemoteServiceController.getInstance().game(true, gameId.text);
 			}
 			

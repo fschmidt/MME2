@@ -2,6 +2,7 @@ package de.bht.consilio.application
 {
 	import de.bht.consilio.custom_components.view.ActionMenu;
 	import de.bht.consilio.custom_components.view.BottomMenu;
+	import de.bht.consilio.custom_components.view.GameStatusBar;
 	import de.bht.consilio.game.ConsilioGame;
 	
 	import flash.display.Bitmap;
@@ -42,9 +43,17 @@ package de.bht.consilio.application
 		 */
 		public var actionMenu:ActionMenu;
 		
+		public var gameStatusBar:GameStatusBar;
+		
 		public var busyIndicator:BusyIndicator;
 		
 		public var busyLabel:Label;
+		
+		private var _userId:String;
+		
+		private var _opponentId:String;
+		
+		private var _gameName:String;
 		
 		/**
 		 * The actual game  
@@ -96,6 +105,34 @@ package de.bht.consilio.application
 			busyIndicator.visible = false;
 			busyLabel.enabled = false;
 			busyLabel.visible = false;
+		}
+		
+		public function updateStatusBar(powerWhite:uint, powerBlack:uint, turn:uint):void {
+			gameStatusBar.updateStatusBar(powerWhite, powerBlack, turn);
+		}
+		
+		public function initStatusBar(nameWhite:String, nameBlack:String, powerWhite:uint, powerBlack:uint, turn:uint):void {
+			gameStatusBar.initStatusBar(_gameName, nameWhite, nameBlack, powerWhite, powerBlack, turn);
+		}
+		
+		public function getUserId():String {
+			return _userId;
+		}
+		
+		public function setUserId(userId:String):void {
+			_userId = userId;
+		}
+		
+		public function getOpponentId():String {
+			return _opponentId;
+		}
+		
+		public function setOpponentId(opponentId:String):void {
+			_opponentId = opponentId;
+		}
+		
+		public function setGameName(s:String):void {
+			_gameName = s;
 		}
 	}
 }

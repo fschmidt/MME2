@@ -15,8 +15,10 @@ package de.bht.consilio.game
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.media.Sound;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
 	import spark.core.SpriteVisualElement;
@@ -33,9 +35,10 @@ package de.bht.consilio.game
 		
 		[Embed(source="img/battle.jpg")]
 		private var background:Class;
+		[Embed(source="img/boards/boardData.txt", mimeType="application/octet-stream")]
+		private var boardData:Class;
 		
 		private var chessboard:Board;
-		private var boardData:Object;
 		
 		public function ConsilioGame(isWhitePlayer:Boolean){
 			init(isWhitePlayer);
@@ -47,26 +50,19 @@ package de.bht.consilio.game
 		 */
 		private function init(isWhitePlayer:Boolean):void
 		{
-			LoaderMax.activate([ImageLoader]);
-			
 			// create the board
 			chessboard = new Board( Constants.SQUARE_COLOR_WHITE, Constants.SQUARE_COLOR_BLACK );
 			var bg:Bitmap = new background();
 			addChild(bg);
 			addChild(chessboard);
 			
-			// load the board data
-			var myRequest:URLRequest = new URLRequest("img/boards/boardData.json");
-			var myLoader:URLLoader = new URLLoader(); 
-			myLoader.addEventListener(Event.COMPLETE, function(e:Event):void {
-				e.currentTarget.removeEventListener( e.type, arguments.callee );
-				boardData = JSON.parse(e.target.data);
-				
-				chessboard.init(boardData, isWhitePlayer);
-				var g:GameController = GameController.newGameController(chessboard, ConsilioApplication.getInstance().actionMenu, isWhitePlayer);
-				
-			});
-			myLoader.load(myRequest);
+			var ba : ByteArray = new boardData() as ByteArray;
+			var boardData:Object = JSON.parse(ba.readUTFBytes(ba.length));
+			
+			chessboard.init(boardData, isWhitePlayer);
+			
+			var g:GameController = GameController.newGameController(chessboard, ConsilioApplication.getInstance().actionMenu, isWhitePlayer);
+			
 		}
 	}
 }

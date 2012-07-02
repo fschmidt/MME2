@@ -114,8 +114,11 @@ package de.bht.consilio.anim.command
 		
 		private function getForwardAdjectedSquareId(id:String):String
 		{
-			return id.charAt(0) + (parseInt(id.charAt(1)) + 1);
-			
+			if(_piece.facing == "ne") {
+				return id.charAt(0) + (parseInt(id.charAt(1)) + 1);
+			}else{
+				return id.charAt(0) + (parseInt(id.charAt(1)) - 1);
+			}
 		}
 		
 		private function getLefthandAdjectedSquareId(id:String):String
@@ -130,7 +133,11 @@ package de.bht.consilio.anim.command
 		
 		private function getBackwardAdjectedSquareId(id:String):String
 		{
-			return id.charAt(0) + (parseInt(id.charAt(1)) - 1);
+			if(_piece.facing == "ne") {
+				return id.charAt(0) + (parseInt(id.charAt(1)) - 1);
+			}else{
+				return id.charAt(0) + (parseInt(id.charAt(1)) + 1);
+			}
 		}
 	}
 }

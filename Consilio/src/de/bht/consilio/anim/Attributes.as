@@ -46,44 +46,44 @@ package de.bht.consilio.anim
 			switch(name)
 			{
 				case "greendwarf": {
-					return new Attributes(4, 3, 1, 1, 1, Constants.MOVEMENT_TYPE_HORIZONTAL, Constants.ATTACK_TYPE_BASIC, Constants.ANIMATION_LOOKING);
+					return new Attributes(40, 25, 1, 5, 1, Constants.MOVEMENT_TYPE_HORIZONTAL, Constants.ATTACK_TYPE_BASIC, Constants.ANIMATION_LOOKING);
 				}
 				case "red_knight": {
-					return new Attributes(4, 4, 1, 0, 1, Constants.MOVEMENT_TYPE_HORIZONTAL, Constants.ATTACK_TYPE_BASIC, Constants.ANIMATION_TALKING);
+					return new Attributes(40, 30, 1, 0, 1, Constants.MOVEMENT_TYPE_HORIZONTAL, Constants.ATTACK_TYPE_BASIC, Constants.ANIMATION_TALKING);
 				}
 				case "hunter": {
-					return new Attributes(3, 4, 2, 0, 2, Constants.MOVEMENT_TYPE_HORIZONTAL_ADVANCED, Constants.ATTACK_TYPE_SHOOTING, Constants.ANIMATION_LOOKING);
+					return new Attributes(35, 50, 2, 0, 2, Constants.MOVEMENT_TYPE_HORIZONTAL_ADVANCED, Constants.ATTACK_TYPE_SHOOTING, Constants.ANIMATION_LOOKING);
 				}
 				case "red_archer": {
-					return new Attributes(3, 4, 2, 0, 2, Constants.MOVEMENT_TYPE_HORIZONTAL_ADVANCED, Constants.ATTACK_TYPE_SHOOTING, Constants.ANIMATION_TALKING);
+					return new Attributes(35, 50, 2, 0, 2, Constants.MOVEMENT_TYPE_HORIZONTAL_ADVANCED, Constants.ATTACK_TYPE_SHOOTING, Constants.ANIMATION_TALKING);
 				}
 				case "fullplated_knight": {
-					return new Attributes(5, 4, 2, 1, 2, Constants.MOVEMENT_TYPE_HORIZONTAL_ADVANCED, Constants.ATTACK_TYPE_BASIC, Constants.ANIMATION_GREETING);
+					return new Attributes(65, 45, 2, 15, 4, Constants.MOVEMENT_TYPE_HORIZONTAL_ADVANCED, Constants.ATTACK_TYPE_ADVANCED, Constants.ANIMATION_GREETING);
 				}
 				case "axestan_shield": {
-					return new Attributes(4, 5, 2, 1, 2, Constants.MOVEMENT_TYPE_HORIZONTAL_ADVANCED, Constants.ATTACK_TYPE_BASIC, Constants.ANIMATION_TALKING);
+					return new Attributes(65, 50, 2, 10, 4, Constants.MOVEMENT_TYPE_HORIZONTAL_ADVANCED, Constants.ATTACK_TYPE_ADVANCED, Constants.ANIMATION_TALKING);
 				}
 				case "white_mage": {
-					return new Attributes(3, 3, 5, 1, 4, Constants.MOVEMENT_TYPE_VERTICAL, Constants.ATTACK_TYPE_MAGIC_SPELLING, Constants.ANIMATION_TALKING);
+					return new Attributes(30, 30, 4, 5, 4, Constants.MOVEMENT_TYPE_VERTICAL, Constants.ATTACK_TYPE_MAGIC_SPELLING, Constants.ANIMATION_TALKING);
 				}
 				case "black_mage": {
-					return new Attributes(3, 4, 4, 1, 4, Constants.MOVEMENT_TYPE_VERTICAL, Constants.ATTACK_TYPE_MAGIC_SPELLING, Constants.ANIMATION_TALKING);
+					return new Attributes(30, 30, 4, 5, 4, Constants.MOVEMENT_TYPE_VERTICAL, Constants.ATTACK_TYPE_MAGIC_SPELLING, Constants.ANIMATION_TALKING);
 				}
 					
 				case "queen": {
-					return new Attributes(7, 5, 3, 1, 7, Constants.MOVEMENT_TYPE_BOTH, Constants.ATTACK_TYPE_BASIC, Constants.ANIMATION_GREETING);
+					return new Attributes(70, 50, 3, 10, 8, Constants.MOVEMENT_TYPE_BOTH, Constants.ATTACK_TYPE_ADVANCED, Constants.ANIMATION_GREETING);
 				}
 					
 				case "dark_princess": {
-					return new Attributes(6, 5, 3, 1, 8, Constants.MOVEMENT_TYPE_BOTH, Constants.ATTACK_TYPE_BASIC, Constants.ANIMATION_KNIT);
+					return new Attributes(70, 55, 3, 5, 8, Constants.MOVEMENT_TYPE_BOTH, Constants.ATTACK_TYPE_ADVANCED, Constants.ANIMATION_KNIT);
 				}
 					
 				case "bjorn": {
-					return new Attributes(6, 3, 1, 2, 1, Constants.MOVEMENT_TYPE_BOTH, Constants.ATTACK_TYPE_BASIC, Constants.ANIMATION_LOOKING);
+					return new Attributes(100, 40, 1, 15, 1, Constants.MOVEMENT_TYPE_BOTH, Constants.ATTACK_TYPE_ADVANCED, Constants.ANIMATION_LOOKING);
 				}
 					
 				case "black_knight": {
-					return new Attributes(6, 3, 1, 2, 1, Constants.MOVEMENT_TYPE_BOTH, Constants.ATTACK_TYPE_BASIC, Constants.ANIMATION_TALKING);
+					return new Attributes(100, 40, 1, 15, 1, Constants.MOVEMENT_TYPE_BOTH, Constants.ATTACK_TYPE_ADVANCED, Constants.ANIMATION_TALKING);
 				}
 					
 				default:

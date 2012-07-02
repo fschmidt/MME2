@@ -5,7 +5,7 @@
 						 xmlns:mx="library://ns.adobe.com/flex/mx"
 						 xmlns:ConsilioCustomComponents="de.bht.ConsilioCustomComponents.*"
 						 xmlns:view="de.bht.consilio.view.*"
-						 width="1280" height="720" showStatusBar="false" currentState="login"
+						 width="1280" height="720" showStatusBar="false" currentState="login" 
 						 windowComplete="creationComplete(event)" xmlns:ns="de.bht.consilio.custom_components.*" xmlns:ns1="de.bht.consilio.custom_components.view.*">
 	<app:layout>
 		<s:BasicLayout/>
@@ -107,7 +107,7 @@
 				RemoteServiceController.getInstance().removeEventListener(RemotingEvent.LOGIN_COMPLETE, handleLoginComplete);
 				RemoteServiceController.getInstance().removeEventListener(RemotingEvent.LOGIN_FAILED, handleLoginFailed);
 				
-				_userId = e.message;
+				setUserId(e.message);
 				
 				loginPanel.removeEventListener(ConsilioEvent.LOGIN, loginHandler);
 				
@@ -144,7 +144,7 @@
 			
 		]]>
 	</fx:Script>
-	
+	<s:Image width="100%" height="100%" source="@Embed(source='img/battle.jpg')"/>
 	<view:LoginPanel id="loginPanel" includeIn="login" horizontalCenter="0" verticalCenter="0"/>
 	
 	<view:RegisterPanel id="registerPanel" includeIn="register" horizontalCenter="0"
@@ -158,21 +158,23 @@
 	</s:BorderContainer>
 	
 	<!-- the chat component -->
-	<mx:Panel includeIn="game" right="5" bottom="5" width="400" height="200" title="Chat">
-		<mx:TextArea id="log" width="100%" height="100%" borderVisible="false"/>
-		<mx:ControlBar>
+	<mx:Panel includeIn="game" right="10" bottom="10" width="500" height="165" layout="absolute"
+			  title="Chat">
+		<mx:TextArea id="log" x="0" bottom="0" width="100%" height="136" borderVisible="false" selectable="false"/>
+		<mx:ControlBar x="0" y="0">
 			<mx:TextInput id="msg" width="100%" enter="send()"/>
 			<mx:Button label="Send" click="send()"/>
 		</mx:ControlBar>
 	</mx:Panel>
 	
 	<!-- bottom menu bar -->
-	<ns1:BottomMenu id="bottomMenu" includeIn="game" left="5" bottom="5"/>
+	<ns1:BottomMenu id="bottomMenu" includeIn="game" left="10" bottom="10"/>
 	
 	<ns1:ActionMenu id="actionMenu" includeIn="game" visible="false"/>
+	
+	<ns1:GameStatusBar id="gameStatusBar" includeIn="game" visible="true" right="10" top="10"/>
 	
 	<s:BusyIndicator id="busyIndicator" includeIn="game" width="300" height="300" minWidth="100"
 					 minHeight="100" enabled="false" visible="false" horizontalCenter="0" verticalCenter="0"/>
 	<s:Label id="busyLabel" enabled="false" visible="false" alpha="0.5 " fontSize="36" horizontalCenter="0" text="some Text" verticalCenter="-190"/>
-	
 </app:ConsilioApplication>

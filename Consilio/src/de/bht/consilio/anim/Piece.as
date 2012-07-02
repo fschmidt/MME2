@@ -16,6 +16,7 @@ package de.bht.consilio.anim
 	import de.bht.consilio.event.ConsilioEvent;
 	import de.bht.consilio.iso.IsoUtils;
 	import de.bht.consilio.util.ActionCommandFactory;
+	import de.bht.consilio.util.Constants;
 	
 	import flash.events.Event;
 	import flash.geom.Point;
@@ -32,7 +33,11 @@ package de.bht.consilio.anim
 		{
 			super(name, boardPosition, facing);
 			_isOwnPiece = isOwnPiece;
-			_attackAnimationName = attributes.attackType;
+			if(attributes.attackType == Constants.ATTACK_TYPE_BASIC || attributes.attackType == Constants.ATTACK_TYPE_ADVANCED) {
+				_attackAnimationName = "attack";
+			} else {
+				_attackAnimationName = attributes.attackType;
+			}
 			_controller = new ActionController(ActionCommandFactory.moveCommandForAttributes(attributes, this), ActionCommandFactory.attackCommandForAttributes(attributes, this));
 			_attributes = attributes;
 		}
@@ -66,6 +71,7 @@ package de.bht.consilio.anim
 				} else {
 					e.currentTarget.setCurrentAnimation(e.currentTarget.attributes.selectionAnimation);
 					e.currentTarget.dispatchEvent(new ActionEvent(ActionEvent.COMPLETE));
+					e.currentTarget.dispatchEvent(new Event(Event.COMPLETE));
 				}
 			});
 			this.startCurrentAnimation();
@@ -86,16 +92,19 @@ package de.bht.consilio.anim
 			source.redraw(source.color);
 			source.makeSelectable(false);
 			dispatchEvent(new ActionEvent(ActionEvent.COMPLETE));
+			dispatchEvent(new Event(Event.COMPLETE));
 		}
 		
 		public function die():void {
 			this.stopCurrentAnimation();
 			this.setCurrentAnimation("tipping over");
 			this.addEventListener(AnimationEvent.ANIMATION_FINISHED, function(e:Event):void {
+				e.currentTarget.removeEventListener( e.type, arguments.callee );
 				e.currentTarget.stopCurrentAnimation();
 				e.currentTarget.canStartIdleAnimation(false);
 				GameController.getInstance().removeFromGame(e.currentTarget as Piece);
 				dispatchEvent(new ActionEvent(ActionEvent.COMPLETE));
+				dispatchEvent(new Event(Event.COMPLETE));
 			});
 			this.startCurrentAnimation();
 		}

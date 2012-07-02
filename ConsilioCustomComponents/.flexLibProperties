@@ -4,6 +4,7 @@
     <classEntry path="de.bht.consilio.custom_components.view.BottomMenu"/>
     <classEntry path="de.bht.consilio.custom_components.view.ActionMenu"/>
     <classEntry path="de.bht.consilio.custom_components.event.ActionEvent"/>
+    <classEntry path="de.bht.consilio.custom_components.view.GameStatusBar"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

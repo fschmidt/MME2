@@ -6,15 +6,23 @@ package de.bht.consilio.controller
 	import de.bht.consilio.application.ConsilioApplication;
 	import de.bht.consilio.board.Board;
 	import de.bht.consilio.board.Square;
+	import de.bht.consilio.custom_components.event.ActionEvent;
 	import de.bht.consilio.custom_components.view.ActionMenu;
 	import de.bht.consilio.custom_components.view.BottomMenu;
+	import de.bht.consilio.event.ActionEvent;
 	import de.bht.consilio.event.ConsilioEvent;
 	import de.bht.consilio.gsdl.Turn;
 	import de.bht.consilio.iso.IsoUtils;
+	import de.bht.consilio.util.Constants;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
+	import flash.events.IOErrorEvent;
+	import flash.filesystem.File;
 	import flash.geom.Point;
+	import flash.media.Sound;
+	import flash.media.SoundChannel;
+	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
 	
 	import mx.controls.Alert;
@@ -30,22 +38,52 @@ package de.bht.consilio.controller
 		private var _actionMenu:ActionMenu;
 		private var _activeSquares:Array;
 		
+		private var _powerWhite:uint;
+		private var _powerBlack:uint;
+		
+		private var _isWhitePlayer:Boolean;
+		private var _currentTurn:uint;
+		
+		private var _battleTheme:Sound;
+		private var _battleThemeChannel:SoundChannel;
+		
 		public function GameController(board:Board, actionMenu:ActionMenu, isOwnTurn:Boolean, p_key:SingletonBlocker)
 		{
 			_board = board;
 			_bottomMenu = ConsilioApplication.getInstance().bottomMenu;
 			_actionMenu = actionMenu;
 			_isOwnTurn = isOwnTurn;
+			trace("Own Turn: " + isOwnTurn);
+			
+			var file:File = File.applicationDirectory;
+			var urlRequest:URLRequest = new URLRequest(file.nativePath + Constants.BATTLE_THEME); 
+			
+			_battleTheme = new Sound(urlRequest);
+			_battleTheme.addEventListener(Event.COMPLETE, function(e:Event):void {
+				playBattleTheme();
+			});
+			_battleTheme.addEventListener(IOErrorEvent.IO_ERROR, function(e:IOErrorEvent):void {
+				trace(e.text);
+			});
+			
+			_isWhitePlayer = isOwnTurn;
+			
+			_currentTurn = 1;
 			
 			if(_isOwnTurn) {
 				RemoteServiceController.getInstance().addEventListener(RemotingEvent.PLAYER_JOINED, startGame);
 			} else {
+				calculatePowers();
+				ConsilioApplication.getInstance().initStatusBar(ConsilioApplication.getInstance().getOpponentId(), ConsilioApplication.getInstance().getUserId(), _powerWhite, _powerBlack, 1);
 				RemoteServiceController.getInstance().addEventListener(RemotingEvent.GAME_MESSAGE_RECEIVED, onOpponentTurn);
 			}
 		}
 		
 		private function startGame(e:RemotingEvent):void {
 			RemoteServiceController.getInstance().removeEventListener(RemotingEvent.PLAYER_JOINED, startGame);
+			ConsilioApplication.getInstance().setOpponentId(e.message);
+			calculatePowers();
+			ConsilioApplication.getInstance().initStatusBar(ConsilioApplication.getInstance().getUserId(), e.message, _powerWhite, _powerBlack, 0);
 			ConsilioApplication.getInstance().disableBusyIndicator();
 			startTurn();
 		}
@@ -65,6 +103,9 @@ package de.bht.consilio.controller
 		
 		public function startTurn():void
 		{
+			trace("Turn started");
+			ConsilioApplication.getInstance().updateStatusBar(_powerWhite, _powerBlack, ++_currentTurn);
+			_isOwnTurn = true;
 			for each (var s:Square in _board.squares)
 			{
 				if(s.registeredPiece)
@@ -77,11 +118,14 @@ package de.bht.consilio.controller
 		
 		public function endTurn():void
 		{
+			trace("Turn finished");
+			calculatePowers();
+			ConsilioApplication.getInstance().updateStatusBar(_powerWhite, _powerBlack, ++_currentTurn);
 			for each (var s:Square in _board.squares)
 			{
 				s.makeSelectable(false);
 			}
-			_isOwnTurn = !_isOwnTurn;
+			_isOwnTurn = false;
 			
 			RemoteServiceController.getInstance().addEventListener(RemotingEvent.GAME_MESSAGE_RECEIVED, onOpponentTurn);
 			ConsilioApplication.getInstance().showBusyIndicator("Waiting for opponents turn");
@@ -117,16 +161,33 @@ package de.bht.consilio.controller
 			
 			RemoteServiceController.getInstance().removeEventListener(RemotingEvent.GAME_MESSAGE_RECEIVED, onOpponentTurn);
 			ConsilioApplication.getInstance().disableBusyIndicator();
+			
 			var opTurn:Object = e.data;
 			if(opTurn.action == "move") {
 				trace("OpTurn Action = " + opTurn.action);
+				_board.getSquare(opTurn.source).registeredPiece.addEventListener(Event.COMPLETE, function(e:Event):void {
+					e.currentTarget.removeEventListener( e.type, arguments.callee );
+					startTurn();
+				});
 				_board.getSquare(opTurn.source).registeredPiece.moveTo(_board.getSquare(opTurn.target));
 			} else if (opTurn.action == "attack") {
 				trace("OpTurn Action = " + opTurn.action);
+				_board.getSquare(opTurn.target).registeredPiece.addEventListener(Event.COMPLETE, function(e:Event):void {
+					e.currentTarget.removeEventListener( e.type, arguments.callee );
+					calculatePowers();
+					startTurn();
+				});
 				_board.getSquare(opTurn.source).registeredPiece.attack(_board.getSquare(opTurn.target).registeredPiece);
 			}
-			_isOwnTurn = !_isOwnTurn;
-			startTurn();
+		}
+		
+		
+		private function playBattleTheme():void {
+			_battleThemeChannel = _battleTheme.play();
+			_battleThemeChannel.addEventListener(Event.SOUND_COMPLETE, function(e:Event):void {
+				e.currentTarget.removeEventListener( e.type, arguments.callee );
+				playBattleTheme();
+			});
 		}
 		
 		public function get squares() : Dictionary {
@@ -190,18 +251,52 @@ package de.bht.consilio.controller
 		
 		
 		public function removeFromGame(piece:Piece):void {
-			if(piece.name == "bjorn" || piece.name == "black_knight") {
+			if((piece.name == "bjorn" && !_isWhitePlayer) || (piece.name == "black_knight" && _isWhitePlayer)) {
 				handleGameWon();
+			} else if ((piece.name == "bjorn" && _isWhitePlayer) || (piece.name == "black_knight" && !_isWhitePlayer)) {
+				handleGameLost();
 			}
 			var s:Square = getSquareById(piece.boardPosition);
 			s.removeCurrentClickAction();
 			s.registeredPiece = null;
 			s.isOccupied = false;
 			s.makeSelectable(false);
+			_board.removeChild(piece);
 		}
 		
 		private function handleGameWon():void {
-			Alert.show("WOW, you won the game. We'll go and tell your opponent about it");
+			Alert.show("WOW, you won the game. We'll go and tell your opponent about it.");
+		}
+		
+		private function handleGameLost():void {
+			Alert.show("OMG, you lost the game. Better luck next time...");
+		}
+		
+		private function calculatePowers():void {
+			var pW:uint = 0;
+			var pB:uint = 0;
+			for(var i:String in _board.squares)
+			{
+				var s:Square = _board.squares[i];
+				
+				if(s.registeredPiece) {
+					if(s.registeredPiece.isOwnPiece) {
+						if(_isWhitePlayer) {
+							pW += (s.registeredPiece.attributes.attack + s.registeredPiece.attributes.defense) * s.registeredPiece.attributes.currentHP;
+						} else {
+							pB += (s.registeredPiece.attributes.attack + s.registeredPiece.attributes.defense) * s.registeredPiece.attributes.currentHP;
+						}
+					} else {
+						if(_isWhitePlayer) {
+							pB += (s.registeredPiece.attributes.attack + s.registeredPiece.attributes.defense) * s.registeredPiece.attributes.currentHP;
+						} else {
+							pW += (s.registeredPiece.attributes.attack + s.registeredPiece.attributes.defense) * s.registeredPiece.attributes.currentHP;
+						}
+					}
+				}
+			}
+			_powerWhite = pW;
+			_powerBlack = pB;
 		}
 		
 	}
