@@ -1,7 +1,5 @@
 package de.bht.consilio.anim
 {
-	import com.greensock.TweenLite;
-	
 	import de.bht.consilio.board.Square;
 	import de.bht.consilio.iso.IsoObject;
 	import de.bht.consilio.iso.IsoUtils;

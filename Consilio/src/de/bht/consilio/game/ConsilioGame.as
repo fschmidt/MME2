@@ -1,9 +1,6 @@
 package de.bht.consilio.game  
 {
-	
-	import com.greensock.events.LoaderEvent;
-	import com.greensock.loading.ImageLoader;
-	import com.greensock.loading.LoaderMax;
+
 	
 	import de.bht.consilio.anim.AnimatedSprite;
 	import de.bht.consilio.application.ConsilioApplication;

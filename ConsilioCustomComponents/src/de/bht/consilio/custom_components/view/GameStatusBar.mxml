@@ -15,7 +15,9 @@
 				whitePowerText.text = powerWhite + "";
 				blackPowerText.text = powerBlack + "";
 				turnText.text = "Turn: " + turn;
-				balanceBar.value = (powerBlack - powerWhite)%50;
+				var bbValue:int = Math.min(Math.max(-5000, (powerBlack - powerWhite)), 5000);
+				bbValue /=100;
+				balanceBar.value = bbValue;
 			}
 			
 			public function initStatusBar(gameName:String, nameWhite:String, nameBlack:String, powerWhite:uint, powerBlack:uint, turn:uint):void {
@@ -27,7 +29,7 @@
 			
 		]]>	</fx:Script>
 		<s:HSlider id="balanceBar" top="-20" width="80%" horizontalCenter="0" maximum="50"
-				   minimum="-50" />
+				   minimum="-50" enabled="false"/>
 		<s:BorderContainer left="20" width="150" height="50" backgroundAlpha="0.3"
 						   borderVisible="true" cornerRadius="5" dropShadowVisible="true"
 						   verticalCenter="0">

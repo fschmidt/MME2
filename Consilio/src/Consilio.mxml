@@ -51,6 +51,8 @@
 			
 			private function handleChatMessage(e:RemotingEvent):void {
 				log.text = log.text + e.message;
+				
+				log.verticalScrollPosition = int.MAX_VALUE;
 			}
 			
 			
@@ -160,11 +162,12 @@
 	<!-- the chat component -->
 	<mx:Panel includeIn="game" right="10" bottom="10" width="500" height="165" layout="absolute"
 			  title="Chat">
-		<mx:TextArea id="log" x="0" bottom="0" width="100%" height="136" borderVisible="false" selectable="false"/>
-		<mx:ControlBar x="0" y="0">
-			<mx:TextInput id="msg" width="100%" enter="send()"/>
-			<mx:Button label="Send" click="send()"/>
-		</mx:ControlBar>
+		<mx:TextArea id="log" x="0" bottom="41" width="100%" height="95" borderVisible="false"
+					 editable="false" enabled="true" selectable="false" wordWrap="true"/>
+		<mx:Canvas left="0" bottom="0" width="100%" height="20%" borderAlpha="0">
+			<mx:TextInput id="msg" y="0" left="20" width="75%" enter="send()"/>
+			<mx:Button right="20" label="Send" click="send()"/>
+		</mx:Canvas>
 	</mx:Panel>
 	
 	<!-- bottom menu bar -->
